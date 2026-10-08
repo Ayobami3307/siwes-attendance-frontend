@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/lecturerSession.css">
+    <link rel="stylesheet" href="css/lecturerProfile.css">
+    <title>Lecturer Profile</title>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <h1 class="logo">NIIT</h1>
+            <p>Lecturer Portal</p>
+        </div>
+
+        <nav class="sidebar-menu">
+            <a href="lecturerDashboard.html" class="nav-item">
+                <i class="fa-solid fa-house"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="lecturerSession.html" class="nav-item">
+                <i class="fa-solid fa-qrcode"></i>
+                <span>Create Session</span>
+            </a>
+
+            <a href="lecturerAttendance.html" class="nav-item">
+                <i class="fa-solid fa-calendar-days"></i>
+                <span>Attendance Records</span>
+            </a>
+
+            
+
+            <a href="lecturerProfile.html" class="nav-item active">
+                <i class="fa-solid fa-user"></i>
+                <span>Profile</span>
+            </a>
+
+            <a href="logout.html" class="nav-item logout">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </a>
+            
+            <a href="lecturerSupport.html" class="nav-item">
+                <i class="fa-solid fa-headset"></i>
+                <span>Support Tickets</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <i class="fa-solid fa-chalkboard-user"></i>
+            <div>
+                <p class="footer-title">Teach Today</p>
+                <p class="footer-subtitle">Shape Tomorrow</p>
+            </div>
+        </div>
+    </aside>
+
+    <div class="main-wrapper">
+        <button class="menu-toggle" id="menuToggle" type="button">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        
+        <header class="top-header">
+            <div class="notification-icon">
+                <i class="fa-regular fa-bell"></i>
+                <span class="badge"></span>
+            </div>
+
+            <div class="user-profile">
+                <div class="avatar">LA</div>
+
+                <div class="user-info">
+                    <h5 class="lecturer-name">Lecturer A</h5>
+                    <p class="lecturer-id">Lecturer</p>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+
+            <div class="page-header">
+                <h1>My Profile</h1>
+                <p>View and manage your lecturer profile.</p>
+            </div>
+
+            <div class="content">
+
+                <div class="profile-card">
+
+                    <div class="profile-header">
+                        <div class="profile-avatar-wrapper" style="width: 75px; height: 75px; overflow: hidden;">
+                            <div class="profile-avatar">LA</div>
+
+                            <button class="camera-edit" id="camera-edit" type="button">
+                                <i class="fa-solid fa-camera"></i>
+                            </button>
+
+                            <input type="file" id="profile-image-input" accept="image/*" style="display: none;">
+                        </div>
+                        <div>
+                            <h2 id="profileName">Lecturer A</h2>
+                            <p id="profileRole">Lecturer</p>
+                        </div>
+                    </div>
+
+                    <div class="profile-details">
+
+                        <div class="profile-field">
+                            <label>Lecturer ID</label>
+                            <p id="profileStudentId">Loading...</p>
+                        </div>
+
+                        <div class="profile-field">
+                            <label>Name</label>
+                            <p id="profileFullName">Loading...</p>
+                        </div>
+
+                        <div class="profile-field">
+                            <label>Email</label>
+                            <p id="profileEmail">Loading...</p>
+                        </div>
+
+                        <div class="profile-field">
+                            <label>Phone Number</label>
+                            <p id="profilePhone">Not provided</p>
+                        </div>
+
+                        <div class="profile-field">
+                            <label>Course</label>
+                            <p id="profileCourse">Not provided</p>
+                        </div>
+
+                        <div class="profile-field">
+                            <label>Program Duration</label>
+                            <p id="profileDuration">Not provided</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+    <script src="js/lecturerProfile.js"></script>
+
+</body>
+</html>

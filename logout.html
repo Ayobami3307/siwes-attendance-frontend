@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Logging Out - NIIT Smart Attendance</title>
+  <link rel="stylesheet" href="css/logout.css" />
+</head>
+<body>
+
+  <div class="logout-card">
+    <div class="logout-icon">🔒</div>
+    <h1 class="logout-title">You have been logged out</h1>
+    <p class="logout-subtitle">Thank you for using the NIIT Smart Attendance Portal. Your session has safely ended.</p>
+    
+    <a href="landingPage.html" class="login-btn">Return to Login</a>
+  </div>
+
+  <script>
+    localStorage.removeItem("token");
+    sessionStorage.removeItem("token");
+    sessionStorage.clear();
+
+    setTimeout(() => {
+        window.location.href = "login.html";
+    }, 3000);
+</script>
+
+</body>
+</html>

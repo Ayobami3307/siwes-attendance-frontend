@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <title>Lecturer Registration</title>
+</head>
+<body>
+    <header>
+        <nav class="navlinks">
+            <h1 class="logo">NIIT</h1>
+            <p><a href="./landingPage.html">&larr;Back To Home</a></p>
+        </nav>
+    </header>
+
+    <main class="login-wrapper">
+        <div class="login-card">
+            <div class="login-header">
+                <h1 class="login-title">Lecturer Registration</h1>
+                <p class="login-subtitle">Create your lecturer account to access the lecturer portal.</p>
+            </div>
+
+            <form class="login-form" method="POST">
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" placeholder="Enter your full name" required/>
+                </div>
+
+                <div class="form-group">
+                    <label for="lecturerId">Lecturer ID</label>
+                    <input type="text" id="lecturerId" placeholder="230590..." required/>
+                </div>
+
+                <div class="form-group">
+                    <label for="course">Course</label>
+                    <select id="course" required>
+                        <option value="">Select your course</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="Enter your email" required/>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+
+                    <div class="password-wrapper">
+                        <input type="password" id="password" placeholder="Create a password" required/>
+
+                        <button type="button" class="password-toggle" id="passwordToggle">
+                            <i class="fa-regular fa-eye" style="color: rgb(190, 192, 195);"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group" id="otp-group" style="display: none;">
+                    <label for="otp">OTP Verification Code</label>
+                    <input type="text" id="otp" placeholder="Enter 6-digit OTP" maxlength="6"/>
+                    <button type="button" id="resendOtpBtn" class="resend-otp-btn" style="display: none;">Resend OTP</button>
+                </div>
+
+                <div class="form-options">
+                    <a href="./lecturerLogin.html" class="forgot-link">Already have an account? Login</a>
+                </div>
+
+                <button type="submit" class="login-btn">Register</button>
+            </form>
+        </div>
+    </main>
+
+    <script src="js/lecturerRegister.js"></script>
+</body>
+</html>

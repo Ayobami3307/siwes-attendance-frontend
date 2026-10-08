@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIIT Student Portal - Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <h1 class="logo">NIIT</h1>
+            <p>Student Portal</p>
+        </div>
+
+        <nav class="sidebar-menu">
+            <a href="dashboard.html" class="nav-item active">
+                <i class="fa-solid fa-house"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="scan.html" class="nav-item">
+                <i class="fa-solid fa-qrcode"></i>
+                <span>Scan QR</span>
+            </a>
+            <a href="attendance.html" class="nav-item">
+                <i class="fa-solid fa-calendar-days"></i>
+                <span>Attendance</span>
+            </a>
+            <a href="profile.html" class="nav-item">
+                <i class="fa-solid fa-user"></i>
+                <span>Profile</span>
+            </a>
+            <a href="logout.html" class="nav-item logout">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </a>
+            <a href="support.html" class="nav-item">
+                <i class="fa-solid fa-headset"></i>
+                <span>Support</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <div>
+                <p class="footer-title">Learn Today</p>
+                <p class="footer-subtitle">Build Tomorrow</p>
+            </div>
+        </div>
+    </aside>
+
+    <div class="main-wrapper">
+        <button class="menu-toggle" id="menuToggle" type="button">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <header class="top-header">
+            <div class="notification-icon">
+                <i class="fa-regular fa-bell"></i>
+                <span class="badge"></span>
+            </div>
+            <div class="user-profile">
+                <div class="avatar"></div>
+                <div class="user-info">
+                    <h5 class="student-name"></h5>
+                    <p class="student-id"></p>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-section">
+
+            <div class="welcome-banner">
+                <div class="welcome-text">
+                    <h2>Welcome back, Ayobami! 👋</h2>
+                    <p>Here's your attendance overview. Keep it up!</p>
+                    <span class="course-tag">
+                        <i class="fa-solid fa-graduation-cap"></i> Active Course: <span id="courseName">Loading</span>
+                    </span>
+                </div>
+                <a href="scan.html" class="banner-cta">
+                    <i class="fa-solid fa-qrcode"></i> Open QR Scanner <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="attendance-cards">
+                <div class="card">
+                    <div class="card-icon blue-bg">
+                        <i class="fa-regular fa-calendar-check"></i>
+                    </div>
+                    <div class="card-details">
+                        <span class="card-label">Total Classes</span>
+                        <h3 class="card-value" id="totalClasses">0</h3>
+                        <span class="card-change positive" id="totalClassesText">0 sessions recorded</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon green-bg">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+                    <div class="card-details">
+                        <span class="card-label">Classes Attended</span>
+                        <h3 class="card-value" id="classesAttended">0</h3>
+                        <span class="card-change positive" id="classesAttendedText">0 sessions attended</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon purple-bg">
+                        <i class="fa-regular fa-clock"></i>
+                    </div>
+                    <div class="card-details">
+                        <span class="card-label">Overall Rate</span>
+                        <h3 class="card-value" id="overallRate">0%</h3>
+                        <span class="card-change positive" id="overallRateText">Based on your attendance</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="middle-grid">
+
+                <div class="attendance-action-card">
+                    <div class="qr-preview-box">
+                        <i class="fa-solid fa-expand corner-icon top-left"></i>
+                        <i class="fa-solid fa-expand corner-icon top-right"></i>
+                        <i class="fa-solid fa-qrcode qr-code-icon"></i>
+                        <i class="fa-solid fa-expand corner-icon bottom-left"></i>
+                        <i class="fa-solid fa-expand corner-icon bottom-right"></i>
+                    </div>
+                    <div class="action-info">
+                        <h3>Mark Your Attendance</h3>
+                        <p>Scan the QR code displayed by your lecturer to mark your attendance.</p>
+                        <a href="scan.html" class="scan-btn">
+                            <i class="fa-solid fa-qrcode"></i> Open QR Scanner <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="todays-classes-card">
+                    <div class="card-header-spread">
+                        <div class="header-title">
+                            <i class="fa-regular fa-calendar-check"></i>
+                            <h3>Today's Attendance</h3>
+                        </div>
+                    </div>
+
+                    <div class="today-attendance">
+                        <div class="attendance-status">
+                            <span class="status-label">Current Status</span>
+                            <span id="todayStatus" class="status-pill pending">No Attendance</span>
+                        </div>
+
+                        <div class="attendance-time">
+                            <div>
+                                <span class="status-label">Time Logged In</span>
+                                <strong id="todayLoginTime">-</strong>
+                            </div>
+                            <div>
+                                <span class="status-label">Time Out</span>
+                                <strong id="todayTimeOut">-</strong>
+                            </div>
+                        </div>
+
+                        <a href="#" id="timeOutBtn" class="scan-btn">
+                            <i class="fa-solid fa-right-from-bracket"></i> Time Out
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="recent-logs-card">
+                <div class="card-header-spread">
+                    <div class="header-title">
+                        <i class="fa-regular fa-clock"></i>
+                        <h3>Recent Attendance</h3>
+                    </div>
+                    <a href="attendance.html" class="view-all">View All <i class="fa-solid fa-chevron-right"></i></a>
+                </div>
+
+                <table class="dashboard-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Time Logged In</th>
+                            <th>Time Out</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recentAttendanceBody">
+                    </tbody>
+                </table>
+            </div>
+
+        </main>
+    </div>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

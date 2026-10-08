@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/lecturerSession.css">
+    <link rel="stylesheet" href="css/lecturerAttendance.css">
+    <title>Attendance Records</title>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <h1 class="logo">NIIT</h1>
+            <p>Lecturer Portal</p>
+        </div>
+
+        <nav class="sidebar-menu">
+            <a href="lecturerDashboard.html" class="nav-item">
+                <i class="fa-solid fa-house"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="lecturerSession.html" class="nav-item">
+                <i class="fa-solid fa-qrcode"></i>
+                <span>Create Session</span>
+            </a>
+
+            <a href="lecturerAttendance.html" class="nav-item active">
+                <i class="fa-solid fa-calendar-days"></i>
+                <span>Attendance Records</span>
+            </a>
+
+            <a href="lecturerProfile.html" class="nav-item">
+                <i class="fa-solid fa-user"></i>
+                <span>Profile</span>
+            </a>
+
+            <a href="logout.html" class="nav-item logout">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </a>
+            
+            <a href="lecturerSupport.html" class="nav-item">
+                <i class="fa-solid fa-headset"></i>
+                <span>Support Tickets</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <i class="fa-solid fa-chalkboard-user"></i>
+            <div>
+                <p class="footer-title">Teach Today</p>
+                <p class="footer-subtitle">Shape Tomorrow</p>
+            </div>
+        </div>
+    </aside>
+
+    <div class="main-wrapper">
+        <button class="menu-toggle" id="menuToggle" type="button">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        
+        <header class="top-header">
+            <div class="notification-icon">
+                <i class="fa-regular fa-bell"></i>
+                <span class="badge"></span>
+            </div>
+
+            <div class="user-profile">
+                <div class="avatar">LA</div>
+
+                <div class="user-info">
+                    <h5 class="lecturer-name"></h5>
+                    <p class="lecturer-id">Lecturer</p>
+                </div>
+
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="page-header">
+                <h1>Attendance Records</h1>
+                <p>View and monitor student attendance records.</p>
+            </div>
+
+            <div class="content">
+
+                <div class="card">
+
+                   <div class="attendance-header">
+                        <h2>Student Attendance</h2>
+
+                        <div class="attendance-actions">
+                            <input type="text" id="searchInput" placeholder="Search Student ID">
+
+                            <select id="monthFilter">
+                                <option value="">All Months</option>
+                                <option value="0">January</option>
+                                <option value="1">February</option>
+                                <option value="2">March</option>
+                                <option value="3">April</option>
+                                <option value="4">May</option>
+                                <option value="5">June</option>
+                                <option value="6">July</option>
+                                <option value="7">August</option>
+                                <option value="8">September</option>
+                                <option value="9">October</option>
+                                <option value="10">November</option>
+                                <option value="11">December</option>
+                            </select>
+
+                            <button id="refreshBtn">
+                                <i class="fa-solid fa-rotate"></i>
+                                Refresh
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="attendance-summary">
+                        <div class="summary-card">
+                            <i class="fa-solid fa-users"></i>
+                            <div>
+                                <span>Total Attendance</span>
+                                <strong id="totalAttendance">0</strong>
+                            </div>
+                        </div>
+
+                        <div class="summary-card">
+                            <i class="fa-solid fa-user-check"></i>
+                            <div>
+                                <span>Present</span>
+                                <strong id="presentCount">0</strong>
+                            </div>
+                        </div>
+
+                        <div class="summary-card">
+                            <i class="fa-solid fa-user-clock"></i>
+                            <div>
+                                <span>Not Timed Out</span>
+                                <strong id="notTimedOutCount">0</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="attendanceContainer">
+                        <p>Loading attendance records...</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+    <script src="js/lecturerAttendance.js"></script>
+
+</body>
+</html>

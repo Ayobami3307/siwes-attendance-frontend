@@ -1,0 +1,87 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #f8fafc;
+  color: #2c3e50;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.logout-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 40px 32px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+}
+
+.logout-icon {
+  font-size: 2.5rem;
+  background-color: #e6f4f1;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+
+.logout-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #0b2b63;
+  margin-bottom: 8px;
+}
+
+.logout-subtitle {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.login-btn {
+  display: inline-block;
+  width: 100%;
+  background-color: #009688;
+  color: #ffffff;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.login-btn:hover {
+  opacity: 0.9;
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 15px;
+  }
+
+  .logout-card {
+    padding: 32px 20px;
+  }
+
+  .logout-title {
+    font-size: 1.3rem;
+  }
+
+  .logout-subtitle {
+    font-size: 0.85rem;
+  }
+}

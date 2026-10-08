@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIIT Student Portal - Scan</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/scan.css">
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <h1 class="logo">NIIT</h1>
+            <p>Student Portal</p>
+        </div>
+
+        <nav class="sidebar-menu">
+            <a href="dashboard.html" class="nav-item">
+                <i class="fa-solid fa-house"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="scan.html" class="nav-item active">
+                <i class="fa-solid fa-qrcode"></i>
+                <span>Scan QR</span>
+            </a>
+            <a href="attendance.html" class="nav-item">
+                <i class="fa-solid fa-calendar-days"></i>
+                <span>Attendance</span>
+            </a>
+            <a href="profile.html" class="nav-item">
+                <i class="fa-solid fa-user"></i>
+                <span>Profile</span>
+            </a>
+            <a href="logout.html" class="nav-item logout">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </a>
+            <a href="support.html" class="nav-item">
+                <i class="fa-solid fa-headset"></i>
+                <span>Support</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <div>
+                <p class="footer-title">Learn Today</p>
+                <p class="footer-subtitle">Build Tomorrow</p>
+            </div>
+        </div>
+    </aside>
+
+    <div class="main-wrapper">
+        <button class="menu-toggle" id="menuToggle" type="button">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        
+        <header class="top-header">
+            
+            <div class="notification-icon">
+                <i class="fa-regular fa-bell"></i>
+                <span class="badge"></span>
+            </div>
+            <div class="user-profile">
+                <div class="avatar">AE</div>
+                <div class="user-info">
+                    <h5 class="student-name"></h5>
+                    <p class="student-id"></p>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="scan">
+                <div class="scan-box">
+                    <div class="scan-top">
+                        <div class="scan-title">
+                            <h2>Scan Lecture QR Code</h2>
+                            <p>Fit the lecturer's QR code into the box to mark your attendance.</p>
+                        </div>
+
+                        <div class="camera-scanner" id="camera-scanner">
+                            <div id="reader"></div>
+                            <div class="scan-frame">
+                                <span class="corner top-l"></span>
+                                <span class="corner top-r"></span>
+                                <span class="corner bottom-l"></span>
+                                <span class="corner bottom-r"></span>
+                                <div class="laser-line"></div>
+                            </div>
+                            <div class="camera-placeholder">
+                                <i class="fa-solid fa-camera camera-icon"></i>
+                                <p>Requesting Camera Access...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="trouble">
+                        <p>Having trouble scanning the QR code?</p>
+                        <form class="manual-code">
+                            <input type="text" name="sessionCode" placeholder="Enter session code manually">
+                            <button type="submit" class="submit-btn">Submit Code</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="how">
+                <div class="how-header">
+                    <h3><i class="fa-solid fa-circle-info" style="color: #2563eb;"></i>How it works</h3>
+                </div>
+
+                <ul class="steps-list">
+                    <li>
+                        <span class="step-num">1</span>
+                        <div>
+                            <strong>Locate QR Code</strong>
+                            <p>Look at the projected screen or screen displayed by your lecturer.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="step-num">2</span>
+                        <div>
+                            <strong>Scan Promptly</strong>
+                            <p>Ensure your device is connected to the internet and hold steady.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="step-num">3</span>
+                        <div>
+                            <strong>Instant Verification</strong>
+                            <p>Once detected, your attendance log will update automatically.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </main>
+    </div>
+    <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+    <script src="js/scan.js"></script>
+</body>
+</html>

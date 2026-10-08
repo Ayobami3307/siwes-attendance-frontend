@@ -1,0 +1,752 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    color: #333;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navlinks {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #ffffff;
+    box-shadow: 0 50px 50px rgba(45, 44, 44, 0.08);
+}
+
+.navlinks .logo {
+    font-weight: 900;
+    color: #0c4a92;
+    font-size: 1.9rem;
+}
+
+.navlinks ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    align-items: center;
+}
+
+.navlinks ul a {
+    text-decoration: none;
+    color: black;
+}
+
+.navlinks ul button {
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.navlinks ul button:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    transition-duration: 0.9s;
+}
+
+.navlinks ul a:hover {
+    color: #14B8B8;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    min-height: 75vh;
+    text-align: justify;
+    gap: 40px;
+}
+
+.main-content h1 {
+    font-size: 2.5rem;
+}
+
+.main-content p {
+    width: 295px;
+    font-size: medium;
+    margin-bottom: 16px;
+    margin-top: 16px;
+}
+
+.image img {
+    width: 450px;
+    height: 400px;
+    top: 0;
+}
+
+.container button {
+    cursor: pointer;
+    color: white;
+}
+
+.container button:hover {
+    transition-duration: 0.5s;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.cards {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    font-size: small;
+}
+
+.cards .card {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: 0 20px 20px rgba(8, 0, 0, 0.15);
+    cursor: pointer;
+    margin-bottom: 40px;
+}
+
+.cards .card i {
+    color: #14B8B8;
+    padding: 5px 10px;
+    border-radius: 8px;
+}
+
+.cards .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    transition-duration: 0.5s;
+}
+
+.cards .card h3 {
+    padding-left: 20px;
+}
+
+.how {
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 0;
+    background-color: rgb(245, 246, 247);
+}
+
+.how h2 {
+    margin-bottom: 20px;
+    font-weight: 900;
+    color: #0c4a92;
+}
+
+.special {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    margin-top: 20px;
+}
+
+.works {
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 20px 20px rgba(8, 0, 0, 0.15);
+    border-radius: 15px;
+    gap: 15px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.works p {
+    width: 300px;
+}
+
+.step-icon {
+    width: 44px;
+    height: 44px;
+    background-color: #096d6d;
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin: 0 auto 16px;
+}
+
+.faq {
+    min-height: 50vh;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.faq h2 {
+    text-align: center;
+    color: #0c4a92;
+    font-weight: 900;
+}
+
+.fAQS {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 20px;
+}
+
+.fAQS .faq-card {
+    padding: 20px 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(132, 131, 131, 0.307);
+    cursor: pointer;
+    color: #0c4a92;
+    margin-top: 20px;
+    padding-right: 450px;
+}
+
+.fAQS .faq-card:hover {
+    background-color: #14B8B8;
+    color: white;
+    transition-duration: 0.5s;
+}
+
+.Need-Support {
+    background-color: #f5f7fa;
+    padding: 45px 20px 80px;
+    min-height: 100vh;
+}
+
+.Need-Support h2 {
+    text-align: center;
+    color: #12366b;
+    font-size: 38px;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin: 0 0 50px;
+}
+
+.issue {
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 45px;
+    border: 1px solid #e1e7ef;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+}
+
+.issue legend {
+    display: block;
+    width: 100%;
+    border: none;
+    color: #12366b;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+.issue input,
+.issue select,
+.issue textarea {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #dce4ee;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 16px;
+    outline: none;
+    transition: 0.2s ease;
+}
+
+.issue input {
+    height: 58px;
+    margin-top: 10px;
+    padding: 0 16px;
+}
+
+.issue select {
+    height: 58px;
+    margin-top: 10px;
+    padding: 0 16px;
+    background-color: #e9e9ed;
+    cursor: pointer;
+}
+
+.issue textarea {
+    height: 148px;
+    margin-top: 10px;
+    padding: 16px;
+    resize: vertical;
+}
+
+.issue input::placeholder,
+.issue textarea::placeholder {
+    color: #777;
+    font-size: 16px;
+}
+
+.issue input:focus,
+.issue select:focus,
+.issue textarea:focus {
+    border-color: #12366b;
+    box-shadow: 0 0 0 3px rgba(18, 54, 107, 0.1);
+}
+
+.issue button {
+    width: 100%;
+    height: 62px;
+    border: none;
+    border-radius: 10px;
+    background-color: #08a395;
+    color: white;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 0;
+    transition: 0.2s ease;
+}
+
+.issue button:hover {
+    background-color: #078f83;
+}
+
+#message-field {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transform: translateY(-10px);
+    margin-bottom: 0;
+    transition: max-height 0.4s ease, opacity 0.3s ease, transform 0.4s ease, margin-bottom 0.4s ease;
+}
+
+#message-field.show {
+    max-height: 250px;
+    opacity: 1;
+    transform: translateY(0);
+    margin-bottom: 25px;
+}
+
+.portal-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.55);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.portal-box {
+    width: 100%;
+    max-width: 550px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 35px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+}
+
+.close-modal {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    border: none;
+    background: none;
+    font-size: 28px;
+    color: #64748b;
+    cursor: pointer;
+}
+
+.portal-box h2 {
+    color: #0c4a92;
+    font-size: 1.7rem;
+    margin-bottom: 8px;
+}
+
+.portal-box > p {
+    color: #64748b;
+    margin-bottom: 25px;
+}
+
+.portal-options {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.portal-option {
+    flex: 1;
+    padding: 25px 15px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #333;
+    transition: 0.3s ease;
+}
+
+.portal-option i {
+    font-size: 2.2rem;
+    color: #0c4a92;
+    margin-bottom: 12px;
+}
+
+.portal-option h3 {
+    color: #0c4a92;
+    margin-bottom: 6px;
+}
+
+.portal-option span {
+    font-size: 0.85rem;
+    color: #64748b;
+}
+
+.portal-option:hover {
+    transform: translateY(-5px);
+    border-color: #14B8B8;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+footer {
+    text-align: center;
+    font-size: 15px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: gray;
+    margin-bottom: 2px;
+}
+
+footer p {
+    cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+    .container {
+        padding: 40px 30px;
+        gap: 25px;
+    }
+
+    .image img {
+        width: 380px;
+        height: auto;
+    }
+
+    .cards {
+        flex-wrap: wrap;
+        padding: 0 20px;
+    }
+
+    .special {
+        padding: 0 20px;
+    }
+
+    .works {
+        flex: 1;
+    }
+
+    .works p {
+        width: auto;
+    }
+
+    .fAQS .faq-card {
+        padding-right: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .navlinks {
+        padding: 14px 18px;
+        justify-content: space-between;
+    }
+
+    .navlinks .logo {
+        font-size: 1.6rem;
+    }
+
+    .navlinks ul {
+        gap: 12px;
+        font-size: 0.85rem;
+    }
+
+    .navlinks ul li a {
+        white-space: nowrap;
+    }
+
+    .portal-login-btn {
+        padding: 7px 9px !important;
+        font-size: 0.75rem;
+    }
+
+    .container {
+        flex-direction: column;
+        text-align: center;
+        min-height: auto;
+        padding: 50px 20px 30px;
+        gap: 5px;
+    }
+
+    .main-content {
+        display: contents;
+        gap: 0;
+    }
+
+    .main-content h1 {
+        order: 1;
+        
+    }
+
+    .main-content p {
+        order: 2;
+        margin-top: 8px;
+        margin-bottom: 8px;
+    }
+
+    .image {
+        margin: 0;
+        order: 3;
+    }
+
+    .image img {
+        width: 80%;
+        max-width: 400px;
+        height: auto;
+        margin: 0;
+    }
+
+    .portal-proceed-btn {
+        order: 4;
+        margin-top: 5px;
+    }
+
+    .cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        padding: 0 15px;
+    }
+
+    .cards .card {
+        margin-bottom: 25px;
+        padding: 12px 10px;
+        justify-content: center;
+        text-align: center;
+        flex-direction: column;
+    }
+
+    .cards .card i {
+        padding: 5px;
+    }
+
+    .cards .card h3 {
+        padding-left: 0;
+        font-size: 0.7rem;
+    }
+
+    .how {
+        padding: 45px 15px;
+    }
+
+    .special {
+        flex-direction: column;
+        width: 100%;
+        padding: 0;
+    }
+
+    .works {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .works p {
+        width: auto;
+        max-width: 100%;
+    }
+
+    .faq {
+        margin-top: 40px;
+        margin-bottom: 40px;
+    }
+
+    .faq h2 {
+        font-size: 1.4rem;
+        padding: 0 15px;
+    }
+
+    .fAQS {
+        margin: 20px 15px;
+    }
+
+    .fAQS .faq-card {
+        padding: 18px 15px;
+    }
+
+    .Need-Support {
+        padding: 40px 15px 60px;
+    }
+
+    .Need-Support h2 {
+        font-size: 28px;
+        margin-bottom: 35px;
+    }
+
+    .issue {
+        width: 100%;
+        padding: 30px 20px;
+    }
+
+    .portal-box {
+        padding: 30px 20px;
+    }
+
+    .portal-options {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .navlinks {
+        padding: 12px 14px;
+    }
+
+    .navlinks .logo {
+        font-size: 1.45rem;
+    }
+
+    .navlinks ul {
+        gap: 8px;
+        font-size: 0.72rem;
+    }
+
+    .navlinks ul li a {
+        display: none;
+    }
+
+    .portal-login-btn {
+        padding: 7px 8px !important;
+        font-size: 0.68rem;
+    }
+
+    .container {
+        padding: 35px 15px 25px;
+    }
+
+    .main-content h1 {
+        font-size: 1.7rem;
+    }
+
+    .main-content p {
+        font-size: 0.85rem;
+    }
+
+    .image img {
+        width: 95%;
+    }
+
+    .portal-proceed-btn {
+        width: 100%;
+        max-width: 300px;
+        padding: 11px 20px !important;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 0 20px;
+    }
+
+    .cards .card {
+        flex-direction: row;
+        justify-content: flex-start;
+        text-align: left;
+        margin-bottom: 0;
+    }
+
+    .cards .card h3 {
+        padding-left: 10px;
+        font-size: 0.75rem;
+    }
+
+    .how {
+        padding: 40px 15px;
+    }
+
+    .how h2 {
+        font-size: 1.4rem;
+    }
+
+    .works {
+        padding: 18px 15px;
+    }
+
+    .works h3 {
+        font-size: 1rem;
+    }
+
+    .works p {
+        font-size: 0.85rem !important;
+        line-height: 1.5;
+    }
+
+    .faq h2 {
+        font-size: 1.2rem;
+    }
+
+    .fAQS {
+        margin: 15px;
+    }
+
+    .fAQS .faq-card {
+        padding: 16px 12px;
+    }
+
+    .fAQS .faq-card summary {
+        font-size: 0.9rem;
+    }
+
+    .Need-Support h2 {
+        font-size: 24px;
+    }
+
+    .issue {
+        padding: 25px 15px;
+    }
+
+    .issue input,
+    .issue select {
+        height: 52px;
+    }
+
+    .issue textarea {
+        height: 130px;
+    }
+
+    .issue button {
+        height: 55px;
+        font-size: 15px;
+    }
+
+    .portal-box h2 {
+        font-size: 1.4rem;
+    }
+
+    .portal-box > p {
+        font-size: 0.9rem;
+    }
+
+    .portal-option {
+        padding: 20px 12px;
+    }
+}

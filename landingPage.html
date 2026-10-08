@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/landingPage.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css"/>
+    <title>NIIT Student Portal - landingPage</title>
+</head>
+<body>
+    <header>
+        <nav class="navlinks">
+            <h1 class="logo">NIIT</h1>
+            <ul>
+                <li><a href="#how">How it works</a></li>
+                <li><a href="#faq">FAQs</a></li>
+                <button class="portal-login-btn" style="background-color: #0c4a92; border: none; padding: 7px 12px; border-radius: 7px;">[ Student / Lecturer Portal Login ]</button>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <section class="main-content">
+            <h1>Welcome Back!</h1>
+            <p>Access your portal to manage attendance securely and efficiently using Dynamic QR Codes</p>
+            <button class="portal-proceed-btn" style="background-color: #0a9399; border: none; padding: 10px 60px; border-radius: 7px;">[ Proceed To Portal Login ]</button>
+        </section>
+
+        <section class="image">
+            <img src="Image/project image.png" alt="No Image">
+        </section>
+    </div>
+
+     <div class="cards">
+        <div class="card">
+            <i class="fa-solid fa-bolt"></i>
+            <h3>FAST & EASY</h3>
+        </div>
+
+        <div class="card">
+            <i class="fa-solid fa-lock"></i>
+            <h3>SECURE VERIFICATION</h3>
+        </div>
+
+        <div class="card">
+            <i class="fa-solid fa-chart-line"></i>
+            <h3>REAL-TIME TRACKING</h3>
+        </div>
+
+    </div>
+
+    <div class="how" id="how">
+        <h2>HOW IT WORKS</h2>
+        <div class="special">
+            <div class="works">
+                <div class="step-icon">1</div>
+                <h3> Log in to your portal</h3>
+                <p style="font-size: 15px; margin-top: 10px;">Access your student account using your official credentials</p>
+            </div>
+
+            <div class="works">
+                <div class="step-icon">2</div>
+                <h3>Scan Dynamic QR Code</h3>
+                <p style="font-size: 15px; margin-top: 10px;">Point your camera at the screen in your lecture-room to mark your attendance</p>
+            </div>
+
+            <div class="works">
+                <div class="step-icon">3</div>
+                <h3>Instant Verification</h3>
+                <p style="font-size: 15px; margin-top: 10px;">Your attendance is logged securely in real-time</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="faq" id="faq">
+        <h2> FREQUENTLY ASKED QUESTIONS</h2>
+        <div class="fAQS">
+            <details class="faq-card">
+                <summary>What if the QR code changes before I scan</summary>
+                <p style="margin-top: 10px; color: #64748b;">Dynamic QR codes refresh automatically for security. Simply scan the newest code displayed on screen</p>
+            </details>
+
+            <details class="faq-card">
+                <summary>Can i mark attendance from outside the Class-Room/Lecture-Room</summary>
+                <p style="margin-top: 10px; color: #64748b;">No, the system requires active session verification during your designated lecture time</p>
+            </details>
+
+            <details class="faq-card">
+                <summary>What should i do if my log in fails</summary>
+                <p style="margin-top: 10px; color: #64748b;">Ensure your credentials are correct</p>
+            </details>
+        </div>
+    </div>
+
+</div>
+
+    <div class="portal-modal" id="portalModal">
+        <div class="portal-box">
+            <button class="close-modal" id="closeModal">&times;</button>
+
+            <h2>Choose Your Portal</h2>
+            <p>Select how you want to continue</p>
+            <div class="portal-options">
+                <a href="login.html?role=student" class="portal-option">
+                    <i class="fa-solid fa-user-graduate"></i>
+                    <h3>Student</h3>
+                    <span>Student Portal</span>
+                </a>
+
+                <a href="lecturerLogin.html?role=lecturer" class="portal-option">
+                    <i class="fa-solid fa-chalkboard-user"></i>
+                    <h3>Lecturer</h3>
+                    <span>Lecturer Portal</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2026 NIIT. All Rights Reserved
+    </footer>
+    <script src="js/landingPage.js"></script>
+</body>
+</html>

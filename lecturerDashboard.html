@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/lecturerDashboard.css">
+    <title>Lecturer Dashboard</title>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <h1 class="logo">NIIT</h1>
+            <p>Lecturer Portal</p>
+        </div>
+        <nav class="sidebar-menu">
+            <a href="lecturerDashboard.html" class="nav-item active">
+                <i class="fa-solid fa-house"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="lecturerSession.html" class="nav-item">
+                <i class="fa-solid fa-qrcode"></i>
+                <span>Create Session</span>
+            </a>
+            <a href="lecturerAttendance.html" class="nav-item">
+                <i class="fa-solid fa-calendar-days"></i>
+                <span>Attendance Records</span>
+            </a>
+           
+            <a href="lecturerProfile.html" class="nav-item">
+                <i class="fa-solid fa-user"></i>
+                <span>Profile</span>
+            </a>
+            <a href="logout.html" class="nav-item logout">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </a> 
+            <a href="lecturerSupport.html" class="nav-item">
+                <i class="fa-solid fa-headset"></i>
+                <span>Support Tickets</span>
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <i class="fa-solid fa-chalkboard-user"></i>
+            <div>
+                <p class="footer-title">Lecture Today</p>
+                <p class="footer-subtitle">Shape Tomorrow</p>
+            </div>
+        </div>
+    </aside>
+
+    <div class="main-wrapper">
+        <button class="menu-toggle" id="menuToggle" type="button">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        
+        <header class="top-header">
+            <div class="notification-icon">
+                <i class="fa-regular fa-bell"></i>
+                <span class="badge"></span>
+            </div>
+            <div class="user-profile">
+                <div class="avatar">LA</div>
+                <div class="user-info">
+                    <h5 class="lecturer-name"></h5>
+                    <p class="lecturer-id">Lecturer</p>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="welcome-banner">
+                <div class="welcome-text">
+                    <h2>Welcome back, Lecturer! 👋</h2>
+                    <p>Here's your teaching and attendance overview.</p>
+                    <span class="course-tag">
+                        <i class="fa-solid fa-graduation-cap"></i> Active Course: <span id="activeCourse">Loading...</span>
+                    </span>
+                </div>
+                <a href="lecturerSession.html" class="banner-cta">
+                    <i class="fa-solid fa-qrcode"></i> Create Attendance Session <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+           <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-qrcode"></i>
+                    </div>
+                    <div>
+                        <p>Sessions Created</p>
+                        <h2 id="totalSessions">0</h2>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <div>
+                        <p>Total Attendance</p>
+                        <h2 id="totalAttendance">0</h2>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-calendar-check"></i>
+                    </div>
+                    <div>
+                        <p>Today's Attendance</p>
+                        <h2 id="todayAttendance">0</h2>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-headset"></i>
+                    </div>
+                    <div>
+                        <p>Pending Support</p>
+                        <h2 id="pendingTickets">0</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Quick Actions</h2>
+                    </div>
+
+                    <div class="quick-actions">
+                        <a href="lecturerSession.html" class="action-btn">
+                            <i class="fa-solid fa-qrcode"></i>
+                            <span>Create Attendance Session</span>
+                        </a>
+
+                        <a href="lecturerAttendance.html" class="action-btn">
+                            <i class="fa-solid fa-calendar-days"></i>
+                            <span>View Attendance Records</span>
+                        </a>
+
+                        <a href="lecturerSupport.html" class="action-btn">
+                            <i class="fa-solid fa-headset"></i>
+                            <span>View Support Tickets</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Recent Attendance</h2>
+                        <a href="lecturerAttendance.html">View All</a>
+                    </div>
+
+                    <div id="recentAttendance">
+                        <p>Loading attendance records...</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/lecturerDashboard.js"></script>
+</body>
+</html>

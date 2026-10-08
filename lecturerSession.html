@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/lecturerSession.css">
+    <title>Lecturer Portal</title>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <h1 class="logo">NIIT</h1>
+            <p>Lecturer Portal</p>
+        </div>
+        <nav class="sidebar-menu">
+            <a href="lecturerDashboard.html" class="nav-item">
+                <i class="fa-solid fa-house"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="lecturerSession.html" class="nav-item active">
+                <i class="fa-solid fa-qrcode"></i>
+                <span>Create Session</span>
+            </a>
+            <a href="lecturerAttendance.html" class="nav-item">
+                <i class="fa-solid fa-calendar-days"></i>
+                <span>Attendance Records</span>
+            </a>
+            
+            <a href="lecturerProfile.html" class="nav-item">
+                <i class="fa-solid fa-user"></i>
+                <span>Profile</span>
+            </a>
+            <a href="logout.html" class="nav-item logout">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </a>
+            <a href="lecturerSupport.html" class="nav-item">
+                <i class="fa-solid fa-headset"></i>
+                <span>Support Tickets</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <i class="fa-solid fa-chalkboard-user"></i>
+            <div>
+                <p class="footer-title">Lecture Today</p>
+                <p class="footer-subtitle">Shape Tomorrow</p>
+            </div>
+        </div>
+    </aside>
+
+    <div class="main-wrapper">
+        <button class="menu-toggle" id="menuToggle" type="button">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        
+        <header class="top-header">
+            <div class="notification-icon">
+                <i class="fa-regular fa-bell"></i>
+                <span class="badge"></span>
+            </div>
+
+            <div class="user-profile">
+                <div class="avatar">LA</div>
+
+                <div class="user-info">
+                    <h5 class="lecturer-name"></h5>
+                    <p class="lecturer-id"></p>
+                </div>
+
+            </div>
+        </header>
+
+        <main class="main-content">
+
+            <div class="page-header">
+                <h1>Create Attendance Session</h1>
+                <p>Create a lecture session and display the generated QR code for students.</p>
+            </div>
+
+            <div class="content">
+
+                <div class="card">
+                    <h2>Session Details</h2>
+
+                    <form id="sessionForm">
+
+                        <div class="form-group">
+                            <label>Course</label>
+                            <div class="course-display">
+                                <span id="courseCode">Loading...</span> - <span id="courseTitle">Loading...</span>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="create-btn">
+                            <i class="fa-solid fa-qrcode"></i>
+                            Create Attendance Session
+                        </button>
+
+                    </form>
+                </div>
+
+                <div class="card">
+
+                    <div class="qr-container" id="qrContainer">
+
+                        <h2>Attendance QR Code</h2>
+
+                        <div class="qr-placeholder">
+                            <i class="fa-solid fa-qrcode"></i>
+                            <p>Your QR code will appear here after creating a session.</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+    <script src="js/lecturerSession.js"></script>
+
+</body>
+</html>

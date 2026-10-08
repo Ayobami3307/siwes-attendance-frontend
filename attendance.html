@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIIT Student Portal - Attendance</title>
+    <link rel="stylesheet" href="css/attendance.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <h1 class="logo">NIIT</h1>
+            <p>Student Portal</p>
+        </div>
+
+        <nav class="sidebar-menu">
+            <a href="dashboard.html" class="nav-item">
+                <i class="fa-solid fa-house"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="scan.html" class="nav-item">
+                <i class="fa-solid fa-qrcode"></i>
+                <span>Scan QR</span>
+            </a>
+            <a href="attendance.html" class="nav-item active">
+                <i class="fa-solid fa-calendar-days"></i>
+                <span>Attendance</span>
+            </a>
+            <a href="profile.html" class="nav-item">
+                <i class="fa-solid fa-user"></i>
+                <span>Profile</span>
+            </a>
+            <a href="logout.html" class="nav-item logout">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </a>
+            <a href="support.html" class="nav-item">
+                <i class="fa-solid fa-headset"></i>
+                <span>Support</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <div>
+                <p class="footer-title">Learn Today</p>
+                <p class="footer-subtitle">Build Tomorrow</p>
+            </div>
+        </div>
+    </aside>
+
+    <div class="main-wrapper">
+        <button class="menu-toggle" id="menuToggle" type="button">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        
+        <header class="top-header">
+            <div class="notification-icon">
+                <i class="fa-regular fa-bell"></i>
+                <span class="badge"></span>
+            </div>
+            <div class="user-profile">
+                <div class="avatar">AE</div>
+                <div class="user-info">
+                    <h5 class="student-name">Adebanjo Ayobami Emmanuel</h5>
+                    <p class="student-id">Matric No. 230591355</p>
+                </div>
+            </div>
+        </header>
+
+        <main class="maincontent">
+            <div class="header">
+                <div class="title">
+                    <h1 class="history">Attendance History</h1>
+                    <p class="track">View your all-time attendance history</p>
+                </div>
+                <a href="scan.html" class="banner-cta">
+                    <i class="fa-solid fa-qrcode"></i> Open QR Scanner <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="attendance-cards">
+                <div class="card">
+                    <div class="card-icon blue-bg">
+                        <i class="fa-solid fa-clipboard-user"></i>
+                    </div>
+                    <div>
+                        <span class="card-label">Total Sessions</span>
+                        <h3 class="card-value" id="total-sessions">0</h3>
+                        <span class="card-change days" id="session-info">Attendance sessions</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon green-bg">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+                    <div>
+                        <span class="card-label">Attended</span>
+                        <h3 class="card-value" id="attended-sessions">0</h3>
+                        <span class="card-change positive" id="attendance-change">Current attendance</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon purple-bg">
+                        <i class="fa-solid fa-circle-xmark"></i>
+                    </div>
+                    <div>
+                        <span class="card-label">Overall Rate</span>
+                        <h3 class="card-value" id="attendance-rate">0%</h3>
+                        <span class="card-change" id="rate-info">Attendance rate</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="attendance-history">
+                <div class="header">
+                    <div class="header-title">
+                        <h3><i class="fa-solid fa-list-check"></i> Detailed Attendance Logs</h3>
+                    </div>
+
+                    <div class="select-month">
+                        <select id="select-month">
+                            <option value="all">All Months</option>
+                            <option value="0">January</option>
+                            <option value="1">February</option>
+                            <option value="2">March</option>
+                            <option value="3">April</option>
+                            <option value="4">May</option>
+                            <option value="5">June</option>
+                            <option value="6">July</option>
+                            <option value="7">August</option>
+                            <option value="8">September</option>
+                            <option value="9">October</option>
+                            <option value="10">November</option>
+                            <option value="11">December</option>
+                        </select>
+                    </div>
+                    
+                   <button type="button" class="view-all" id="export-pdf">
+                        <i class="fa-solid fa-download"></i> Export PDF
+                    </button>
+                </div>
+
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Time In</th>
+                            <th>Time out</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body">
+                        
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+    <script src="js/attendance.js"></script>
+</body>
+</html>

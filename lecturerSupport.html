@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/lecturerSession.css">
+    <title>Support Tickets</title>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <h1 class="logo">NIIT</h1>
+            <p>Lecturer Portal</p>
+        </div>
+
+        <nav class="sidebar-menu">
+            <a href="lecturerDashboard.html" class="nav-item">
+                <i class="fa-solid fa-house"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="lecturerSession.html" class="nav-item">
+                <i class="fa-solid fa-qrcode"></i>
+                <span>Create Session</span>
+            </a>
+
+            <a href="lecturerAttendance.html" class="nav-item">
+                <i class="fa-solid fa-calendar-days"></i>
+                <span>Attendance Records</span>
+            </a>
+
+            
+
+            <a href="lecturerProfile.html" class="nav-item">
+                <i class="fa-solid fa-user"></i>
+                <span>Profile</span>
+            </a>
+
+            <a href="logout.html" class="nav-item logout">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </a>
+            <a href="lecturerSupport.html" class="nav-item active">
+                <i class="fa-solid fa-headset"></i>
+                <span>Support Tickets</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <i class="fa-solid fa-chalkboard-user"></i>
+            <div>
+                <p class="footer-title">Teach Today</p>
+                <p class="footer-subtitle">Shape Tomorrow</p>
+            </div>
+        </div>
+    </aside>
+
+    <div class="main-wrapper">
+        <button class="menu-toggle" id="menuToggle" type="button">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        
+        <header class="top-header">
+            <div class="notification-icon">
+                <i class="fa-regular fa-bell"></i>
+                <span class="badge"></span>
+            </div>
+
+            <div class="user-profile">
+                <div class="avatar"></div>
+
+                <div class="user-info">
+                    <h5 class="lecturer-name"></h5>
+                    <p class="lecturer-id"></p>
+                </div>
+
+            </div>
+        </header>
+
+        <main class="main-content">
+
+            <div class="page-header">
+                <h1>Support Tickets</h1>
+                <p>View and manage student support requests.</p>
+            </div>
+
+            <div class="content">
+
+                <div class="card">
+
+                    <div class="support-header">
+                        <h2>Student Issues</h2>
+
+                        <button id="refreshBtn">
+                            <i class="fa-solid fa-rotate"></i>
+                            Refresh
+                        </button>
+                    </div>
+
+                    <div id="ticketContainer">
+                        <p>Loading support tickets...</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+    <script src="js/lecturerSupport.js"></script>
+
+</body>
+</html>

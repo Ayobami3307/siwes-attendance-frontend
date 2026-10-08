@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIIT Student Portal - Profile</title>
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <h1 class="logo">NIIT</h1>
+            <p>Student Portal</p>
+        </div>
+
+        <nav class="sidebar-menu">
+            <a href="dashboard.html" class="nav-item">
+                <i class="fa-solid fa-house"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="scan.html" class="nav-item">
+                <i class="fa-solid fa-qrcode"></i>
+                <span>Scan QR</span>
+            </a>
+            <a href="attendance.html" class="nav-item">
+                <i class="fa-solid fa-calendar-days"></i>
+                <span>Attendance</span>
+            </a>
+            <a href="profile.html" class="nav-item active">
+                <i class="fa-solid fa-user"></i>
+                <span>Profile</span>
+            </a>
+            <a href="logout.html" class="nav-item logout">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </a>
+            <a href="support.html" class="nav-item">
+                <i class="fa-solid fa-headset"></i>
+                <span>Support</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <div>
+                <p class="footer-title">Learn Today</p>
+                <p class="footer-subtitle">Build Tomorrow</p>
+            </div>
+        </div>
+    </aside>
+
+    <div class="main-wrapper">
+        <button class="menu-toggle" id="menuToggle" type="button">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <header class="top-header">
+            <div class="notification-icon">
+                <i class="fa-regular fa-bell"></i>
+                <span class="badge"></span>
+            </div>
+
+            <div class="user-profile">
+                <div class="avatar"></div>
+                <div class="user-info">
+                    <h5 class="student-name"></h5>
+                    <p class="student-id"></p>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="profile">
+                <div class="profile-card">
+                    <div class="profile-avatar-wrapper">
+                        <div class="profile-avatar"></div>
+
+                        <button class="camera-edit" id="camera-edit" type="button">
+                            <i class="fa-solid fa-camera"></i>
+                        </button>
+
+                        <input type="file" id="profile-image-input" accept="image/*"style="display: none;"/>
+                    </div>
+                    <h3 class="profile-name"></h3>
+                    <p class="profile-role"></p>
+                    <span class="status-pill verified" style="margin-top: 10px;">Active Student</span>
+
+                    <div class="profile-stats">
+                        <div class="card">
+                            <span class="stat-number" id="progress">Month 3</span>
+                            <span class="stat-text">Progress</span>
+                        </div>
+                        <div class="card">
+                            <span class="stat-number" id="profileAttendance">0%</span>
+                            <span class="stat-text">Attendance</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="student-detail">
+                    <div class="title">
+                        <h3><i class="fa-solid fa-id-card" style="color: #2563eb;"></i> Student Details</h3>
+                       <button class="edit-profile-btn" id="edit-profile-btn"><i class="fa-solid fa-pen-to-square"></i> Edit Profile</button>
+
+                    </div>
+
+                    <form class="form-input">
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label>Full Name</label>
+                                <input type="text" id="fullName" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label>Student ID</label>
+                                <input type="text" id="studentId" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label>Email Address</label>
+                                <input type="email" id="email" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label>Phone Number</label>
+                                <input type="tel" id="phoneNumber" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label>Course</label>
+                                <input type="text" id="course" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label>Program Duration</label>
+                                <input type="text" id="programDuration" readonly>
+                            </div>
+                        </div>     
+                    </form>
+
+                    <button type="button" class="save-btn" style="display: none;">Save Changes</button>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="js/profile.js"></script>
+</body>
+</html>
