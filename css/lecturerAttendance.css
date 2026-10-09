@@ -246,12 +246,6 @@
         display: none;
     }
 
-    .sidebar.open ~ .main-wrapper .menu-toggle {
-        left: auto;
-        right: 125px;
-        color: red;
-    }
-
     .main-content {
         width: 100%;
         max-width: 100%;
@@ -334,12 +328,6 @@
     .menu-toggle {
         left: 14px;
         font-size: 1.15rem;
-    }
-
-    .sidebar.open ~ .main-wrapper .menu-toggle {
-        right: 110px;
-        left: auto;
-        color: red;
     }
 
     .main-content {

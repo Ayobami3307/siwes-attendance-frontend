@@ -460,16 +460,19 @@ body {
   }
 
   .menu-toggle {
-    display: flex;
+    display: block;
     position: fixed;
-    left: 20px;
-    top: 15px;
-    z-index: 200;
-    background: none;
+    top: 18px;
+    left: 18px;
+    transform: none;
     border: none;
-    font-size: 1.4rem;
-    color: #0f172a;
+    background: transparent;
+    color: #1e293b;
+    font-size: 1.3rem;
     cursor: pointer;
+    padding: 6px;
+    z-index: 1300;
+    transition: all 0.3s ease;
   }
 
   .user-info,
@@ -481,7 +484,7 @@ body {
     left: auto;
     right: 150px;
     color: red;
-    top: 20px;
+    top: 15px;
   }
 
   .profile {

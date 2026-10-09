@@ -547,13 +547,20 @@ body {
     display: flex;
     position: fixed;
     left: 20px;
-    top: 15px;
-    z-index: 200;
+    top: 25px;
+    z-index: 2000;
     background: none;
     border: none;
     font-size: 1.4rem;
     color: #0f172a;
     cursor: pointer;
+  }
+
+  .sidebar.open ~ .main-wrapper .menu-toggle {
+    left: auto;
+    right: 125px;
+    top: 20px;
+    color: red;
   }
 
   .main-content {
@@ -590,12 +597,6 @@ body {
   .submit-btn {
     width: 100%;
     padding: 10px;
-  }
-
-  .sidebar.open ~ .main-wrapper .menu-toggle {
-    left: auto;
-    right: 125px;
-    color: red;
   }
 }
 

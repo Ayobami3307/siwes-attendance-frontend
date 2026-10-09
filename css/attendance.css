@@ -197,13 +197,25 @@ body {
 }
 
 .menu-toggle {
-    display: none;
+    display: block;
+    position: fixed;
+    top: 18px;
+    left: 18px;
+    transform: none;
     border: none;
     background: transparent;
     color: #1e293b;
     font-size: 1.3rem;
     cursor: pointer;
     padding: 6px;
+    z-index: 2000;
+}
+
+.sidebar.open ~ .main-wrapper .menu-toggle {
+    left: auto;
+    right: 120px;
+    top: 15px;
+    color: red;
 }
 
 .header {
@@ -563,25 +575,17 @@ body {
     .menu-toggle {
         display: block;
         position: fixed;
+        top: 18px;
         left: 18px;
-        top: 22px;
         transform: none;
-        z-index: 2000;
         border: none;
         background: transparent;
         color: #1e293b;
         font-size: 1.3rem;
         cursor: pointer;
         padding: 6px;
+        z-index: 1300;
         transition: all 0.3s ease;
-    }
-
-    .sidebar.open ~ .main-wrapper .menu-toggle {
-        left: auto;
-        right: 18px;
-        top: 22px;
-        color: red;
-        z-index: 2000;
     }
 
     .user-info {
@@ -698,12 +702,6 @@ body {
         left: 14px;
         font-size: 1.15rem;
         color: #1e293b;
-    }
-
-    .sidebar.open ~ .main-wrapper .menu-toggle {
-        right: 110px;
-        left: auto;
-        color: red;
     }
 
     .notification-icon {
