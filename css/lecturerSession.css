@@ -509,6 +509,7 @@ body {
     .sidebar.open ~ .main-wrapper .menu-toggle {
         left: auto;
         right: 125px;
+        top: 15px;
         color: red;
     }
 
