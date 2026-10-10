@@ -38,7 +38,13 @@ registerForm.addEventListener("submit", async (e) => {
     const fullName = document.querySelector("#fullName").value.trim();
     const lecturerId = document.querySelector("#lecturerId").value.trim();
     const email = document.querySelector("#email").value.trim();
+    const phoneNumber=document.querySelector("#phoneNumber").value.trim();
     const password = document.querySelector("#password").value.trim();
+
+    if (!/^\d{11}$/.test(phoneNumber)) {
+        alert("Please enter a valid 11-digit phone number.");
+        return;
+    }
 
     if (!otpSent) {
         const courseId = courseSelect.value;
@@ -142,6 +148,7 @@ registerForm.addEventListener("submit", async (e) => {
             fullName,
             studentId: lecturerId,
             email,
+            phoneNumber,
             password,
             courseId
         };

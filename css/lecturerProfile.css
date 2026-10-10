@@ -68,17 +68,6 @@
 
 .menu-toggle {
     display: none;
-    border: none;
-    background: transparent;
-    color: #1e293b;
-    font-size: 1.3rem;
-    cursor: pointer;
-    padding: 6px;
-    position: absolute;
-    left: 18px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 1100;
 }
 
 .profile-avatar-wrapper {
@@ -173,7 +162,7 @@
         justify-content: flex-end;
     }
 
-    .m.menu-toggle {
+    .menu-toggle {
         display: block;
         position: fixed;
         top: 18px;

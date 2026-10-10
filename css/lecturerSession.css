@@ -476,17 +476,17 @@ body {
 
     .menu-toggle {
         display: block;
-        position: absolute;
+        position: fixed;
+        top: 18px;
         left: 18px;
-        top: 50%;
-        transform: translateY(-50%);
+        transform: none;
         border: none;
         background: transparent;
         color: #1e293b;
         font-size: 1.3rem;
         cursor: pointer;
         padding: 6px;
-        z-index: 1100;
+        z-index: 1300;
         transition: all 0.3s ease;
     }
 

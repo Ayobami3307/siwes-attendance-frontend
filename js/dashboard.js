@@ -185,29 +185,44 @@ const loadAttendance = async () => {
             const recordDate = new Date(record.date);
 
             return recordDate.getDate() === today.getDate() &&
-                   recordDate.getMonth() === today.getMonth() &&
-                   recordDate.getFullYear() === today.getFullYear();
+                recordDate.getMonth() === today.getMonth() &&
+                recordDate.getFullYear() === today.getFullYear() &&
+                !record.timeOut;
         });
 
-        if (todayRecord) {
-            todayStatus.textContent = todayRecord.status;
+       if (todayRecord) {
+        todayStatus.textContent = todayRecord.status;
+        todayStatus.classList.remove("pending");
+        todayStatus.classList.add("verified");
+
+        todayLoginTime.textContent = formatTime(todayRecord.date);
+        todayTimeOut.textContent = "-";
+
+        timeOutBtn.style.display = "block";
+    } else {
+        const completedToday = data.find(record => {
+            const recordDate = new Date(record.date);
+
+            return recordDate.getDate() === today.getDate() &&
+                recordDate.getMonth() === today.getMonth() &&
+                recordDate.getFullYear() === today.getFullYear();
+        });
+
+        if (completedToday) {
+            todayStatus.textContent = completedToday.status;
             todayStatus.classList.remove("pending");
             todayStatus.classList.add("verified");
 
-            todayLoginTime.textContent = formatTime(todayRecord.date);
-            todayTimeOut.textContent = formatTime(todayRecord.timeOut);
-
-            if (todayRecord.timeOut) {
-                timeOutBtn.style.display = "none";
-            } else {
-                timeOutBtn.style.display = "block";
-            }
+            todayLoginTime.textContent = formatTime(completedToday.date);
+            todayTimeOut.textContent = formatTime(completedToday.timeOut);
         } else {
             todayStatus.textContent = "No Attendance";
             todayLoginTime.textContent = "-";
             todayTimeOut.textContent = "-";
-            timeOutBtn.style.display = "none";
         }
+
+        timeOutBtn.style.display = "none";
+    }
 
     } catch (error) {
         console.log("Error:", error);
