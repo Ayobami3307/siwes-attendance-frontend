@@ -292,6 +292,10 @@ const sidebar = document.querySelector(".sidebar");
 
 menuToggle.addEventListener("click", () => {
     sidebar.classList.toggle("open");
+    menuToggle.classList.toggle(
+        "sidebar-menu-open",
+        sidebar.classList.contains("open")
+    );
 
     const icon = menuToggle.querySelector("i");
 
