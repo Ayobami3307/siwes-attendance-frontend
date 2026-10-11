@@ -25,11 +25,14 @@ if (!token) {
 
 const loadLecturerProfile = async () => {
     try {
-        const response = await fetch("https://siwes-attendance-backend.onrender.com/api/profile", {
-            headers: {
-                "Authorization": `Bearer ${token}`
+        const response = await fetch(
+            "https://siwes-attendance-backend.onrender.com/api/profile",
+            {
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
             }
-        });
+        );
 
         const data = await response.json();
 
@@ -78,17 +81,170 @@ loadLecturerProfile();
 const sessionForm = document.querySelector("#sessionForm");
 const qrContainer = document.querySelector("#qrContainer");
 
+let countdownInterval = null;
+
+const displaySession = (session, qrcode) => {
+
+    if (countdownInterval) {
+        clearInterval(countdownInterval);
+        countdownInterval = null;
+    }
+
+    const expiresAt = new Date(session.expiresAt).getTime();
+
+    // If the session has already expired, do not display its QR code
+    if (Date.now() >= expiresAt) {
+        showExpiredSession();
+        return;
+    }
+
+    qrContainer.innerHTML = `
+        <h2>Attendance QR Code</h2>
+
+        <img src="${qrcode}" alt="Attendance QR Code">
+
+        <div class="session-info">
+            <p>
+                <strong>Course:</strong>
+                ${session.courseCode}
+            </p>
+
+            <p>
+                <strong>Title:</strong>
+                ${session.courseTitle}
+            </p>
+
+            <p>
+                <strong>Lecturer:</strong>
+                ${session.lecturerName}
+            </p>
+
+            <div class="session-code">
+                <strong>SESSION CODE</strong>
+                <span>${session.sessionId}</span>
+            </div>
+
+            <p class="expiry">
+                <i class="fa-solid fa-clock"></i>
+                QR code expires in <span id="countdown"></span>
+            </p>
+        </div>
+    `;
+
+    const updateCountdown = () => {
+        const countdownElement = document.querySelector("#countdown");
+
+        if (!countdownElement) {
+            clearInterval(countdownInterval);
+            countdownInterval = null;
+            return;
+        }
+
+        const difference = expiresAt - Date.now();
+
+        if (difference <= 0) {
+            clearInterval(countdownInterval);
+            countdownInterval = null;
+
+            showExpiredSession();
+            return;
+        }
+
+        const minutes = Math.floor(difference / 60000);
+
+        const seconds = Math.floor(
+            (difference % 60000) / 1000
+        );
+
+        countdownElement.textContent =
+            `${minutes}:${seconds.toString().padStart(2, "0")}`;
+    };
+
+    // Show the correct remaining time immediately
+    updateCountdown();
+
+    // Continue updating every second
+    if (Date.now() < expiresAt) {
+        countdownInterval = setInterval(updateCountdown, 1000);
+    }
+};
+
+const showExpiredSession = () => {
+
+    if (countdownInterval) {
+        clearInterval(countdownInterval);
+        countdownInterval = null;
+    }
+
+    qrContainer.innerHTML = `
+        <h2>Attendance QR Code</h2>
+
+        <div class="qr-placeholder">
+            <i class="fa-solid fa-clock"></i>
+            <p>
+                This attendance session has expired.
+                Create a new session.
+            </p>
+        </div>
+    `;
+};
+
+const loadActiveSession = async () => {
+    try {
+        const response = await fetch(
+            "https://siwes-attendance-backend.onrender.com/api/session/active",
+            {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            if (response.status === 401) {
+                localStorage.removeItem("token");
+                window.location.href = "login.html?role=lecturer";
+                return;
+            }
+
+            console.error(
+                data.message || "Unable to retrieve active session."
+            );
+
+            return;
+        }
+
+        if (data.active && data.session && data.qrcode) {
+            displaySession(data.session, data.qrcode);
+        }
+
+    } catch (error) {
+        console.error("Unable to restore active session:", error);
+    }
+};
+
+
 sessionForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
+    const createButton = sessionForm.querySelector(".create-btn");
+
+    createButton.disabled = true;
+
     try {
-        const response = await fetch("https://siwes-attendance-backend.onrender.com/api/session", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
+        const response = await fetch(
+            "https://siwes-attendance-backend.onrender.com/api/session",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                }
             }
-        });
+        );
 
         const data = await response.json();
 
@@ -101,63 +257,26 @@ sessionForm.addEventListener("submit", async (e) => {
                 return;
             }
 
-            alert(data.message || "Unable to create attendance session.");
+            alert(
+                data.message || "Unable to create attendance session."
+            );
+
             return;
         }
 
-        qrContainer.innerHTML = `
-            <h2>Attendance QR Code</h2>
-
-            <img src="${data.qrcode}" alt="Attendance QR Code">
-
-            <div class="session-info">
-                <p><strong>Course:</strong> ${data.session.courseCode}</p>
-                <p><strong>Title:</strong> ${data.session.courseTitle}</p>
-                <p><strong>Lecturer:</strong> ${data.session.lecturerName}</p>
-
-                <div class="session-code">
-                    <strong>SESSION CODE</strong>
-                    <span>${data.session.sessionId}</span>
-                </div>
-
-                <p class="expiry">
-                    <i class="fa-solid fa-clock"></i>
-                    QR code expires in <span id="countdown">10:00</span>
-                </p>
-            </div>
-        `;
-
-        const expiresAt = new Date(data.session.expiresAt).getTime();
-
-        const countdown = setInterval(() => {
-            const now = new Date().getTime();
-            const difference = expiresAt - now;
-
-            const countdownElement = document.querySelector("#countdown");
-
-            if (!countdownElement) {
-                clearInterval(countdown);
-                return;
-            }
-
-            if (difference <= 0) {
-                clearInterval(countdown);
-                countdownElement.textContent = "Expired";
-                return;
-            }
-
-            const minutes = Math.floor(difference / 60000);
-            const seconds = Math.floor((difference % 60000) / 1000);
-
-            countdownElement.textContent =
-                `${minutes}:${seconds.toString().padStart(2, "0")}`;
-        }, 1000);
+        // Display the new or existing active session
+        displaySession(data.session, data.qrcode);
 
     } catch (error) {
         console.log(error);
         alert("Unable to connect to the server.");
+
+    } finally {
+        createButton.disabled = false;
     }
 });
+
+loadActiveSession();
 
 const menuToggle = document.querySelector("#menuToggle");
 const sidebar = document.querySelector(".sidebar");

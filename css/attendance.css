@@ -197,18 +197,7 @@ body {
 }
 
 .menu-toggle {
-    display: block;
-    position: fixed;
-    top: 18px;
-    left: 18px;
-    transform: none;
-    border: none;
-    background: transparent;
-    color: #1e293b;
-    font-size: 1.3rem;
-    cursor: pointer;
-    padding: 6px;
-    z-index: 2000;
+    display: none;
 }
 
 .sidebar.open ~ .main-wrapper .menu-toggle {
