@@ -64,6 +64,82 @@ const loadStudentProfile = async () => {
     }
 };
 
+const loadStudentCourse = async () => {
+    const courseSelect = document.querySelector("#support-course");
+
+    try {
+        const response = await fetch(
+            "https://siwes-attendance-backend.onrender.com/api/profile",
+            {
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            courseSelect.innerHTML = `
+                <option value="" disabled selected>
+                    Unable to load your course
+                </option>
+            `;
+            return;
+        }
+
+        const course = data.courseId;
+
+        if (!course) {
+            courseSelect.innerHTML = `
+                <option value="" disabled selected>
+                    No course assigned
+                </option>
+            `;
+            return;
+        }
+
+        const courseName =
+            typeof course === "object"
+                ? course.courseTitle || course.courseName || course.name
+                : data.course || course;
+
+        const courseCode =
+            typeof course === "object"
+                ? course.courseCode || data.courseCode || ""
+                : data.courseCode || "";
+
+        if (!courseName) {
+            courseSelect.innerHTML = `
+                <option value="" disabled selected>
+                    Course information unavailable
+                </option>
+            `;
+            return;
+        }
+
+        const option = document.createElement("option");
+
+        option.value = courseName;
+        option.textContent = courseCode
+            ? `${courseCode} - ${courseName}`
+            : courseName;
+
+        option.selected = true;
+
+        courseSelect.replaceChildren(option);
+
+    } catch (error) {
+        console.error("Error loading student course:", error);
+
+        courseSelect.innerHTML = `
+            <option value="" disabled selected>
+                Unable to load your course
+            </option>
+        `;
+    }
+};
+
 const supportForm = document.querySelector("#support-form");
 const issueCategory = document.querySelector("#issue-category");
 const issueMessage = document.querySelector("#issue-message");
