@@ -149,16 +149,37 @@ const loadAttendance = async () => {
         const classesAttendedText = document.querySelector("#classesAttendedText");
         const overallRateText = document.querySelector("#overallRateText");
 
-        totalClasses.textContent = data.length;
-        totalClassesText.textContent = `${data.length} sessions recorded`;
+        const sessionsResponse = await fetch(
+            "https://siwes-attendance-backend.onrender.com/api/session/student",
+            {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            }
+        );
 
-        const attended = data.filter(record => record.status === "Present").length;
+        const sessions = await sessionsResponse.json();
+
+        if (!sessionsResponse.ok) {
+            console.log("Unable to load sessions:", sessions);
+            return;
+        }
+
+        const total = sessions.length;
+
+        totalClasses.textContent = total;
+        totalClassesText.textContent = `${total} sessions recorded`;
+
+        const attended = data.filter(
+            record => record.status === "Present"
+        ).length;
 
         classesAttended.textContent = attended;
         classesAttendedText.textContent = `${attended} sessions attended`;
 
-        const rate = data.length > 0
-            ? ((attended / data.length) * 100).toFixed(1)
+        const rate = total > 0
+            ? ((attended / total) * 100).toFixed(1)
             : 0;
 
         overallRate.textContent = `${rate}%`;
