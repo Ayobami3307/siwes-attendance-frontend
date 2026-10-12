@@ -25,45 +25,6 @@ if (!token) {
     }
 }
 
-const loadStudentProfile = async () => {
-    try {
-        const response = await fetch("https://siwes-attendance-backend.onrender.com/api/profile", {
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
-        });
-
-        const data = await response.json();
-
-        if (!response.ok) {
-            return;
-        }
-
-        document.querySelector(".student-name").textContent = data.name;
-        document.querySelector(".student-id").textContent = data.studentId;
-
-        const nameParts = data.name.trim().split(/\s+/);
-
-        const initials = nameParts
-            .slice(0, 2)
-            .map(name => name[0].toUpperCase())
-            .join("");
-
-        const avatarElement = document.querySelector(".avatar");
-
-        if (data.profileImage) {
-            avatarElement.innerHTML = `
-                <img src="${data.profileImage}" alt="Profile Picture">
-            `;
-        } else {
-            avatarElement.textContent = initials;
-        }
-
-    } catch (error) {
-        console.log(error);
-    }
-};
-
 const loadStudentCourse = async () => {
     const courseSelect = document.querySelector("#support-course");
 
@@ -72,7 +33,7 @@ const loadStudentCourse = async () => {
             "https://siwes-attendance-backend.onrender.com/api/profile",
             {
                 headers: {
-                    "Authorization": `Bearer ${token}`
+                    Authorization: `Bearer ${token}`
                 }
             }
         );
@@ -80,17 +41,12 @@ const loadStudentCourse = async () => {
         const data = await response.json();
 
         if (!response.ok) {
-            courseSelect.innerHTML = `
-                <option value="" disabled selected>
-                    Unable to load your course
-                </option>
-            `;
-            return;
+            throw new Error(data.message || "Failed to load profile");
         }
 
         const course = data.courseId;
 
-        if (!course) {
+        if (!course || typeof course !== "object") {
             courseSelect.innerHTML = `
                 <option value="" disabled selected>
                     No course assigned
@@ -99,32 +55,10 @@ const loadStudentCourse = async () => {
             return;
         }
 
-        const courseName =
-            typeof course === "object"
-                ? course.courseTitle || course.courseName || course.name
-                : data.course || course;
-
-        const courseCode =
-            typeof course === "object"
-                ? course.courseCode || data.courseCode || ""
-                : data.courseCode || "";
-
-        if (!courseName) {
-            courseSelect.innerHTML = `
-                <option value="" disabled selected>
-                    Course information unavailable
-                </option>
-            `;
-            return;
-        }
-
         const option = document.createElement("option");
 
-        option.value = courseName;
-        option.textContent = courseCode
-            ? `${courseCode} - ${courseName}`
-            : courseName;
-
+        option.value = course._id;
+        option.textContent = `${course.code} - ${course.name}`;
         option.selected = true;
 
         courseSelect.replaceChildren(option);
