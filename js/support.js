@@ -228,4 +228,5 @@ menuToggle.addEventListener("click", () => {
 });
 
 loadStudentProfile();
+loadStudentCourse();
 loadMyTickets();
