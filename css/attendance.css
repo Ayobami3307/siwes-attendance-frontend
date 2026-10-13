@@ -814,7 +814,7 @@ body {
         display: flex;
         align-items: center;
         justify-content: center;
-        background: #fff;
+        background: red;
         border-radius: 8px;
     }
 

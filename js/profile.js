@@ -107,35 +107,291 @@ profileImageInput.addEventListener("change", async () => {
     }
 });
 
-let editing = false;
+const editProfileForm = document.querySelector("#edit-profile-form");
+
+const editNameInput = document.querySelector("#edit-name");
+const editEmailInput = document.querySelector("#edit-email");
+const editPhoneInput = document.querySelector("#edit-phone");
+
+const sendEmailOtpBtn = document.querySelector("#send-email-otp-btn");
+const emailOtpGroup = document.querySelector("#email-otp-group");
+const emailOtpInput = document.querySelector("#email-otp");
+const verifyEmailOtpBtn = document.querySelector("#verify-email-otp-btn");
+
+const cancelEditBtn = document.querySelector("#cancel-edit-btn");
+
+let originalName = "";
+let originalEmail = "";
 let originalPhoneNumber = "";
+let verifiedNewEmail = "";
+
+// ===============================
+// EDIT PROFILE
+// ===============================
 
 editProfileBtn.addEventListener("click", () => {
-    if (!editing) {
-        originalPhoneNumber = phoneNumber.value;
+    originalName = fullName.value;
+    originalEmail = email.value.trim().toLowerCase();
+    originalPhoneNumber = phoneNumber.value;
 
-        phoneNumber.removeAttribute("readonly");
-        saveBtn.style.display = "block";
+    editNameInput.value = originalName;
+    editEmailInput.value = originalEmail;
+    editPhoneInput.value = originalPhoneNumber;
 
-        editProfileBtn.innerHTML = `<i class="fa-solid fa-xmark"></i> Cancel`;
-        editProfileBtn.style.backgroundColor = "red";
-        editProfileBtn.style.color = "white";
-        editProfileBtn.style.border = "none";
+    verifiedNewEmail = "";
 
-        editing = true;
-    } else {
-        phoneNumber.value = originalPhoneNumber;
-        phoneNumber.setAttribute("readonly", true);
-        saveBtn.style.display = "none";
+    emailOtpGroup.style.display = "none";
+    emailOtpInput.value = "";
 
-        editProfileBtn.innerHTML = `<i class="fa-solid fa-pen-to-square"></i> Edit Profile`;
-        editProfileBtn.style.backgroundColor = "";
-        editProfileBtn.style.color = "";
-        editProfileBtn.style.border = "";
+    sendEmailOtpBtn.disabled = false;
+    sendEmailOtpBtn.textContent = "Verify New Email";
+    sendEmailOtpBtn.style.backgroundColor = "";
+    sendEmailOtpBtn.style.cursor = "";
 
-        editing = false;
+    editEmailInput.readOnly = false;
+
+    document.querySelector("#profile-details-form").style.display = "none";
+    editProfileForm.style.display = "grid";
+
+    saveBtn.style.display = "none";
+    editProfileBtn.style.display = "none";
+});
+
+
+// ===============================
+// CANCEL EDITING
+// ===============================
+
+cancelEditBtn.addEventListener("click", () => {
+    editNameInput.value = originalName;
+    editEmailInput.value = originalEmail;
+    editPhoneInput.value = originalPhoneNumber;
+
+    editProfileForm.style.display = "none";
+    document.querySelector("#profile-details-form").style.display = "grid";
+
+    editProfileBtn.style.display = "flex";
+
+    emailOtpGroup.style.display = "none";
+    emailOtpInput.value = "";
+
+    verifiedNewEmail = "";
+
+    sendEmailOtpBtn.disabled = false;
+    sendEmailOtpBtn.textContent = "Verify New Email";
+    sendEmailOtpBtn.style.backgroundColor = "";
+    sendEmailOtpBtn.style.cursor = "";
+
+    editEmailInput.readOnly = false;
+});
+
+sendEmailOtpBtn.addEventListener("click", async () => {
+    const newEmail = editEmailInput.value.trim().toLowerCase();
+
+    if (!newEmail) {
+        alert("Please enter your new email address.");
+        return;
+    }
+
+    if (newEmail === originalEmail) {
+        alert("This is already your current email address.");
+        return;
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newEmail)) {
+        alert("Please enter a valid email address.");
+        return;
+    }
+
+    try {
+        sendEmailOtpBtn.disabled = true;
+        sendEmailOtpBtn.textContent = "Sending code...";
+
+        const response = await fetch(
+            "https://siwes-attendance-backend.onrender.com/api/send-email-change-otp",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify({ email: newEmail })
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            alert(data.message || "Unable to send verification code.");
+            return;
+        }
+
+        verifiedNewEmail = "";
+
+        emailOtpGroup.style.display = "flex";
+        emailOtpInput.value = "";
+
+        alert("Verification code sent to your new email address.");
+
+    } catch (error) {
+        console.log(error);
+        alert("Unable to connect to the server.");
+    } finally {
+        if (!verifiedNewEmail) {
+            sendEmailOtpBtn.disabled = false;
+            sendEmailOtpBtn.textContent = "Verify New Email";
+            sendEmailOtpBtn.style.backgroundColor = "";
+            sendEmailOtpBtn.style.cursor = "";
+        }
     }
 });
+
+verifyEmailOtpBtn.addEventListener("click", async () => {
+    const enteredEmail = editEmailInput.value.trim().toLowerCase();
+    const otp = emailOtpInput.value.trim();
+
+    if (!/^\d{6}$/.test(otp)) {
+        alert("Please enter the six-digit verification code.");
+        return;
+    }
+
+    try {
+        verifyEmailOtpBtn.disabled = true;
+        verifyEmailOtpBtn.textContent = "Verifying...";
+
+        const response = await fetch(
+            "https://siwes-attendance-backend.onrender.com/api/verify-email-change-otp",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    email: enteredEmail,
+                    otp
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            alert(data.message || "Unable to verify email.");
+            return;
+        }
+
+        verifiedNewEmail = data.email.toLowerCase();
+
+        email.value = data.email;
+        editEmailInput.value = data.email;
+
+        emailOtpGroup.style.display = "none";
+        emailOtpInput.value = "";
+
+        sendEmailOtpBtn.disabled = true;
+        sendEmailOtpBtn.textContent = "Email Verified";
+        sendEmailOtpBtn.style.backgroundColor = "#9ca3af";
+        sendEmailOtpBtn.style.cursor = "not-allowed";
+
+        editEmailInput.readOnly = true;
+
+        alert("Email address verified and updated successfully.");
+
+    } catch (error) {
+        console.log(error);
+        alert("Unable to connect to the server.");
+    } finally {
+        verifyEmailOtpBtn.disabled = false;
+        verifyEmailOtpBtn.textContent = "Confirm Email";
+    }
+});
+
+document.querySelector("#save-profile-btn").addEventListener("click", saveStudentProfile);
+ 
+async function saveStudentProfile() {
+    const name = editNameInput.value.trim();
+    const phone = editPhoneInput.value.trim();
+    const enteredEmail = editEmailInput.value.trim().toLowerCase();
+
+    if (!name) {
+        alert("Please enter your full name.");
+        return;
+    }
+
+    if (phone && !/^\d{11}$/.test(phone)) {
+        alert("Phone number must be exactly 11 digits.");
+        return;
+    }
+
+    if (
+        enteredEmail !== originalEmail &&
+        enteredEmail !== verifiedNewEmail
+    ) {
+        alert("Please verify your new email address before saving.");
+        return;
+    }
+
+    try {
+        const saveProfileBtn = document.querySelector("#save-profile-btn");
+
+        saveProfileBtn.disabled = true;
+        saveProfileBtn.textContent = "Saving...";
+
+        const response = await fetch(
+            "https://siwes-attendance-backend.onrender.com/api/profile",
+            {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    name,
+                    phoneNumber: phone
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            if (response.status === 401) {
+                localStorage.removeItem("token");
+                sessionStorage.removeItem("token");
+                window.location.href = "login.html?role=student";
+                return;
+            }
+
+            alert(data.message || "Unable to update profile.");
+            return;
+        }
+
+        fullName.value = data.user.name;
+        profileName.textContent = data.user.name;
+        studentName.textContent = data.user.name;
+
+        phoneNumber.value = data.user.phoneNumber || "";
+
+        originalName = data.user.name;
+        originalPhoneNumber = data.user.phoneNumber || "";
+
+        editProfileForm.style.display = "none";
+        document.querySelector("#profile-details-form").style.display = "grid";
+        editProfileBtn.style.display = "flex";
+
+        alert("Profile updated successfully!");
+
+    } catch (error) {
+        console.log(error);
+        alert("Unable to connect to the server.");
+    } finally {
+        const saveProfileBtn = document.querySelector("#save-profile-btn");
+
+        saveProfileBtn.disabled = false;
+        saveProfileBtn.textContent = "Save Changes";
+    }
+}
 
 saveBtn.addEventListener("click", async () => {
     const phone = phoneNumber.value.trim();

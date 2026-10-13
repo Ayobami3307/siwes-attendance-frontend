@@ -202,7 +202,6 @@ const cancelEditBtn = document.querySelector("#cancel-edit-btn");
 let originalEmail = "";
 let verifiedNewEmail = "";
 
-// Open the edit form
 editProfileBtn.addEventListener("click", () => {
     editNameInput.value =
         document.querySelector("#profileFullName").textContent;
@@ -219,15 +218,20 @@ editProfileBtn.addEventListener("click", () => {
         displayedPhone === "Not provided" ? "" : displayedPhone;
 
     verifiedNewEmail = "";
+    sendEmailOtpBtn.disabled = false;
+    sendEmailOtpBtn.textContent = "Verify New Email";
+    sendEmailOtpBtn.style.backgroundColor = "";
+    sendEmailOtpBtn.style.cursor = "";
+    editEmailInput.readOnly = false;
     emailOtpGroup.style.display = "none";
     emailOtpInput.value = "";
 
     profileDetails.style.display = "none";
     editProfileForm.style.display = "block";
     editProfileBtn.style.display = "none";
+    editEmailInput.readOnly = false;
 });
 
-// Cancel editing
 cancelEditBtn.addEventListener("click", () => {
     editProfileForm.style.display = "none";
     profileDetails.style.display = "";
@@ -235,9 +239,13 @@ cancelEditBtn.addEventListener("click", () => {
     emailOtpGroup.style.display = "none";
     emailOtpInput.value = "";
     verifiedNewEmail = "";
+    sendEmailOtpBtn.disabled = false;
+    sendEmailOtpBtn.textContent = "Verify New Email";
+    sendEmailOtpBtn.style.backgroundColor = "";
+    sendEmailOtpBtn.style.cursor = "";
+    editEmailInput.readOnly = false;
 });
 
-// Send verification code to the new email
 sendEmailOtpBtn.addEventListener("click", async () => {
     const newEmail = editEmailInput.value.trim().toLowerCase();
 
@@ -290,12 +298,20 @@ sendEmailOtpBtn.addEventListener("click", async () => {
         console.log(error);
         alert("Unable to connect to the server.");
     } finally {
-        sendEmailOtpBtn.disabled = false;
-        sendEmailOtpBtn.textContent = "Verify New Email";
+        if (verifiedNewEmail) {
+            sendEmailOtpBtn.disabled = true;
+            sendEmailOtpBtn.textContent = "Email Verified";
+            sendEmailOtpBtn.style.backgroundColor = "#9ca3af";
+            sendEmailOtpBtn.style.cursor = "not-allowed";
+        } else {
+            sendEmailOtpBtn.disabled = false;
+            sendEmailOtpBtn.textContent = "Verify New Email";
+            sendEmailOtpBtn.style.backgroundColor = "";
+            sendEmailOtpBtn.style.cursor = "";
+        }
     }
 });
 
-// Verify the code and update the email address
 verifyEmailOtpBtn.addEventListener("click", async () => {
     const email = editEmailInput.value.trim().toLowerCase();
     const otp = emailOtpInput.value.trim();
@@ -331,6 +347,17 @@ verifyEmailOtpBtn.addEventListener("click", async () => {
         verifiedNewEmail = data.email;
 
         document.querySelector("#profileEmail").textContent = data.email;
+
+        emailOtpGroup.style.display = "none";
+        emailOtpInput.value = "";
+
+        sendEmailOtpBtn.disabled = true;
+        sendEmailOtpBtn.textContent = "Email Verified";
+
+        sendEmailOtpBtn.style.backgroundColor = "#9ca3af";
+        sendEmailOtpBtn.style.cursor = "not-allowed";
+
+        editEmailInput.readOnly = true;
 
         alert("Email address verified and updated successfully.");
 
@@ -405,7 +432,6 @@ saveProfileBtn.addEventListener("click", async () => {
             .map(part => part[0].toUpperCase())
             .join("");
 
-        // Update initials only when no profile image is present.
         if (!profileAvatar.querySelector("img")) {
             profileAvatar.textContent = initials;
         }
