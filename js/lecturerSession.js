@@ -170,7 +170,6 @@ const displaySession = (session, qrcode) => {
 };
 
 const showExpiredSession = () => {
-
     if (countdownInterval) {
         clearInterval(countdownInterval);
         countdownInterval = null;
@@ -182,8 +181,11 @@ const showExpiredSession = () => {
         <div class="qr-placeholder">
             <i class="fa-solid fa-clock"></i>
             <p>
-                This attendance session has expired.
-                Create a new session.
+                This QR code has expired.
+            </p>
+            <p>
+                If the three-hour attendance session is still active,
+                generate a new QR code to continue taking attendance.
             </p>
         </div>
     `;
@@ -210,22 +212,20 @@ const loadActiveSession = async () => {
                 return;
             }
 
-            console.error(
-                data.message || "Unable to retrieve active session."
-            );
-
+            console.error(data.message || "Unable to retrieve active session.");
             return;
         }
 
         if (data.active && data.session && data.qrcode) {
             displaySession(data.session, data.qrcode);
+        } else if (data.active && data.session && data.qrExpired) {
+            showExpiredSession();
         }
 
     } catch (error) {
         console.error("Unable to restore active session:", error);
     }
 };
-
 
 sessionForm.addEventListener("submit", async (e) => {
     e.preventDefault();

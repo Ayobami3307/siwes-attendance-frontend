@@ -85,22 +85,22 @@ const loadProfile = async () => {
 };
 
 
-const markAttendance = async (sessionId) => {
-
+const markAttendance = async (sessionId, qrToken = null) => {
     try {
-
-        const response = await fetch("https://siwes-attendance-backend.onrender.com/api/attendance", {
-            method: "POST",
-
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
-            },
-
-            body: JSON.stringify({
-                sessionId: sessionId
-            })
-        });
+        const response = await fetch(
+            "https://siwes-attendance-backend.onrender.com/api/attendance",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    sessionId,
+                    qrToken
+                })
+            }
+        );
 
         const data = await response.json();
 
@@ -109,6 +109,7 @@ const markAttendance = async (sessionId) => {
         if (!response.ok) {
             if (response.status === 401) {
                 localStorage.removeItem("token");
+                sessionStorage.removeItem("token");
                 window.location.href = "login.html?role=student";
                 return;
             }
@@ -117,8 +118,6 @@ const markAttendance = async (sessionId) => {
             alert(data.message || "Unable to mark attendance.");
             return;
         }
-
-
 
         cameraScanner.innerHTML = `
             <div class="success-message">
@@ -145,15 +144,11 @@ const markAttendance = async (sessionId) => {
                 window.location.href = "attendance.html";
             }
         }, 1000);
-       
 
     } catch (error) {
-
         console.log(error);
         attendanceProcessing = false;
-
         alert("Unable to connect to the server.");
-
     }
 };
 
@@ -169,14 +164,27 @@ const qrConfig = {
 };
 
 const onScanSuccess = async (decodedText) => {
-
     if (attendanceProcessing) {
+        return;
+    }
+
+    let qrData;
+
+    try {
+        qrData = JSON.parse(decodedText);
+    } catch (error) {
+        alert("Invalid QR code. Please scan the latest attendance QR code.");
+        return;
+    }
+
+    if (!qrData.sessionId || !qrData.qrToken) {
+        alert("Invalid QR code. Please scan the latest attendance QR code.");
         return;
     }
 
     attendanceProcessing = true;
 
-    console.log("QR Code scanned:", decodedText);
+    console.log("QR Code scanned:", qrData);
 
     try {
         await html5QrCode.stop();
@@ -184,7 +192,7 @@ const onScanSuccess = async (decodedText) => {
         console.log(error);
     }
 
-    await markAttendance(decodedText);
+    await markAttendance(qrData.sessionId, qrData.qrToken);
 };
 
 
