@@ -178,3 +178,253 @@ menuToggle.addEventListener("click", () => {
 });
 
 loadProfile();
+
+// ===============================
+// EDIT PROFILE FUNCTIONALITY
+// ===============================
+
+const editProfileBtn = document.querySelector("#edit-profile-btn");
+const editProfileForm = document.querySelector("#edit-profile-form");
+const profileDetails = document.querySelector(".profile-details");
+
+const editNameInput = document.querySelector("#edit-name");
+const editEmailInput = document.querySelector("#edit-email");
+const editPhoneInput = document.querySelector("#edit-phone");
+
+const sendEmailOtpBtn = document.querySelector("#send-email-otp-btn");
+const emailOtpGroup = document.querySelector("#email-otp-group");
+const emailOtpInput = document.querySelector("#email-otp");
+const verifyEmailOtpBtn = document.querySelector("#verify-email-otp-btn");
+
+const saveProfileBtn = document.querySelector("#save-profile-btn");
+const cancelEditBtn = document.querySelector("#cancel-edit-btn");
+
+let originalEmail = "";
+let verifiedNewEmail = "";
+
+// Open the edit form
+editProfileBtn.addEventListener("click", () => {
+    editNameInput.value =
+        document.querySelector("#profileFullName").textContent;
+
+    originalEmail =
+        document.querySelector("#profileEmail").textContent.trim();
+
+    editEmailInput.value = originalEmail;
+
+    const displayedPhone =
+        document.querySelector("#profilePhone").textContent.trim();
+
+    editPhoneInput.value =
+        displayedPhone === "Not provided" ? "" : displayedPhone;
+
+    verifiedNewEmail = "";
+    emailOtpGroup.style.display = "none";
+    emailOtpInput.value = "";
+
+    profileDetails.style.display = "none";
+    editProfileForm.style.display = "block";
+    editProfileBtn.style.display = "none";
+});
+
+// Cancel editing
+cancelEditBtn.addEventListener("click", () => {
+    editProfileForm.style.display = "none";
+    profileDetails.style.display = "";
+    editProfileBtn.style.display = "";
+    emailOtpGroup.style.display = "none";
+    emailOtpInput.value = "";
+    verifiedNewEmail = "";
+});
+
+// Send verification code to the new email
+sendEmailOtpBtn.addEventListener("click", async () => {
+    const newEmail = editEmailInput.value.trim().toLowerCase();
+
+    if (!newEmail) {
+        alert("Please enter your new email address.");
+        return;
+    }
+
+    if (newEmail === originalEmail.toLowerCase()) {
+        alert("This is already your current email address.");
+        return;
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newEmail)) {
+        alert("Please enter a valid email address.");
+        return;
+    }
+
+    try {
+        sendEmailOtpBtn.disabled = true;
+        sendEmailOtpBtn.textContent = "Sending code...";
+
+        const response = await fetch(
+            "https://siwes-attendance-backend.onrender.com/api/send-email-change-otp",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify({ email: newEmail })
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            alert(data.message || "Unable to send verification code.");
+            return;
+        }
+
+        verifiedNewEmail = "";
+
+        emailOtpGroup.style.display = "flex";
+        emailOtpInput.value = "";
+
+        alert("Verification code sent to your new email address.");
+
+    } catch (error) {
+        console.log(error);
+        alert("Unable to connect to the server.");
+    } finally {
+        sendEmailOtpBtn.disabled = false;
+        sendEmailOtpBtn.textContent = "Verify New Email";
+    }
+});
+
+// Verify the code and update the email address
+verifyEmailOtpBtn.addEventListener("click", async () => {
+    const email = editEmailInput.value.trim().toLowerCase();
+    const otp = emailOtpInput.value.trim();
+
+    if (!/^\d{6}$/.test(otp)) {
+        alert("Please enter the six-digit verification code.");
+        return;
+    }
+
+    try {
+        verifyEmailOtpBtn.disabled = true;
+        verifyEmailOtpBtn.textContent = "Verifying...";
+
+        const response = await fetch(
+            "https://siwes-attendance-backend.onrender.com/api/verify-email-change-otp",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify({ email, otp })
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            alert(data.message || "Unable to verify email.");
+            return;
+        }
+
+        verifiedNewEmail = data.email;
+
+        document.querySelector("#profileEmail").textContent = data.email;
+
+        alert("Email address verified and updated successfully.");
+
+    } catch (error) {
+        console.log(error);
+        alert("Unable to connect to the server.");
+    } finally {
+        verifyEmailOtpBtn.disabled = false;
+        verifyEmailOtpBtn.textContent = "Confirm Email";
+    }
+});
+
+// Save the name and phone number
+saveProfileBtn.addEventListener("click", async () => {
+    const name = editNameInput.value.trim();
+    const phoneNumber = editPhoneInput.value.trim();
+    const enteredEmail = editEmailInput.value.trim().toLowerCase();
+
+    if (!name) {
+        alert("Please enter your full name.");
+        return;
+    }
+
+    if (phoneNumber && !/^\d{11}$/.test(phoneNumber)) {
+        alert("Phone number must be exactly 11 digits.");
+        return;
+    }
+
+    if (
+        enteredEmail !== originalEmail.toLowerCase() &&
+        enteredEmail !== verifiedNewEmail
+    ) {
+        alert("Please verify your new email address before saving.");
+        return;
+    }
+
+    try {
+        saveProfileBtn.disabled = true;
+        saveProfileBtn.textContent = "Saving...";
+
+        const response = await fetch(
+            "https://siwes-attendance-backend.onrender.com/api/profile",
+            {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    name,
+                    phoneNumber
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            alert(data.message || "Unable to save profile.");
+            return;
+        }
+
+        document.querySelector("#profileName").textContent = data.user.name;
+        document.querySelector("#profileFullName").textContent = data.user.name;
+        document.querySelector(".lecturer-name").textContent = data.user.name;
+        document.querySelector("#profilePhone").textContent =
+            data.user.phoneNumber || "Not provided";
+
+        const nameParts = data.user.name.trim().split(/\s+/);
+        const initials = nameParts
+            .slice(0, 2)
+            .map(part => part[0].toUpperCase())
+            .join("");
+
+        // Update initials only when no profile image is present.
+        if (!profileAvatar.querySelector("img")) {
+            profileAvatar.textContent = initials;
+        }
+
+        if (!headerAvatar.querySelector("img")) {
+            headerAvatar.textContent = initials;
+        }
+
+        editProfileForm.style.display = "none";
+        profileDetails.style.display = "";
+        editProfileBtn.style.display = "";
+
+        alert("Profile updated successfully.");
+
+    } catch (error) {
+        console.log(error);
+        alert("Unable to connect to the server.");
+    } finally {
+        saveProfileBtn.disabled = false;
+        saveProfileBtn.textContent = "Save Changes";
+    }
+});

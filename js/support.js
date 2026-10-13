@@ -25,6 +25,45 @@ if (!token) {
     }
 }
 
+const loadStudentProfile = async () => {
+    try {
+        const response = await fetch("https://siwes-attendance-backend.onrender.com/api/profile", {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            return;
+        }
+
+        document.querySelector(".student-name").textContent = data.name;
+        document.querySelector(".student-id").textContent = data.studentId;
+
+        const nameParts = data.name.trim().split(/\s+/);
+
+        const initials = nameParts
+            .slice(0, 2)
+            .map(name => name[0].toUpperCase())
+            .join("");
+
+        const avatarElement = document.querySelector(".avatar");
+
+        if (data.profileImage) {
+            avatarElement.innerHTML = `
+                <img src="${data.profileImage}" alt="Profile Picture">
+            `;
+        } else {
+            avatarElement.textContent = initials;
+        }
+
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 const loadStudentCourse = async () => {
     const courseSelect = document.querySelector("#support-course");
 

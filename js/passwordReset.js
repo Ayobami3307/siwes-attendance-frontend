@@ -66,7 +66,8 @@ resetForm.addEventListener("submit", async (e) => {
                 },
                 body: JSON.stringify({
                     email,
-                    otp
+                    otp,
+                    purpose: "password-reset"
                 })
             });
 

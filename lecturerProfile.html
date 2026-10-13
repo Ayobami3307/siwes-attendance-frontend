@@ -108,6 +108,13 @@
 
                     <div class="profile-details">
 
+                        <div class="profile-actions">
+                            <button type="button" id="edit-profile-btn">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                                Edit Profile
+                            </button>
+                        </div>
+
                         <div class="profile-field">
                             <label>Lecturer ID</label>
                             <p id="profileStudentId">Loading...</p>
@@ -136,6 +143,57 @@
                         <div class="profile-field">
                             <label>Program Duration</label>
                             <p id="profileDuration">Not provided</p>
+                        </div>
+
+                    </div>
+
+                    <div class="edit-profile-form" id="edit-profile-form" style="display: none;">
+
+                        <h3>Edit Profile</h3>
+
+                        <div class="form-group">
+                            <label for="edit-name">Full Name</label>
+                            <input type="text" id="edit-name" placeholder="Enter your full name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="edit-email">Email Address</label>
+                            <input type="email" id="edit-email" placeholder="Enter your email address" required>
+                            <button type="button" id="send-email-otp-btn">
+                                Verify New Email
+                            </button>
+                        </div>
+
+                        <div class="form-group" id="email-otp-group" style="display: none;">
+                            <label for="email-otp">Email Verification Code</label>
+                            <input
+                                type="text"
+                                id="email-otp"
+                                inputmode="numeric"
+                                maxlength="6"
+                                placeholder="Enter the 6-digit code"
+                            >
+                            <button type="button" id="verify-email-otp-btn">
+                                Confirm Email
+                            </button>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="edit-phone">Phone Number</label>
+                            <input
+                                type="tel"
+                                id="edit-phone"
+                                inputmode="numeric"
+                                maxlength="11"
+                                placeholder="Enter your 11-digit phone number"
+                                required
+                            >
+                            <small>Phone changes are not yet verified by SMS.</small>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" id="save-profile-btn">Save Changes</button>
+                            <button type="button" id="cancel-edit-btn">Cancel</button>
                         </div>
 
                     </div>
