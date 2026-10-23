@@ -106,11 +106,23 @@
 
 .profile-actions {
     display: flex;
-    justify-content: flex-end;
     margin: 20px 0;
 }
 
-.profile-actions button,
+.profile-actions button{
+    padding: 5px 15vw;
+    border: none;
+    border-radius: 6px;
+    background: #0b3d91;
+    color: white;
+    font-size: 14px;
+    width: 40vw;
+    height: 8vh;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
 .form-actions button,
 #send-email-otp-btn,
 #verify-email-otp-btn {
