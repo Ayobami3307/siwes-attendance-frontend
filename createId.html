@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Id</title>
+    <link rel="stylesheet" href="css/createId.css">
+</head>
+<body>
+    <header>
+        <nav class="navlinks">
+            <h1 class="logo">NIIT</h1>
+            <p><a href="./landingPage.html">&larr;Back To Home</a></p>
+        </nav>
+    </header>
+
+    <main class="id-wrapper">
+        <div class="create-id">
+            <div class="create-id-header">
+                <h1 class="id-title">Create Your Unique ID</h1>
+                <p class="id-subtitle">Enter your credentials to create an id</p>
+                <hr>
+            </div>
+
+            <form class="credentials" id="createIdForm">
+                <div class="credential">
+                    <label for="fullName">Full Name:</label><br>
+                    <input
+                        type="text"
+                        id="fullName"
+                        name="name"
+                        placeholder="Enter Your Full Name"
+                        required
+                    >
+                </div>
+
+                <div class="credential">
+                    <label for="phoneNumber">Phone Number:</label><br>
+                    <input
+                        type="tel"
+                        id="phoneNumber"
+                        name="phoneNumber"
+                        placeholder="Enter Your Mobile Number"
+                        required
+                    >
+                </div>
+
+                <div class="credential">
+                    <label for="role">Role:</label><br>
+                    <select id="role" name="role" required>
+                        <option value="" disabled selected>Select Role</option>
+                        <option value="lecturer">Lecturer</option>
+                        <option value="student">Student</option>
+                    </select>
+                </div>
+
+                <button class="btn" type="submit">Generate ID</button>
+
+                <p id="message"></p>
+                <div id="generatedId"></div>
+            </form>
+
+        </div>
+    </main>
+
+<script src="js/createId.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,133 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.header{
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navlinks{
+     position: sticky;
+    top: 0;
+    z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background-color: #ffffff;
+  box-shadow: 0 50px 50px rgba(45, 44, 44, 0.08);
+  align-items: center;
+  
+  .logo{
+      font-weight: 900;
+      color: #0c4a92;
+      font-size: 1.9rem;
+  }
+
+  p{
+    font-weight: 800;
+    a{
+      text-decoration: none;
+      color: #14B8B8;
+    }
+
+    a:hover{
+      text-decoration: underline;
+    }
+  }
+}
+
+.id-wrapper{
+    justify-content: center;
+    display: flex;
+    margin-top: 20px;
+}
+
+.create-id-header{
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+hr{
+    color: rgba(128, 128, 128, 0.19);
+    margin-top: 10px;
+    border-radius: 20px;
+}
+
+.create-id{
+  border: 2px solid red;
+  padding: 20px 30px;
+  border-radius: 10px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 40px 32px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+}
+
+.id-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #0c4a92;
+  margin-bottom: 8px;
+}
+
+.id-subtitle {
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+.credentials {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.credentials label {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #0c4a92;
+}
+
+.credentials input {
+  color: rgba(0, 0, 0, 0.461);
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.credentials input:focus {
+  border-color: #009688;
+}
+
+select{
+    border: none;
+    padding: 12px;
+    padding-right: 75%;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    margin-top: 8px;
+}
+
+.btn{
+    background-color: #009688;
+    color: #ffffff;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    margin-top: 8px;
+}
