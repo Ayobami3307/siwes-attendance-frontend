@@ -62,8 +62,14 @@
 
         </div>
     </main>
+<script>
+    const adminToken = localStorage.getItem("adminToken");
 
-<script src="js/createId.js"></script>
+    if (!adminToken) {
+        window.location.replace("staff-login.html");
+    }
+</script>
 
+<script src="createId.js"></script>
 </body>
 </html>

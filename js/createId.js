@@ -18,7 +18,8 @@ createIdForm.addEventListener("submit", async (event) => {
             {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${localStorage.getItem("adminToken")}`
                 },
                 body: JSON.stringify({
                     name,
