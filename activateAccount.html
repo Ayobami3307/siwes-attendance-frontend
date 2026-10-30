@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/activateAccount.css">
+    <title>NIIT Student Portal - Activate Account</title>
+</head>
+<body>
+    <header>
+        <nav class="navlinks">
+            <h1 class="logo">NIIT</h1>
+            <p><a href="./landingPage.html">&larr; Back To Home</a></p>
+        </nav>
+    </header>
+
+<main class="activation-container">
+    <div class="activation-card">
+        <h1>Activate Your Account</h1>
+
+        <p class="subtitle">
+            Enter the OTP sent to your email and create your password.
+        </p>
+
+        <form id="activationForm">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" readonly required>
+
+            <label for="otp">Activation OTP</label>
+            <input
+                type="text"
+                id="otp"
+                name="otp"
+                inputmode="numeric"
+                pattern="[0-9]{6}"
+                maxlength="6"
+                placeholder="Enter 6-digit OTP"
+                autocomplete="one-time-code"
+                required
+            >
+
+            <label for="password">New Password</label>
+            <input
+                type="password"
+                id="password"
+                name="password"
+                minlength="8"
+                placeholder="At least 8 characters"
+                autocomplete="new-password"
+                required
+            >
+
+            <label for="confirmPassword">Confirm Password</label>
+            <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                minlength="8"
+                placeholder="Enter password again"
+                autocomplete="new-password"
+                required
+            >
+
+            <button type="submit" id="activateButton">
+                Activate Account
+            </button>
+
+            <p id="message" role="status" aria-live="polite"></p>
+        </form>
+
+        <a href="login.html" class="back-link">Back to Login</a>
+    </div>
+</main>
+
+<script src="js/activateAccount.js"></script>
+</body>
+</html>

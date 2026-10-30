@@ -1,0 +1,201 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  }
+
+body {
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+padding: 20px;
+color: #1f2937;
+}
+
+/* Navigation */
+
+header {
+position: sticky;
+top: 0;
+z-index: 1000;
+width: 100%;
+flex-shrink: 0;
+}
+
+.navlinks {
+display: flex;
+justify-content: space-between;
+padding: 1rem 2rem;
+background-color: #ffffff;
+box-shadow: 0 8px 30px rgba(45, 44, 44, 0.08);
+align-items: center;
+}
+
+.logo {
+font-weight: 900;
+color: #0c4a92;
+font-size: 1.9rem;
+}
+
+.navlinks p {
+font-weight: 800;
+}
+
+.navlinks p a {
+text-decoration: none;
+color: #14B8B8;
+}
+
+.navlinks p a:hover {
+text-decoration: underline;
+}
+
+/* Activation Container */
+
+.activation-container {
+width: 100%;
+max-width: 450px;
+margin: auto;
+}
+
+.activation-card {
+background: #ffffff;
+padding: 35px 30px;
+border-radius: 16px;
+box-shadow: 0 10px 35px rgba(0, 0, 0, 0.1);
+}
+
+.activation-card h1 {
+text-align: center;
+color: #0c4a92;
+font-size: 27px;
+margin-bottom: 12px;
+}
+
+.subtitle {
+text-align: center;
+color: #64748b;
+font-size: 14px;
+line-height: 1.6;
+margin-bottom: 28px;
+}
+
+/* Activation Form */
+
+#activationForm {
+display: flex;
+flex-direction: column;
+}
+
+#activationForm label {
+font-size: 14px;
+font-weight: 600;
+margin-bottom: 8px;
+color: #334155;
+}
+
+#activationForm input {
+width: 100%;
+padding: 13px 14px;
+border: 1px solid #cbd5e1;
+border-radius: 8px;
+outline: none;
+font-size: 15px;
+margin-bottom: 20px;
+transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+#activationForm input:focus {
+border-color: #0c4a92;
+box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.12);
+}
+
+#activationForm input[readonly] {
+background: #f1f5f9;
+color: #64748b;
+cursor: not-allowed;
+}
+
+/* Activate Button */
+
+#activateButton {
+width: 100%;
+border: none;
+border-radius: 8px;
+padding: 14px;
+background: #0c4a92;
+color: #ffffff;
+font-size: 16px;
+font-weight: 600;
+cursor: pointer;
+transition: background 0.2s, transform 0.2s;
+}
+
+#activateButton:hover {
+background: #0b5ed7;
+}
+
+#activateButton:active {
+transform: scale(0.99);
+}
+
+#activateButton:disabled {
+background: #94a3b8;
+cursor: not-allowed;
+}
+
+/* Messages */
+
+#message {
+margin-top: 18px;
+text-align: center;
+font-size: 14px;
+line-height: 1.5;
+}
+
+/* Back to Login */
+
+.back-link {
+display: block;
+text-align: center;
+margin-top: 22px;
+color: #0c4a92;
+text-decoration: none;
+font-size: 14px;
+font-weight: 600;
+}
+
+.back-link:hover {
+text-decoration: underline;
+}
+
+/* Mobile Responsiveness */
+
+@media (max-width: 480px) {
+body {
+padding: 12px;
+}
+
+.navlinks {
+    padding: 1rem;
+}
+
+.logo {
+    font-size: 1.6rem;
+}
+
+.activation-container {
+    padding: 15px 0;
+}
+
+.activation-card {
+    padding: 28px 20px;
+}
+
+.activation-card h1 {
+    font-size: 23px;
+}
+
+}

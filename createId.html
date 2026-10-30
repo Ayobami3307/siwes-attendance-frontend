@@ -3,33 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Id</title>
+    <title>Create Account | NIIT Smart Attendance</title>
     <link rel="stylesheet" href="css/createId.css">
 </head>
 <body>
     <header>
         <nav class="navlinks">
             <h1 class="logo">NIIT</h1>
-            <p><a href="./landingPage.html">&larr;Back To Home</a></p>
+            <p><a href="./landingPage.html">&larr; Back To Home</a></p>
         </nav>
     </header>
 
     <main class="id-wrapper">
         <div class="create-id">
             <div class="create-id-header">
-                <h1 class="id-title">Create Your Unique ID</h1>
-                <p class="id-subtitle">Enter your credentials to create an id</p>
+                <h1 class="id-title">Create User Account</h1>
+                <p class="id-subtitle">
+                    Enter the user's details to generate an ID and create an account.
+                </p>
                 <hr>
             </div>
 
             <form class="credentials" id="createIdForm">
+
                 <div class="credential">
                     <label for="fullName">Full Name:</label><br>
                     <input
                         type="text"
                         id="fullName"
                         name="name"
-                        placeholder="Enter Your Full Name"
+                        placeholder="Enter full name"
+                        autocomplete="name"
+                        required
+                    >
+                </div>
+
+                <div class="credential">
+                    <label for="email">Email Address:</label><br>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter user's email address"
+                        autocomplete="email"
                         required
                     >
                 </div>
@@ -40,7 +56,10 @@
                         type="tel"
                         id="phoneNumber"
                         name="phoneNumber"
-                        placeholder="Enter Your Mobile Number"
+                        placeholder="Enter 11-digit phone number"
+                        inputmode="numeric"
+                        pattern="[0-9]{11}"
+                        maxlength="11"
                         required
                     >
                 </div>
@@ -49,27 +68,47 @@
                     <label for="role">Role:</label><br>
                     <select id="role" name="role" required>
                         <option value="" disabled selected>Select Role</option>
-                        <option value="lecturer">Lecturer</option>
                         <option value="student">Student</option>
+                        <option value="lecturer">Lecturer</option>
                     </select>
                 </div>
 
-                <button class="btn" type="submit">Generate ID</button>
+                <div class="credential" id="courseField">
+                    <label for="courseId">Course:</label><br>
+                    <select id="courseId" name="courseId" required>
+                        <option value="" disabled selected>Loading courses...</option>
+                    </select>
+                </div>
 
-                <p id="message"></p>
+                <div class="credential" id="durationField">
+                    <label for="programDuration">Program Duration:</label><br>
+                    <input
+                        type="text"
+                        id="programDuration"
+                        name="programDuration"
+                        placeholder="e.g. 3 months, 6 months, 2 years"
+                    >
+                </div>
+
+                <button class="btn" id="createAccountButton" type="submit">
+                    Create Account
+                </button>
+
+                <p id="message" role="status" aria-live="polite"></p>
                 <div id="generatedId"></div>
-            </form>
 
+            </form>
         </div>
     </main>
-<script>
-    const adminToken = localStorage.getItem("adminToken");
 
-    if (!adminToken) {
-        window.location.replace("staff-login.html");
-    }
-</script>
+    <script>
+        const adminToken = localStorage.getItem("adminToken");
 
-<script src="js/createId.js"></script>
+        if (!adminToken) {
+            window.location.replace("staff-login.html");
+        }
+    </script>
+
+    <script src="js/createId.js"></script>
 </body>
 </html>
