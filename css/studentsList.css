@@ -436,6 +436,48 @@ tbody tr:hover {
     overflow-wrap: anywhere;
 }
 
+/* LECTURER ACTION BUTTONS */
+
+.lecturer-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.lecturer-status-btn {
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.disable-btn {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.disable-btn:hover {
+    background: #fecaca;
+}
+
+.activate-btn {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.activate-btn:hover {
+    background: #bbf7d0;
+}
+
+.lecturer-status-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
 @media (max-width: 550px) {
     .student-details-grid {
         grid-template-columns: 1fr;

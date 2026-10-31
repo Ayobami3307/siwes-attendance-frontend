@@ -58,7 +58,6 @@ const loadLecturers = async () => {
         const data = await response.json();
 
         if (!response.ok) {
-
             if (response.status === 401 || response.status === 403) {
                 localStorage.removeItem("adminToken");
                 window.location.href = "staff-login.html";
@@ -86,10 +85,9 @@ const loadLecturers = async () => {
         document.getElementById("disabledLecturers").textContent =
             data.stats.disabledLecturers;
 
-        displayLecturers(allLecturers);
+        filterLecturers();
 
     } catch (error) {
-
         console.error("Lecturers Loading Error:", error);
 
         lecturersTableBody.innerHTML = `
@@ -117,6 +115,34 @@ const displayLecturers = (lecturers) => {
 
         const status = lecturer.accountStatus || "unknown";
 
+        let statusButton = "";
+
+        if (status === "active") {
+            statusButton = `
+                <button
+                    class="lecturer-status-btn disable-btn"
+                    data-id="${escapeHTML(lecturer._id)}"
+                    data-status="disabled"
+                >
+                    Disable
+                </button>
+            `;
+        } else if (status === "disabled") {
+            statusButton = `
+                <button
+                    class="lecturer-status-btn activate-btn"
+                    data-id="${escapeHTML(lecturer._id)}"
+                    data-status="active"
+                >
+                    Reactivate
+                </button>
+            `;
+        } else {
+            statusButton = `
+                <span>Pending activation</span>
+            `;
+        }
+
         return `
             <tr>
                 <td>${escapeHTML(lecturer.studentId)}</td>
@@ -136,12 +162,18 @@ const displayLecturers = (lecturers) => {
                 </td>
 
                 <td>
-                    <button
-                        class="view-student-btn"
-                        data-id="${escapeHTML(lecturer._id)}"
-                    >
-                        View
-                    </button>
+                    <div class="lecturer-actions">
+
+                        <button
+                            class="view-student-btn"
+                            data-id="${escapeHTML(lecturer._id)}"
+                        >
+                            View
+                        </button>
+
+                        ${statusButton}
+
+                    </div>
                 </td>
             </tr>
         `;
@@ -151,7 +183,7 @@ const displayLecturers = (lecturers) => {
 
 
 // SEARCH LECTURERS
-lecturerSearch.addEventListener("input", () => {
+const filterLecturers = () => {
 
     const searchValue = lecturerSearch.value.trim().toLowerCase();
 
@@ -166,7 +198,82 @@ lecturerSearch.addEventListener("input", () => {
     });
 
     displayLecturers(filteredLecturers);
-});
+};
+
+lecturerSearch.addEventListener("input", filterLecturers);
+
+
+// UPDATE LECTURER STATUS
+const changeLecturerStatus = async (lecturerId, newStatus, button) => {
+
+    const lecturer = allLecturers.find(
+        item => item._id === lecturerId
+    );
+
+    if (!lecturer) return;
+
+    const action = newStatus === "disabled"
+        ? "disable"
+        : "reactivate";
+
+    const confirmed = confirm(
+        `Are you sure you want to ${action} ${lecturer.name}'s account?`
+    );
+
+    if (!confirmed) return;
+
+    try {
+
+        button.disabled = true;
+        button.textContent = "Processing...";
+
+        const response = await fetch(
+            `https://siwes-attendance-backend.onrender.com/api/admin/lecturers/${encodeURIComponent(lecturerId)}/status`,
+            {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${adminToken}`
+                },
+                body: JSON.stringify({
+                    accountStatus: newStatus
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+
+            if (response.status === 401 || response.status === 403) {
+                localStorage.removeItem("adminToken");
+                window.location.href = "staff-login.html";
+                return;
+            }
+
+            throw new Error(data.message || "Unable to update lecturer status.");
+        }
+
+        if (!data.success) {
+            throw new Error(data.message || "Status update failed.");
+        }
+
+        alert(data.message);
+
+        await loadLecturers();
+
+    } catch (error) {
+
+        console.error("Lecturer Status Update Error:", error);
+
+        alert(error.message);
+
+        button.disabled = false;
+        button.textContent = action === "disable"
+            ? "Disable"
+            : "Reactivate";
+    }
+};
 
 
 // OPEN LECTURER DETAILS
@@ -209,28 +316,40 @@ const openLecturerModal = (lecturer) => {
 
 // CLOSE MODAL
 const closeModal = () => {
-
     lecturerModal.classList.remove("show");
-
     document.body.style.overflow = "";
 };
 
 
-// VIEW BUTTON
+// TABLE ACTIONS
 lecturersTableBody.addEventListener("click", (event) => {
 
     const viewButton = event.target.closest(".view-student-btn");
 
-    if (!viewButton) return;
+    if (viewButton) {
 
-    const lecturerId = viewButton.dataset.id;
+        const lecturerId = viewButton.dataset.id;
 
-    const selectedLecturer = allLecturers.find(
-        lecturer => lecturer._id === lecturerId
-    );
+        const selectedLecturer = allLecturers.find(
+            lecturer => lecturer._id === lecturerId
+        );
 
-    if (selectedLecturer) {
-        openLecturerModal(selectedLecturer);
+        if (selectedLecturer) {
+            openLecturerModal(selectedLecturer);
+        }
+
+        return;
+    }
+
+    const statusButton = event.target.closest(".lecturer-status-btn");
+
+    if (statusButton) {
+
+        changeLecturerStatus(
+            statusButton.dataset.id,
+            statusButton.dataset.status,
+            statusButton
+        );
     }
 });
 
@@ -241,7 +360,6 @@ closeLecturerModal.addEventListener("click", closeModal);
 
 // CLOSE WHEN CLICKING OUTSIDE
 lecturerModal.addEventListener("click", (event) => {
-
     if (event.target === lecturerModal) {
         closeModal();
     }
