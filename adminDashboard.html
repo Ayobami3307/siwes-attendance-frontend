@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIIT Admin Dashboard</title>
+    <link rel="stylesheet" href="css/adminDashboard.css">
+</head>
+<body>
+
+<!-- ADMIN SIDEBAR -->
+<aside class="sidebar">
+    <div class="admin-profile">
+        <div class="admin-avatar" id="adminAvatar">
+            A
+        </div>
+
+        <h2>NIIT Smart Attendance</h2>
+        <p>Administrator</p>
+    </div>
+
+    <nav class="sidebar-navigation">
+
+        <a href="adminDashboard.html" class="nav-item active">
+            <span>▦</span> Dashboard
+        </a>
+
+        <a href="#" class="nav-item">
+            <span>♙</span> Lecturers
+        </a>
+
+        <a href="#" class="nav-item">
+            <span>♧</span> Students
+        </a>
+
+        <a href="#" class="nav-item">
+            <span>＋</span> Create Account
+        </a>
+
+        <a href="#" class="nav-item">
+            <span>▤</span> Course Management
+        </a>
+
+        <a href="#" class="nav-item">
+            <span>◷</span> Pending Activations
+        </a>
+
+    </nav>
+
+    <div class="sidebar-footer">
+        <p>NIIT Smart Attendance</p>
+       <small>
+            <i data-lucide="zap"></i> Powered by NIIT
+        </small>
+    </div>
+</aside>
+
+
+<!-- MAIN CONTENT -->
+<main class="main-content">
+
+    <!-- TOP NAVIGATION -->
+    <header class="topbar">
+
+        <div class="welcome-text">
+            <h1>Hi, Admin</h1>
+            <p>Welcome to your administration dashboard.</p>
+        </div>
+
+        <div class="topbar-actions">
+
+            <input
+                type="search"
+                id="adminSearch"
+                placeholder="Search..."
+            >
+
+            <button type="button" id="helpButton">Help</button>
+
+            <button type="button" id="logoutButton">Logout</button>
+
+        </div>
+
+    </header>
+
+
+    <!-- STATISTICS -->
+    <section class="statistics-panel">
+
+        <div class="stat-card">
+            <div class="stat-icon">♧</div>
+            <h2 id="totalStudents">0</h2>
+            <p>Total Students</p>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">♙</div>
+            <h2 id="totalLecturers">0</h2>
+            <p>Total Lecturers</p>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">✓</div>
+            <h2 id="activeAccounts">0</h2>
+            <p>Active Accounts</p>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">◷</div>
+            <h2 id="pendingAccounts">0</h2>
+            <p>Pending Activations</p>
+        </div>
+
+    </section>
+
+
+    <!-- DASHBOARD BODY -->
+    <section class="dashboard-body">
+
+        <div class="quick-access-area">
+
+            <h3>Quick Access: Students</h3>
+
+            <div class="quick-access-grid">
+
+                <a href="#" class="quick-card student-card">
+                    <span class="quick-icon">♧</span>
+                    <h4>Students List</h4>
+                    <p>View and manage student accounts.</p>
+                </a>
+
+                <a href="#" class="quick-card account-card">
+                    <span class="quick-icon">＋</span>
+                    <h4>Create Account</h4>
+                    <p>Register a new student or lecturer.</p>
+                </a>
+
+                <a href="#" class="quick-card activation-card">
+                    <span class="quick-icon">◷</span>
+                    <h4>Pending Activations</h4>
+                    <p>View accounts awaiting activation.</p>
+                </a>
+
+                <a href="#" class="quick-card manage-card">
+                    <span class="quick-icon">⚙</span>
+                    <h4>Manage Accounts</h4>
+                    <p>Review and manage account status.</p>
+                </a>
+
+            </div>
+
+
+            <h3 class="lecturer-heading">Quick Access: Lecturers</h3>
+
+            <div class="quick-access-grid">
+
+                <a href="#" class="quick-card lecturer-card">
+                    <span class="quick-icon">♙</span>
+                    <h4>Lecturers List</h4>
+                    <p>View lecturer accounts.</p>
+                </a>
+
+                <a href="#" class="quick-card course-card">
+                    <span class="quick-icon">▤</span>
+                    <h4>Course Management</h4>
+                    <p>Manage available courses.</p>
+                </a>
+
+                <a href="#" class="quick-card profile-card">
+                    <span class="quick-icon">♙</span>
+                    <h4>Admin Profile</h4>
+                    <p>View administrator details.</p>
+                </a>
+
+                <a href="#" class="quick-card settings-card">
+                    <span class="quick-icon">⚙</span>
+                    <h4>Account Settings</h4>
+                    <p>Manage administrative settings.</p>
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT PANEL -->
+        <aside class="right-panel">
+
+            <div class="registration-statistics">
+
+                <h4>Account Statistics</h4>
+
+                <div id="registrationChart">
+                    <p>Registration statistics will appear here.</p>
+                </div>
+
+            </div>
+
+
+            <div class="calendar-panel">
+
+                <div class="calendar-header">
+                    <h4 id="calendarMonth">Calendar</h4>
+
+                    <div>
+                        <button id="previousMonth">&lsaquo;</button>
+                        <button id="nextMonth">&rsaquo;</button>
+                    </div>
+                </div>
+
+                <div id="calendar"></div>
+
+            </div>
+
+        </aside>
+
+    </section>
+
+</main>
+
+
+<!-- ADMIN AUTHENTICATION CHECK -->
+<script>
+    const adminToken = localStorage.getItem("adminToken");
+
+    if (!adminToken) {
+        window.location.replace("staff-login.html");
+    }
+</script>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<script>lucide.createIcons();</script>
+
+<script src="js/adminDashboard.js"></script>
+</body>
+</html>
