@@ -1,7 +1,5 @@
-// NIIT ADMIN DASHBOARD
-
 // Get admin token
-const adminToken = localStorage.getItem("adminToken");
+window.adminToken = localStorage.getItem("adminToken");
 
 // Protect dashboard
 if (!adminToken) {
@@ -123,7 +121,7 @@ const loadDashboardStats = async () => {
             {
                 method: "GET",
                 headers: {
-                    "Authorization": `Bearer ${adminToken}`
+                    "Authorization": `Bearer ${window.adminToken}`
                 }
             }
         );
