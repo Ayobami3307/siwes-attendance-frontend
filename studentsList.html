@@ -161,6 +161,76 @@
 
     </main>
 
+    <!-- STUDENT DETAILS MODAL -->
+<div class="student-modal-overlay" id="studentModal">
+
+    <div class="student-modal">
+
+        <div class="modal-header">
+            <div>
+                <h2>Student Details</h2>
+                <p>View student account information</p>
+            </div>
+
+            <button type="button" id="closeStudentModal" class="modal-close">
+                &times;
+            </button>
+        </div>
+
+        <div class="student-modal-body">
+
+            <div class="student-modal-avatar" id="modalAvatar">
+                S
+            </div>
+
+            <h3 id="modalStudentName">Student Name</h3>
+            <p id="modalStudentId">Student ID</p>
+
+            <div class="student-details-grid">
+
+                <div class="detail-item">
+                    <span>Email Address</span>
+                    <strong id="modalEmail">-</strong>
+                </div>
+
+                <div class="detail-item">
+                    <span>Phone Number</span>
+                    <strong id="modalPhone">-</strong>
+                </div>
+
+                <div class="detail-item">
+                    <span>Programme Duration</span>
+                    <strong id="modalDuration">-</strong>
+                </div>
+
+                <div class="detail-item">
+                    <span>Course</span>
+                    <strong id="modalCourse">-</strong>
+                </div>
+
+                <div class="detail-item">
+                    <span>Course Code</span>
+                    <strong id="modalCourseCode">-</strong>
+                </div>
+
+                <div class="detail-item">
+                    <span>Account Status</span>
+                    <strong id="modalStatus">-</strong>
+                </div>
+
+                <div class="detail-item">
+                    <span>Date Created</span>
+                    <strong id="modalCreatedAt">-</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
 
     <!-- ADMIN AUTHENTICATION -->
     <script>

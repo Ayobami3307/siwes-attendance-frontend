@@ -272,6 +272,181 @@ tbody tr:hover {
     background: #fafaff;
 }
 
+/* VIEW STUDENT BUTTON */
+
+.view-student-btn {
+    background: linear-gradient(135deg, #154288, #4269c8);
+    color: #ffffff;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 3px 8px rgba(21, 66, 136, 0.15);
+}
+
+.view-student-btn:hover {
+    background: linear-gradient(135deg, #10346c, #3154ad);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(21, 66, 136, 0.25);
+}
+
+.view-student-btn:active {
+    transform: scale(0.96);
+}
+
+.view-student-btn:focus-visible {
+    outline: 3px solid rgba(66, 105, 200, 0.3);
+    outline-offset: 3px;
+}
+
+/* STUDENT DETAILS MODAL */
+
+.student-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(1, 18, 49, 0.65);
+    backdrop-filter: blur(5px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 2000;
+}
+
+.student-modal-overlay.show {
+    display: flex;
+}
+
+.student-modal {
+    background: #ffffff;
+    width: 100%;
+    max-width: 650px;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 18px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    animation: modalAppear 0.25s ease;
+}
+
+@keyframes modalAppear {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 30px;
+    border-bottom: 1px solid #e8edf5;
+}
+
+.modal-header h2 {
+    color: #102b59;
+    font-size: 21px;
+    margin-bottom: 5px;
+}
+
+.modal-header p {
+    color: #7b8798;
+    font-size: 13px;
+}
+
+.modal-close {
+    border: none;
+    background: #f1f4f9;
+    color: #344563;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.modal-close:hover {
+    background: #e2e8f2;
+}
+
+.student-modal-body {
+    padding: 30px;
+    text-align: center;
+}
+
+.student-modal-avatar {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #154288, #7355d9);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0 auto 15px;
+}
+
+.student-modal-body > h3 {
+    color: #102b59;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.student-modal-body > p {
+    color: #7b8798;
+    font-size: 13px;
+    margin-bottom: 30px;
+}
+
+.student-details-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    text-align: left;
+}
+
+.detail-item {
+    background: #f6f8fc;
+    padding: 16px;
+    border-radius: 10px;
+    min-width: 0;
+}
+
+.detail-item span {
+    display: block;
+    color: #8290a5;
+    font-size: 12px;
+    margin-bottom: 8px;
+}
+
+.detail-item strong {
+    display: block;
+    color: #18345f;
+    font-size: 13px;
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 550px) {
+    .student-details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-header,
+    .student-modal-body {
+        padding: 20px;
+    }
+}
+
 
 /* TABLET RESPONSIVENESS */
 
