@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Students List | NIIT Smart Attendance</title>
+
+    <link rel="stylesheet" href="css/studentsList.css">
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="admin-profile">
+
+            <div class="admin-avatar" id="adminAvatar">
+                A
+            </div>
+
+            <h2>NIIT Smart Attendance</h2>
+            <p>Administrator</p>
+
+        </div>
+
+        <nav class="sidebar-navigation">
+
+            <a href="adminDashboard.html" class="nav-item">
+                <span>▦</span> Dashboard
+            </a>
+
+            <a href="#" class="nav-item">
+                <span>♙</span> Lecturers
+            </a>
+
+            <a href="studentsList.html" class="nav-item active">
+                <span>♧</span> Students
+            </a>
+
+            <a href="createid.html" class="nav-item">
+                <span>＋</span> Create Account
+            </a>
+
+            <a href="#" class="nav-item">
+                <span>▤</span> Course Management
+            </a>
+
+            <a href="#" class="nav-item">
+                <span>◷</span> Pending Activations
+            </a>
+
+        </nav>
+
+        <div class="sidebar-footer">
+
+            <p>NIIT Smart Attendance</p>
+
+            <small>
+                <i data-lucide="zap"></i> Powered by NIIT
+            </small>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <div class="students-container">
+
+            <header class="page-header">
+
+                <div>
+                    <h2>Students Management</h2>
+                    <p>View and manage registered student accounts.</p>
+                </div>
+
+                <a href="adminDashboard.html" class="back-button">
+                    ← Dashboard
+                </a>
+
+            </header>
+
+
+            <!-- STUDENT STATISTICS -->
+            <section class="students-summary">
+
+                <div class="summary-card">
+                    <h3>Total Students</h3>
+                    <p id="totalStudents">0</p>
+                </div>
+
+                <div class="summary-card">
+                    <h3>Active Students</h3>
+                    <p id="activeStudents">0</p>
+                </div>
+
+                <div class="summary-card">
+                    <h3>Pending Students</h3>
+                    <p id="pendingStudents">0</p>
+                </div>
+
+                <div class="summary-card">
+                    <h3>Disabled Students</h3>
+                    <p id="disabledStudents">0</p>
+                </div>
+
+            </section>
+
+
+            <!-- STUDENTS TABLE -->
+            <section class="students-list-section">
+
+                <div class="list-header">
+
+                    <h3>All Students</h3>
+
+                    <input
+                        type="search"
+                        id="studentSearch"
+                        placeholder="Search by name or student ID..."
+                    >
+
+                </div>
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Student ID</th>
+                                <th>Full Name</th>
+                                <th>Email</th>
+                                <th>Phone Number</th>
+                                <th>Duration</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="studentsTableBody">
+
+                            <tr>
+                                <td colspan="7">Loading students...</td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <!-- ADMIN AUTHENTICATION -->
+    <script>
+        if (!localStorage.getItem("adminToken")) {
+            window.location.href = "staff-login.html";
+        }
+    </script>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        lucide.createIcons();
+    </script>
+
+    <script src="js/studentsList.js"></script>
+
+</body>
+</html>
