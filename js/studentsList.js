@@ -11,7 +11,7 @@ let allStudents = [];
 
 // PROTECT PAGE
 if (!adminToken) {
-    window.location.href = "staff-login.html";
+    window.location.href = "staffLogin.html";
 }
 
 
@@ -76,7 +76,7 @@ const loadStudents = async () => {
 
             if (response.status === 401 || response.status === 403) {
                 localStorage.removeItem("adminToken");
-                window.location.href = "staff-login.html";
+                window.location.href = "staffLogin.html";
                 return;
             }
 
@@ -275,7 +275,7 @@ const changeStudentStatus = async (studentId, newStatus, button) => {
 
             if (response.status === 401 || response.status === 403) {
                 localStorage.removeItem("adminToken");
-                window.location.href = "staff-login.html";
+                window.location.href = "staffLogin.html";
                 return;
             }
 

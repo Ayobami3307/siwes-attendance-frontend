@@ -8,7 +8,7 @@ const closeLecturerModal = document.getElementById("closeLecturerModal");
 let allLecturers = [];
 
 if (!adminToken) {
-    window.location.href = "staff-login.html";
+    window.location.href = "staffLogin.html";
 }
 
 const escapeHTML = (value) => String(value ?? "")
@@ -60,7 +60,7 @@ const loadLecturers = async () => {
         if (!response.ok) {
             if (response.status === 401 || response.status === 403) {
                 localStorage.removeItem("adminToken");
-                window.location.href = "staff-login.html";
+                window.location.href = "staffLogin.html";
                 return;
             }
 
@@ -247,7 +247,7 @@ const changeLecturerStatus = async (lecturerId, newStatus, button) => {
 
             if (response.status === 401 || response.status === 403) {
                 localStorage.removeItem("adminToken");
-                window.location.href = "staff-login.html";
+                window.location.href = "staffLogin.html";
                 return;
             }
 

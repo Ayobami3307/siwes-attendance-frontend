@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Management | NIIT Smart Attendance</title>
+
+    <link rel="stylesheet" href="css/courseManagement.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+   <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="admin-profile">
+
+            <div class="admin-avatar" id="adminAvatar">
+                A
+            </div>
+
+            <h2>NIIT Smart Attendance</h2>
+            <p>Administrator</p>
+
+        </div>
+
+        <nav class="sidebar-navigation">
+
+            <a href="adminDashboard.html" class="nav-item">
+                <span>▦</span> Dashboard
+            </a>
+
+            <a href="lecturersList.html" class="nav-item">
+                <span>♙</span> Lecturers
+            </a>
+
+            <a href="studentsList.html" class="nav-item">
+                <span>♧</span> Students
+            </a>
+
+            <a href="createid.html" class="nav-item">
+                <span>＋</span> Create Account
+            </a>
+
+            <a href="#" class="nav-item active">
+                <span>▤</span> Course Management
+            </a>
+
+            <a href="pendingActivations.html" class="nav-item">
+                <span>◷</span> Pending Activations
+            </a>
+
+        </nav>
+
+        <div class="sidebar-footer">
+
+            <p>NIIT Smart Attendance</p>
+
+            <small>
+                <i data-lucide="zap"></i> Powered by NIIT
+            </small>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <header class="page-header">
+            <div>
+                <h1>Course Management</h1>
+                <p>Create, update and manage available courses.</p>
+            </div>
+
+            <a href="adminDashboard.html" class="back-button">
+                <i data-lucide="arrow-left"></i>
+                Dashboard
+            </a>
+        </header>
+
+
+        <!-- SUMMARY CARDS -->
+        <section class="summary-cards">
+
+            <div class="summary-card">
+                <div class="summary-icon">
+                    <i data-lucide="book-open"></i>
+                </div>
+
+                <div>
+                    <p>Total Courses</p>
+                    <h2 id="totalCourses">0</h2>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- COURSE MANAGEMENT SECTION -->
+        <section class="content-card">
+
+            <div class="section-header">
+                <div>
+                    <h2>Available Courses</h2>
+                    <p>Manage courses registered on the attendance portal.</p>
+                </div>
+
+                <button id="addCourseBtn" class="primary-button">
+                    <i data-lucide="plus"></i>
+                    Add Course
+                </button>
+            </div>
+
+
+            <!-- SEARCH -->
+            <div class="table-controls">
+                <div class="search-box">
+                    <i data-lucide="search"></i>
+                    <input
+                        type="text"
+                        id="courseSearch"
+                        placeholder="Search by course name or code..."
+                    >
+                </div>
+            </div>
+
+
+            <!-- COURSES TABLE -->
+            <div class="table-container">
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>S/N</th>
+                            <th>Course Name</th>
+                            <th>Course Code</th>
+                            <th>Date Created</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="coursesTableBody">
+                        <tr>
+                            <td colspan="5" class="loading-message">
+                                Loading courses...
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- ADD / EDIT COURSE MODAL -->
+        <div class="modal-overlay" id="courseModal">
+
+            <div class="modal">
+
+                <div class="modal-header">
+                    <div>
+                        <h2 id="modalTitle">Add New Course</h2>
+                        <p>Enter the course details below.</p>
+                    </div>
+
+                    <button type="button" id="closeModalBtn" class="close-button">
+                        <i data-lucide="x"></i>
+                    </button>
+                </div>
+
+
+                <form id="courseForm">
+
+                    <div class="form-group">
+                        <label for="courseName">Course Name</label>
+                        <input
+                            type="text"
+                            id="courseName"
+                            placeholder="e.g. Web Development"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="courseCode">Course Code</label>
+                        <input
+                            type="text"
+                            id="courseCode"
+                            placeholder="e.g. WEB101"
+                            required
+                        >
+                    </div>
+
+                    <div id="formMessage" class="form-message"></div>
+
+                    <div class="modal-actions">
+                        <button type="button" id="cancelCourseBtn" class="cancel-button">
+                            Cancel
+                        </button>
+
+                        <button type="submit" id="saveCourseBtn" class="primary-button">
+                            Save Course
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+        <!-- DELETE CONFIRMATION MODAL -->
+        <div class="modal-overlay" id="deleteModal">
+
+            <div class="modal delete-modal">
+
+                <div class="delete-icon">
+                    <i data-lucide="alert-triangle"></i>
+                </div>
+
+                <h2>Delete Course?</h2>
+
+                <p id="deleteMessage">
+                    Are you sure you want to delete this course?
+                </p>
+
+                <div class="modal-actions">
+                    <button type="button" id="cancelDeleteBtn" class="cancel-button">
+                        Cancel
+                    </button>
+
+                    <button type="button" id="confirmDeleteBtn" class="delete-button">
+                        Delete Course
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- NOTIFICATION -->
+        <div id="notification" class="notification"></div>
+
+    </main>
+
+
+    <script src="js/courseManagement.js"></script>
+
+    <script>
+        lucide.createIcons();
+    </script>
+
+</body>
+</html>

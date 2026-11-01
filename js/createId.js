@@ -115,7 +115,7 @@ createIdForm.addEventListener("submit", async (event) => {
     const adminToken = localStorage.getItem("adminToken");
 
     if (!adminToken) {
-        window.location.replace("staff-login.html");
+        window.location.replace("staffLogin.html");
         return;
     }
 

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pending Activations | NIIT Smart Attendance</title>
+    <link rel="stylesheet" href="css/pendingActivations.css">
+</head>
+<body>
+    <aside class="sidebar">
+
+        <div class="admin-profile">
+            <div class="admin-avatar">A</div>
+            <h2>NIIT Smart Attendance</h2>
+            <p>Administrator</p>
+        </div>
+
+        <nav class="sidebar-navigation">
+
+            <a href="adminDashboard.html" class="nav-item">
+                <span>▦</span> Dashboard
+            </a>
+
+            <a href="lecturersList.html" class="nav-item">
+                <span>♙</span> Lecturers
+            </a>
+
+            <a href="studentsList.html" class="nav-item">
+                <span>♧</span> Students
+            </a>
+
+            <a href="createid.html" class="nav-item">
+                <span>＋</span> Create Account
+            </a>
+
+            <a href="courseManagement.html" class="nav-item">
+                <span>▤</span> Course Management
+            </a>
+
+            <a href="pendingActivations.html" class="nav-item active">
+                <span>◷</span> Pending Activations
+            </a>
+
+        </nav>
+
+        <div class="sidebar-footer">
+            <p>NIIT Smart Attendance</p>
+            <small> <i data-lucide="zap"></i> Powered by NIIT</small>
+        </div>
+
+    </aside>
+
+
+    <main class="main-content">
+
+        <div class="activations-container">
+
+            <header class="page-header">
+
+                <div>
+                    <h2>Pending Activations</h2>
+                    <p>View accounts awaiting email verification and activation.</p>
+                </div>
+
+                <a href="adminDashboard.html" class="back-button">
+                    ← Dashboard
+                </a>
+
+            </header>
+
+
+            <section class="activation-summary">
+
+                <div class="summary-card">
+                    <h3>Total Pending Accounts</h3>
+                    <p id="pendingCount">0</p>
+                </div>
+
+                <div class="summary-card">
+                    <h3>Pending Students</h3>
+                    <p id="pendingStudents">0</p>
+                </div>
+
+                <div class="summary-card">
+                    <h3>Pending Lecturers</h3>
+                    <p id="pendingLecturers">0</p>
+                </div>
+
+            </section>
+
+
+            <section class="activations-list-section">
+
+                <div class="list-header">
+
+                    <h3>Accounts Awaiting Activation</h3>
+
+                    <input
+                        type="search"
+                        id="activationSearch"
+                        placeholder="Search by name, ID or email..."
+                    >
+
+                </div>
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Account ID</th>
+                                <th>Full Name</th>
+                                <th>Email</th>
+                                <th>Phone Number</th>
+                                <th>Role</th>
+                                <th>Date Created</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="activationsTableBody">
+
+                            <tr>
+                                <td colspan="6">Loading pending accounts...</td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <script>
+        if (!localStorage.getItem("adminToken")) {
+            window.location.replace("staffLogin.html");
+        }
+    </script>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>lucide.createIcons();</script>
+
+    <script src="js/pendingActivations.js"></script>
+</body>
+</html>

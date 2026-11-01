@@ -3,7 +3,7 @@ window.adminToken = localStorage.getItem("adminToken");
 
 // Protect dashboard
 if (!adminToken) {
-    window.location.href = "staff-login.html";
+    window.location.href = "staffLogin.html";
 }
 
 // LOGOUT
@@ -15,7 +15,7 @@ if (logoutButton) {
 
         if (confirmLogout) {
             localStorage.removeItem("adminToken");
-            window.location.href = "staff-login.html";
+            window.location.href = "staffLogin.html";
         }
     });
 }

@@ -37,11 +37,11 @@
             <span>＋</span> Create Account
         </a>
 
-        <a href="#" class="nav-item">
+        <a href="courseManagement.html" class="nav-item">
             <span>▤</span> Course Management
         </a>
 
-        <a href="#" class="nav-item">
+        <a href="pendingActivations.html" class="nav-item">
             <span>◷</span> Pending Activations
         </a>
 
@@ -135,16 +135,16 @@
                     <p>Register a new student or lecturer.</p>
                 </a>
 
-                <a href="#" class="quick-card activation-card">
+                <a href="pendingActivations.html" class="quick-card activation-card">
                     <span class="quick-icon">◷</span>
                     <h4>Pending Activations</h4>
                     <p>View accounts awaiting activation.</p>
                 </a>
 
-                <a href="#" class="quick-card manage-card">
+                <a href="manageAccounts.html" class="quick-card manage-card">
                     <span class="quick-icon">⚙</span>
                     <h4>Manage Accounts</h4>
-                    <p>Review and manage account status.</p>
+                    <p>View, Search, and Manage Student and Lecturer accounts.</p>
                 </a>
 
             </div>
@@ -160,7 +160,7 @@
                     <p>View lecturer accounts.</p>
                 </a>
 
-                <a href="#" class="quick-card course-card">
+                <a href="courseManagement.html" class="quick-card course-card">
                     <span class="quick-icon">▤</span>
                     <h4>Course Management</h4>
                     <p>Manage available courses.</p>
@@ -224,7 +224,7 @@
     const adminToken = localStorage.getItem("adminToken");
 
     if (!adminToken) {
-        window.location.replace("staff-login.html");
+        window.location.replace("staffLogin.html");
     }
 </script>
 
