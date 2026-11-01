@@ -478,6 +478,67 @@ tbody tr:hover {
     cursor: not-allowed;
 }
 
+/* STUDENT ACTION BUTTONS */
+.lecturer-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.student-status-btn {
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.disable-btn {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.disable-btn:hover {
+    background: #fecaca;
+}
+
+.activate-btn {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.activate-btn:hover {
+    background: #bbf7d0;
+}
+
+.student-status-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* KEEP STUDENT ACTION BUTTONS ON ONE LINE */
+.lecturer-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+}
+
+.student-status-btn {
+    padding: 7px 9px;
+    font-size: 11px;
+    flex-shrink: 0;
+}
+
+.students-table td:last-child {
+    min-width: 150px;
+}
+
+
 @media (max-width: 550px) {
     .student-details-grid {
         grid-template-columns: 1fr;

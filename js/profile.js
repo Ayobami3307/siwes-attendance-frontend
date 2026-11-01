@@ -393,59 +393,6 @@ async function saveStudentProfile() {
     }
 }
 
-saveBtn.addEventListener("click", async () => {
-    const phone = phoneNumber.value.trim();
-
-    if (!/^\d{11}$/.test(phone)) {
-        alert("Phone number must be exactly 11 digits.");
-        return;
-    }
-
-    try {
-        const response = await fetch("https://siwes-attendance-backend.onrender.com/api/profile", {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
-            },
-            body: JSON.stringify({
-                phoneNumber: phone
-            })
-        });
-
-        const data = await response.json();
-
-        console.log(data);
-
-        if (!response.ok) {
-            if (response.status === 401) {
-                localStorage.removeItem("token");
-                window.location.href = "login.html?role=student";
-                return;
-            }
-
-            alert(data.message || "Unable to update profile.");
-            return;
-        }
-
-        alert("Profile updated successfully!");
-
-        phoneNumber.setAttribute("readonly", true);
-        saveBtn.style.display = "none";
-
-        editProfileBtn.innerHTML = `<i class="fa-solid fa-pen-to-square"></i> Edit Profile`;
-        editProfileBtn.style.setProperty("background-color", "", "important");
-        editProfileBtn.style.setProperty("color", "", "important");
-        editProfileBtn.style.setProperty("border", "", "important");
-
-        editing = false;
-
-    } catch (error) {
-        console.log(error);
-        alert("Unable to connect to the server.");
-    }
-});
-
 const getProfile = async () => {
     try {
         const response = await fetch("https://siwes-attendance-backend.onrender.com/api/profile", {

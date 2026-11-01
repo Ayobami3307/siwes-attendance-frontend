@@ -3,21 +3,19 @@ const adminToken = localStorage.getItem("adminToken");
 const studentsTableBody = document.getElementById("studentsTableBody");
 const studentSearch = document.getElementById("studentSearch");
 
-// Modal elements
 const studentModal = document.getElementById("studentModal");
 const closeStudentModal = document.getElementById("closeStudentModal");
 
-// Store students locally
 let allStudents = [];
 
 
-// Protect the page
+// PROTECT PAGE
 if (!adminToken) {
     window.location.href = "staff-login.html";
 }
 
 
-// Escape values before inserting them into HTML
+// ESCAPE HTML
 const escapeHTML = (value) => {
     return String(value ?? "")
         .replace(/&/g, "&amp;")
@@ -28,7 +26,7 @@ const escapeHTML = (value) => {
 };
 
 
-// Format date
+// FORMAT DATE
 const formatDate = (date) => {
 
     if (!date) return "Not available";
@@ -47,7 +45,7 @@ const formatDate = (date) => {
 };
 
 
-// Fetch all students
+// LOAD STUDENTS
 const loadStudents = async () => {
 
     try {
@@ -68,8 +66,12 @@ const loadStudents = async () => {
             }
         );
 
-        const data = await response.json();
+        const responseText = await response.text();
 
+        console.log("HTTP Status:", response.status);
+        console.log("Backend Response:", responseText);
+
+        const data = JSON.parse(responseText);
         if (!response.ok) {
 
             if (response.status === 401 || response.status === 403) {
@@ -85,10 +87,8 @@ const loadStudents = async () => {
             throw new Error(data.message || "Unable to load students.");
         }
 
-        // Store student records
         allStudents = data.students || [];
 
-        // Update summary cards
         document.getElementById("totalStudents").textContent =
             data.stats.totalStudents;
 
@@ -101,8 +101,7 @@ const loadStudents = async () => {
         document.getElementById("disabledStudents").textContent =
             data.stats.disabledStudents;
 
-        // Display students
-        displayStudents(allStudents);
+        filterStudents();
 
     } catch (error) {
 
@@ -110,16 +109,14 @@ const loadStudents = async () => {
 
         studentsTableBody.innerHTML = `
             <tr>
-                <td colspan="7">
-                    ${escapeHTML(error.message)}
-                </td>
+                <td colspan="7">${escapeHTML(error.message)}</td>
             </tr>
         `;
     }
 };
 
 
-// Display students in the table
+// DISPLAY STUDENTS
 const displayStudents = (students) => {
 
     if (!students || students.length === 0) {
@@ -136,6 +133,39 @@ const displayStudents = (students) => {
     studentsTableBody.innerHTML = students.map(student => {
 
         const status = student.accountStatus || "unknown";
+
+        let statusButton = "";
+
+        if (status === "active") {
+
+            statusButton = `
+                <button
+                    class="student-status-btn disable-btn"
+                    data-id="${escapeHTML(student._id)}"
+                    data-status="disabled"
+                >
+                    Disable
+                </button>
+            `;
+
+        } else if (status === "disabled") {
+
+            statusButton = `
+                <button
+                    class="student-status-btn activate-btn"
+                    data-id="${escapeHTML(student._id)}"
+                    data-status="active"
+                >
+                    Reactivate
+                </button>
+            `;
+
+        } else {
+
+            statusButton = `
+                <span>Pending activation</span>
+            `;
+        }
 
         return `
             <tr>
@@ -157,11 +187,18 @@ const displayStudents = (students) => {
                 </td>
 
                 <td>
-                    <button
-                        class="view-student-btn"
-                        data-id="${escapeHTML(student._id)}">
-                        View
-                    </button>
+                    <div class="lecturer-actions">
+
+                        <button
+                            class="view-student-btn"
+                            data-id="${escapeHTML(student._id)}"
+                        >
+                            View
+                        </button>
+
+                        ${statusButton}
+
+                    </div>
                 </td>
 
             </tr>
@@ -172,7 +209,7 @@ const displayStudents = (students) => {
 
 
 // SEARCH STUDENTS
-studentSearch.addEventListener("input", () => {
+const filterStudents = () => {
 
     const searchValue = studentSearch.value.trim().toLowerCase();
 
@@ -183,11 +220,92 @@ studentSearch.addEventListener("input", () => {
         const studentId = (student.studentId || "").toLowerCase();
 
         return name.includes(searchValue) ||
-               studentId.includes(searchValue);
+            studentId.includes(searchValue);
     });
 
     displayStudents(filteredStudents);
-});
+};
+
+studentSearch.addEventListener("input", filterStudents);
+
+
+// DISABLE OR REACTIVATE STUDENT
+const changeStudentStatus = async (studentId, newStatus, button) => {
+
+    const student = allStudents.find(
+        item => item._id === studentId
+    );
+
+    if (!student) return;
+
+    const action = newStatus === "disabled"
+        ? "disable"
+        : "reactivate";
+
+    const confirmed = confirm(
+        `Are you sure you want to ${action} ${student.name}'s account?`
+    );
+
+    if (!confirmed) return;
+
+    try {
+
+        button.disabled = true;
+        button.textContent = "Processing...";
+
+        const response = await fetch(
+            `https://siwes-attendance-backend.onrender.com/api/admin/students/${encodeURIComponent(studentId)}/status`,
+            {
+                method: "PATCH",
+
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${adminToken}`
+                },
+
+                body: JSON.stringify({
+                    accountStatus: newStatus
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+
+            if (response.status === 401 || response.status === 403) {
+                localStorage.removeItem("adminToken");
+                window.location.href = "staff-login.html";
+                return;
+            }
+
+            throw new Error(
+                data.message || "Unable to update student status."
+            );
+        }
+
+        if (!data.success) {
+            throw new Error(data.message || "Status update failed.");
+        }
+
+        alert(data.message);
+
+        // Refresh students and statistics
+        await loadStudents();
+
+    } catch (error) {
+
+        console.error("Student Status Update Error:", error);
+
+        alert(error.message);
+
+        button.disabled = false;
+
+        button.textContent = action === "disable"
+            ? "Disable"
+            : "Reactivate";
+    }
+};
 
 
 // OPEN STUDENT DETAILS MODAL
@@ -231,7 +349,7 @@ const openStudentModal = (student) => {
 };
 
 
-// CLOSE STUDENT DETAILS MODAL
+// CLOSE MODAL
 const closeModal = () => {
 
     studentModal.classList.remove("show");
@@ -240,49 +358,63 @@ const closeModal = () => {
 };
 
 
-// Handle View button clicks
+// HANDLE TABLE BUTTONS
 studentsTableBody.addEventListener("click", (event) => {
 
     const viewButton = event.target.closest(".view-student-btn");
 
-    if (!viewButton) return;
+    if (viewButton) {
 
-    const studentId = viewButton.dataset.id;
+        const studentId = viewButton.dataset.id;
 
-    const selectedStudent = allStudents.find(
-        student => student._id === studentId
-    );
+        const selectedStudent = allStudents.find(
+            student => student._id === studentId
+        );
 
-    if (selectedStudent) {
-        openStudentModal(selectedStudent);
+        if (selectedStudent) {
+            openStudentModal(selectedStudent);
+        }
+
+        return;
     }
 
+    const statusButton = event.target.closest(".student-status-btn");
+
+    if (statusButton) {
+
+        changeStudentStatus(
+            statusButton.dataset.id,
+            statusButton.dataset.status,
+            statusButton
+        );
+    }
 });
 
 
-// Close using the X button
+// CLOSE BUTTON
 closeStudentModal.addEventListener("click", closeModal);
 
 
-// Close when clicking outside the popup
+// CLOSE OUTSIDE MODAL
 studentModal.addEventListener("click", (event) => {
 
     if (event.target === studentModal) {
         closeModal();
     }
-
 });
 
 
-// Close using Escape key
+// CLOSE WITH ESCAPE
 document.addEventListener("keydown", (event) => {
 
-    if (event.key === "Escape" && studentModal.classList.contains("show")) {
+    if (
+        event.key === "Escape" &&
+        studentModal.classList.contains("show")
+    ) {
         closeModal();
     }
-
 });
 
 
-// Load students when page opens
+// INITIAL LOAD
 loadStudents();
