@@ -153,7 +153,6 @@ editProfileBtn.addEventListener("click", () => {
     document.querySelector("#profile-details-form").style.display = "none";
     editProfileForm.style.display = "grid";
 
-    saveBtn.style.display = "none";
     editProfileBtn.style.display = "none";
 });
 
