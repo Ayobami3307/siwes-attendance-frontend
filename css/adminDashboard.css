@@ -161,6 +161,33 @@ body {
     cursor: pointer;
     color: #555;
     font-size: 13px;
+    transition: 0.3s;
+}
+
+#helpButton{
+    padding: 10px 20px;
+    background: #f6be6f;
+    border-radius: 8px;
+    color: gray;
+}
+
+#helpButton:hover{
+    transform: translateY(-4px);
+    background: #f7a93c;
+    color: white;
+}
+
+#logoutButton{
+    padding: 10px 20px;
+    background: rgb(252, 103, 103);
+    color: white;
+    border-radius: 8px;
+    
+}
+
+#logoutButton:hover{
+    transform: translateY(-4px);
+    background: red;
 }
 
 /* STATISTICS PANEL */
@@ -371,6 +398,62 @@ body {
 .calendar-day.today {
     background: #3288ff;
     border-radius: 50%;
+}
+
+.registration-statistics {
+    background: #fff;
+    padding: 22px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+}
+
+.registration-statistics h4 {
+    font-size: 17px;
+    margin: 0 0 20px;
+    color: #1e293b;
+}
+
+.account-stat-row {
+    margin-bottom: 20px;
+}
+
+.account-stat-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.account-stat-info span {
+    color: #475569;
+}
+
+.account-stat-info strong {
+    color: #1e293b;
+}
+
+.account-stat-bar {
+    height: 8px;
+    width: 100%;
+    background: #e2e8f0;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.account-stat-fill {
+    height: 100%;
+    background: #2563eb;
+    border-radius: 20px;
+    transition: width 0.4s ease;
+}
+
+.chart-container {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    height: 190px;
+    margin: 15px auto;
 }
 
 /* TABLET RESPONSIVENESS */

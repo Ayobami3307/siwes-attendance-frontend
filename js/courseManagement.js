@@ -5,6 +5,8 @@ const token = localStorage.getItem("adminToken");
 
 // DOM ELEMENTS
 
+const modalTitle = document.getElementById("modalTitle");
+
 const totalCourses = document.getElementById("totalCourses");
 
 const coursesTableBody = document.getElementById("coursesTableBody");
@@ -162,23 +164,33 @@ const displayCourses = (courseList) => {
             <td>${formatDate(course.createdAt)}</td>
 
             <td>
-                <button
-                    class="action-btn edit-btn"
-                    data-action="edit"
-                    data-id="${course._id}">
-                    Edit
-                </button>
 
-                <button
-                    class="action-btn delete-btn"
-                    data-action="delete"
-                    data-id="${course._id}">
-                    Delete
-                </button>
+            <td>
+                <div class="course-actions">
+                    <button
+                        class="action-btn edit-btn"
+                        data-action="edit"
+                        data-id="${course._id}"
+                        title="Edit course">
+                        <i data-lucide="pencil"></i>
+                        <span>Edit</span>
+                    </button>
+
+                    <button
+                        class="action-btn delete-btn"
+                        data-action="delete"
+                        data-id="${course._id}"
+                        title="Delete course">
+                        <i data-lucide="trash-2"></i>
+                        <span>Delete</span>
+                    </button>
+                </div>
             </td>
         `;
 
         coursesTableBody.appendChild(row);
+
+        lucide.createIcons();
 
     });
 
@@ -240,8 +252,7 @@ const openAddModal = () => {
 
     formMessage.textContent = "";
 
-    document.querySelector("#courseModal h2").textContent =
-        "Add New Course";
+    modalTitle.textContent = "Add New Course";
 
     saveCourseBtn.textContent = "Save Course";
 
@@ -262,8 +273,7 @@ const openEditModal = (course) => {
 
     formMessage.textContent = "";
 
-    document.querySelector("#courseModal h2").textContent =
-        "Edit Course";
+    modalTitle.textContent = "Edit Course";
 
     saveCourseBtn.textContent = "Update Course";
 

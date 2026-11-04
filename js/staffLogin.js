@@ -34,7 +34,7 @@ staffLoginForm.addEventListener("submit", async (event) => {
 
         message.textContent = "Login successful! Redirecting...";
 
-        window.location.href = "createid.html";
+        window.location.href = "adminDashboard.html";
 
     } catch (error) {
         message.textContent = error.message;

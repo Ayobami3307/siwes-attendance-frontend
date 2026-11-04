@@ -166,13 +166,13 @@
                     <p>Manage available courses.</p>
                 </a>
 
-                <a href="#" class="quick-card profile-card">
+                <a href="adminProfile.html" class="quick-card profile-card">
                     <span class="quick-icon">♙</span>
                     <h4>Admin Profile</h4>
                     <p>View administrator details.</p>
                 </a>
 
-                <a href="#" class="quick-card settings-card">
+                <a href="accountSettings.html" class="quick-card settings-card">
                     <span class="quick-icon">⚙</span>
                     <h4>Account Settings</h4>
                     <p>Manage administrative settings.</p>
@@ -190,8 +190,8 @@
 
                 <h4>Account Statistics</h4>
 
-                <div id="registrationChart">
-                    <p>Registration statistics will appear here.</p>
+                <div class="chart-container">
+                    <canvas id="registrationChart"></canvas>
                 </div>
 
             </div>
@@ -232,6 +232,9 @@
 
 <script>lucide.createIcons();</script>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="js/adminShared.js"></script>
 <script src="js/adminDashboard.js"></script>
 </body>
 </html>

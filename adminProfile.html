@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Profile | NIIT Smart Attendance</title>
+    <link rel="stylesheet" href="css/adminDashboard.css">
+    <link rel="stylesheet" href="css/adminProfile.css">
+</head>
+<body>
+
+<!-- ADMIN SIDEBAR -->
+<aside class="sidebar">
+
+    <div class="admin-profile">
+        <div class="admin-avatar" id="adminAvatar">A</div>
+        <h2>NIIT Smart Attendance</h2>
+        <p>Administrator</p>
+    </div>
+
+    <nav class="sidebar-navigation">
+
+        <a href="adminDashboard.html" class="nav-item">
+            <span>▦</span> Dashboard
+        </a>
+
+        <a href="lecturersList.html" class="nav-item">
+            <span>♙</span> Lecturers
+        </a>
+
+        <a href="studentsList.html" class="nav-item">
+            <span>♧</span> Students
+        </a>
+
+        <a href="createId.html" class="nav-item">
+            <span>＋</span> Create Account
+        </a>
+
+        <a href="courseManagement.html" class="nav-item">
+            <span>▤</span> Course Management
+        </a>
+
+        <a href="pendingActivations.html" class="nav-item">
+            <span>◷</span> Pending Activations
+        </a>
+
+    </nav>
+
+    <div class="sidebar-footer">
+        <p>NIIT Smart Attendance</p>
+        <small><i data-lucide="zap"></i>Powered by NIIT</small>
+    </div>
+
+</aside>
+
+
+<!-- MAIN CONTENT -->
+<main class="main-content">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+
+        <div class="welcome-text">
+            <h1>Admin Profile</h1>
+            <p>View your administrator account information.</p>
+        </div>
+
+        <div class="topbar-actions">
+            <button type="button" id="logoutButton">Logout</button>
+        </div>
+
+    </header>
+
+
+    <!-- PROFILE CONTENT -->
+    <section class="profile-content">
+
+        <div class="profile-heading">
+            <h2>Administrator Information</h2>
+            <p>Manage and view your administrative account details.</p>
+        </div>
+
+        <div class="profile-card">
+
+            <div class="profile-avatar" id="profileAvatar">
+                A
+            </div>
+
+            <h2 id="adminUsername">Loading...</h2>
+            <p class="admin-role">System Administrator</p>
+
+            <div class="profile-details">
+
+                <div class="detail-item">
+                    <span>Username</span>
+                    <strong id="username">Loading...</strong>
+                </div>
+
+                <div class="detail-item">
+                    <span>Account Role</span>
+                    <strong id="adminRole">Loading...</strong>
+                </div>
+
+                <div class="detail-item">
+                    <span>Account Type</span>
+                    <strong id="accountType">Loading...</strong>
+                </div>
+
+                <div class="detail-item">
+                    <span>Account Status</span>
+                    <strong class="status-active">Active</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<script>lucide.createIcons();</script>
+
+<script src="js/adminShared.js"></script>
+
+<script src="js/adminProfile.js"></script>
+
+</body>
+</html>

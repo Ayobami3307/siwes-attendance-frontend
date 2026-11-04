@@ -84,6 +84,8 @@ const qrContainer = document.querySelector("#qrContainer");
 let countdownInterval = null;
 
 const displaySession = (session, qrcode) => {
+    console.log("QR CODE:", qrcode);
+    console.log("QR TYPE:", typeof qrcode);
 
     if (countdownInterval) {
         clearInterval(countdownInterval);
@@ -101,7 +103,7 @@ const displaySession = (session, qrcode) => {
     qrContainer.innerHTML = `
         <h2>Attendance QR Code</h2>
 
-        <img src="${qrcode}" alt="Attendance QR Code">
+        <img id="attendanceQR" alt="Attendance QR Code">
 
         <div class="session-info">
             <p>
@@ -130,6 +132,24 @@ const displaySession = (session, qrcode) => {
             </p>
         </div>
     `;
+
+    // Display the generated QR code
+    const qrImage = document.querySelector("#attendanceQR");
+
+    qrImage.src = qrcode;
+
+    qrImage.onload = () => {
+        console.log(
+            "QR image loaded successfully:",
+            qrImage.naturalWidth,
+            qrImage.naturalHeight
+        );
+    };
+
+    qrImage.onerror = () => {
+        console.error("QR image failed to load.");
+        console.log("QR prefix:", qrcode.substring(0, 50));
+    };
 
     const updateCountdown = () => {
         const countdownElement = document.querySelector("#countdown");
