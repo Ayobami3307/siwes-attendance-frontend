@@ -50,6 +50,11 @@ const loadStudentProfile = async () => {
             .join("");
 
         const avatarElement = document.querySelector(".avatar");
+        const studentIdElement = document.querySelector(".student-id");
+
+        if (studentIdElement) {
+            studentIdElement.textContent = `Student ID: ${data.studentId}`;
+        }
 
         if (data.profileImage) {
             avatarElement.innerHTML = `

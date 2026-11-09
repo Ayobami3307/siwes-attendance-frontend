@@ -422,6 +422,11 @@ body {
     color: #b91c1c;
 }
 
+.red-bg {
+    background-color: #fee2e2;
+    color: #dc2626;
+}
+
 #export-pdf {
     height: 42px;
     padding: 0 18px;
@@ -639,12 +644,17 @@ body {
         flex: 1;
     }
 
-    .history-table {
-        min-width: 650px;
+    .table-wrapper {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
     }
 
-    .attendance-history {
-        overflow-x: auto;
+    .history-table {
+        width: 100%;
+        min-width: 650px;
+        border-collapse: collapse;
     }
 
     .verified,

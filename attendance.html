@@ -6,6 +6,7 @@
     <title>NIIT Student Portal - Attendance</title>
     <link rel="stylesheet" href="css/attendance.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/responsive.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
 </head>
@@ -105,6 +106,17 @@
                 </div>
 
                 <div class="card">
+                    <div class="card-icon red-bg">
+                        <i class="fa-solid fa-circle-xmark"></i>
+                    </div>
+                    <div>
+                        <span class="card-label">Absent</span>
+                        <h3 class="card-value" id="absent-sessions">0</h3>
+                        <span class="card-change">Missed sessions</span>
+                    </div>
+                </div>
+
+                <div class="card">
                     <div class="card-icon purple-bg">
                         <i class="fa-solid fa-circle-xmark"></i>
                     </div>
@@ -144,20 +156,22 @@
                         <i class="fa-solid fa-download"></i> Export PDF
                     </button>
                 </div>
-
-                <table class="history-table">
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Time In</th>
-                            <th>Time out</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody id="table-body">
-                        
-                    </tbody>
-                </table>
+                
+                <div class="table-wrapper">
+                    <table class="history-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Time In</th>
+                                <th>Time out</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body">
+                            
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </main>
     </div>

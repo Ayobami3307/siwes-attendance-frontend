@@ -149,10 +149,7 @@ const loadProfile = async () => {
         const courseCode = data.courseId?.code || "";
 
         document.querySelector("#profileCourse").textContent =
-            courseCode ? `${courseCode} - ${courseName}` : courseName;
-
-        document.querySelector("#profileDuration").textContent =
-            data.programDuration || "Not provided";
+        courseCode ? `${courseCode} - ${courseName}` : courseName;
 
     } catch (error) {
         console.log(error);

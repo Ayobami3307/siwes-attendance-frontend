@@ -417,7 +417,7 @@ const getProfile = async () => {
         }
 
         studentName.textContent = data.name;
-        studentId.textContent = `Matric No. ${data.studentId}`;
+        studentId.textContent = `Student ID: ${data.studentId}`;
         profileName.textContent = data.name;
 
         if (data.profileImage) {

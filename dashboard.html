@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NIIT Student Portal - Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="css/dashboard.css">
 </head>
 <body>
@@ -57,17 +58,33 @@
         </button>
 
         <header class="top-header">
-            <div class="notification-icon">
-                <i class="fa-regular fa-bell"></i>
-                <span class="badge"></span>
+
+            <div class="header-search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input
+                    type="search"
+                    id="dashboardSearch"
+                    placeholder="Search courses, attendance, sessions..."
+                    autocomplete="off"
+                >
+                <div id="searchResults" class="search-results"></div>
             </div>
-            <div class="user-profile">
-                <div class="avatar"></div>
-                <div class="user-info">
-                    <h5 class="student-name"></h5>
-                    <p class="student-id"></p>
+
+            <div class="header-right">
+                <div class="notification-icon">
+                    <i class="fa-regular fa-bell"></i>
+                    <span class="badge"></span>
+                </div>
+
+                <div class="user-profile">
+                    <div class="avatar"></div>
+                    <div class="user-info">
+                        <h5 class="student-name"></h5>
+                        <p class="student-id"></p>
+                    </div>
                 </div>
             </div>
+
         </header>
 
         <main class="main-section">
@@ -105,6 +122,20 @@
                         <span class="card-label">Classes Attended</span>
                         <h3 class="card-value" id="classesAttended">0</h3>
                         <span class="card-change positive" id="classesAttendedText">0 sessions attended</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon" style="background-color: #fee2e2; color: #dc2626;">
+                        <i class="fa-solid fa-calendar-xmark"></i>
+                    </div>
+
+                    <div class="card-details">
+                        <span class="card-label">Classes Absent</span>
+                        <h3 class="card-value" id="classesAbsent">0</h3>
+                        <span class="card-change" style="color: #dc2626;">
+                            Sessions missed
+                        </span>
                     </div>
                 </div>
 

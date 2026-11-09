@@ -46,6 +46,7 @@ const monthFilter = document.querySelector("#select-month");
 const totalSessions = document.querySelector("#total-sessions");
 const attendedSessions = document.querySelector("#attended-sessions");
 const attendanceRate = document.querySelector("#attendance-rate");
+const absentSessions = document.getElementById("absent-sessions");
 
 let attendanceData = [];
 let sessionData = [];
@@ -106,11 +107,32 @@ const getFilteredAttendance = () => {
 };
 
 const updateAttendanceCards = () => {
-    const filteredSessions = getFilteredSessions();
-    const filteredAttendance = getFilteredAttendance();
+    const now = new Date();
 
-    const total = filteredSessions.length;
-    const attended = filteredAttendance.length;
+    // Only count sessions that have ended
+    const completedSessions = getFilteredSessions().filter(session => {
+        return session.sessionEndsAt &&
+            new Date(session.sessionEndsAt) <= now;
+    });
+
+    const completedSessionIds = new Set(
+        completedSessions.map(session => session.sessionId)
+    );
+
+    // Only count attendance records belonging to completed sessions
+    const completedAttendance = getFilteredAttendance().filter(record =>
+        completedSessionIds.has(record.sessionId)
+    );
+
+    const total = completedSessions.length;
+
+    const attended = completedAttendance.filter(
+        record => record.status === "Present"
+    ).length;
+
+    const absent = completedAttendance.filter(
+        record => record.status === "Absent"
+    ).length;
 
     const rate = total > 0
         ? ((attended / total) * 100).toFixed(1)
@@ -118,6 +140,7 @@ const updateAttendanceCards = () => {
 
     totalSessions.textContent = total;
     attendedSessions.textContent = attended;
+    absentSessions.textContent = absent;
     attendanceRate.textContent = `${rate}%`;
 };
 
@@ -215,7 +238,7 @@ const loadProfile = async () => {
         }
 
         if (studentIdElement) {
-            studentIdElement.textContent = `Matric No. ${data.studentId}`;
+            studentIdElement.textContent = `Student ID: ${data.studentId}`;
         }
 
         if (avatarElement) {
@@ -248,11 +271,30 @@ const exportPDF = () => {
     const selectedMonth = monthFilter.value;
     const monthName = monthFilter.options[monthFilter.selectedIndex].text;
 
-    const records = getFilteredAttendance();
-    const filteredSessions = getFilteredSessions();
+    const now = new Date();
 
-    const totalSessionsCount = filteredSessions.length;
-    const attendedCount = records.length;
+    const filteredSessions = getFilteredSessions().filter(session =>
+        session.sessionEndsAt &&
+        new Date(session.sessionEndsAt) <= now
+    );
+
+    const completedSessionIds = new Set(
+        filteredSessions.map(session => session.sessionId)
+    );
+
+    const records = getFilteredAttendance().filter(record =>
+        completedSessionIds.has(record.sessionId)
+    );
+
+   const totalSessionsCount = filteredSessions.length;
+
+    const attendedCount = records.filter(
+        record => record.status === "Present"
+    ).length;
+
+    const absentCount = records.filter(
+        record => record.status === "Absent"
+    ).length;
 
     const rate = totalSessionsCount > 0
         ? ((attendedCount / totalSessionsCount) * 100).toFixed(1)
@@ -301,7 +343,7 @@ const exportPDF = () => {
     pdf.setFontSize(10);
 
     pdf.text("Student Name:", 14, 58);
-    pdf.text("Matric Number:", 14, 67);
+    pdf.text("Student ID:", 14, 67);
     pdf.text("Period:", 14, 76);
     pdf.text("Course:", 14, 85);
 

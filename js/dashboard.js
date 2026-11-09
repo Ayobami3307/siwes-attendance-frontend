@@ -1,5 +1,7 @@
 const token = localStorage.getItem("token") || sessionStorage.getItem("token");
 
+let studentAttendanceData = [];
+let studentSessionsData = [];
 if (!token) {
     window.location.href = "login.html?role=student";
 } else {
@@ -88,7 +90,7 @@ const getProfile = async () => {
         }
 
         studentName.textContent = data.name;
-        studentId.textContent = `Matric No. ${data.studentId}`;
+        studentId.textContent = `Student ID: ${data.studentId}`;
         if (data.courseId) {
             courseName.textContent = data.courseId.name || "Not assigned";
         } else {
@@ -120,6 +122,7 @@ const getProfile = async () => {
 };
 
 const loadAttendance = async () => {
+    console.log("loadAttendance function started");
     try {
         const response = await fetch("https://siwes-attendance-backend.onrender.com/api/attendance", {
             method: "GET",
@@ -129,6 +132,8 @@ const loadAttendance = async () => {
         });
 
         const data = await response.json();
+
+        studentAttendanceData = data;
 
         console.log("Attendance:", data);
 
@@ -148,6 +153,7 @@ const loadAttendance = async () => {
         const totalClassesText = document.querySelector("#totalClassesText");
         const classesAttendedText = document.querySelector("#classesAttendedText");
         const overallRateText = document.querySelector("#overallRateText");
+        const classesAbsent = document.querySelector("#classesAbsent");
 
         const sessionsResponse = await fetch(
             "https://siwes-attendance-backend.onrender.com/api/session/student",
@@ -160,6 +166,8 @@ const loadAttendance = async () => {
         );
 
         const sessions = await sessionsResponse.json();
+
+        studentSessionsData = sessions;
 
         if (!sessionsResponse.ok) {
             console.log("Unable to load sessions:", sessions);
@@ -175,8 +183,16 @@ const loadAttendance = async () => {
             record => record.status === "Present"
         ).length;
 
+        const absent = data.filter(
+            record => record.status === "Absent"
+        ).length;
+
+        classesAbsent.textContent = absent;
+
         classesAttended.textContent = attended;
         classesAttendedText.textContent = `${attended} sessions attended`;
+
+        classesAbsent.textContent = absent;
 
         const rate = total > 0
             ? ((attended / total) * 100).toFixed(1)
@@ -310,3 +326,146 @@ menuToggle.addEventListener("click", () => {
 
 getProfile();
 loadAttendance();
+
+// STUDENT DASHBOARD SEARCH
+
+const dashboardSearch = document.getElementById("dashboardSearch");
+const searchResults = document.getElementById("searchResults");
+
+const studentQuickLinks = [
+    {
+        title: "Dashboard",
+        description: "Student dashboard",
+        url: "dashboard.html"
+    },
+    {
+        title: "Attendance",
+        description: "View attendance history",
+        url: "attendance.html"
+    },
+    {
+        title: "Scan QR",
+        description: "Open attendance scanner",
+        url: "scan.html"
+    },
+    {
+        title: "Profile",
+        description: "View your student profile",
+        url: "profile.html"
+    },
+    {
+        title: "Support",
+        description: "Get help and support",
+        url: "support.html"
+    }
+];
+
+dashboardSearch.addEventListener("input", () => {
+    const query = dashboardSearch.value.trim().toLowerCase();
+
+    searchResults.innerHTML = "";
+
+    if (!query) {
+        searchResults.style.display = "none";
+        return;
+    }
+
+    const results = [];
+
+    // Search quick links
+    studentQuickLinks.forEach(item => {
+        if (
+            item.title.toLowerCase().includes(query) ||
+            item.description.toLowerCase().includes(query)
+        ) {
+            results.push({
+                title: item.title,
+                description: item.description,
+                url: item.url
+            });
+        }
+    });
+
+    // Search course
+    const currentCourse = courseName.textContent;
+
+    if (currentCourse.toLowerCase().includes(query)) {
+        results.push({
+            title: currentCourse,
+            description: "Your assigned course",
+            url: "profile.html"
+        });
+    }
+
+    // Search attendance records
+    studentAttendanceData.forEach(record => {
+        const date = formatDate(record.date);
+        const status = record.status || "";
+
+        if (
+            date.toLowerCase().includes(query) ||
+            status.toLowerCase().includes(query) ||
+            (record.sessionId || "").toLowerCase().includes(query)
+        ) {
+            results.push({
+                title: `${status} - ${date}`,
+                description: `Session ID: ${record.sessionId || "N/A"}`,
+                url: "attendance.html"
+            });
+        }
+    });
+
+    // Search sessions
+    studentSessionsData.forEach(session => {
+        const sessionId = session.sessionId || "";
+        const sessionDate = formatDate(session.startTime);
+
+        if (
+            sessionId.toLowerCase().includes(query) ||
+            sessionDate.toLowerCase().includes(query) ||
+            (session.courseCode || "").toLowerCase().includes(query) ||
+            (session.courseTitle || "").toLowerCase().includes(query)
+        ) {
+            results.push({
+                title: sessionId,
+                description: `Session - ${sessionDate}`,
+                url: "attendance.html"
+            });
+        }
+    });
+
+    if (results.length === 0) {
+        const emptyMessage = document.createElement("div");
+        emptyMessage.className = "search-empty";
+        emptyMessage.textContent = "No matching results found.";
+
+        searchResults.appendChild(emptyMessage);
+    } else {
+        results.slice(0, 10).forEach(result => {
+            const link = document.createElement("a");
+
+            link.href = result.url;
+            link.className = "search-result-item";
+
+            const title = document.createElement("strong");
+            title.textContent = result.title;
+
+            const description = document.createElement("small");
+            description.textContent = result.description;
+
+            link.appendChild(title);
+            link.appendChild(description);
+
+            searchResults.appendChild(link);
+        });
+    }
+
+    searchResults.style.display = "block";
+});
+
+// Hide results when clicking outside the search bar
+document.addEventListener("click", (event) => {
+    if (!event.target.closest(".header-search")) {
+        searchResults.style.display = "none";
+    }
+});
