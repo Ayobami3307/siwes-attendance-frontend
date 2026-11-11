@@ -469,3 +469,191 @@ document.addEventListener("click", (event) => {
         searchResults.style.display = "none";
     }
 });
+
+// ===================================
+// STUDENT NOTIFICATION SYSTEM
+// ===================================
+
+const notificationBell = document.getElementById("notificationBell");
+const notificationDropdown = document.getElementById("notificationDropdown");
+const notificationBadge = document.getElementById("notificationBadge");
+const notificationList = document.getElementById("notificationList");
+const markAllReadBtn = document.getElementById("markAllReadBtn");
+
+let studentNotifications = [];
+
+// LOAD NOTIFICATIONS
+const loadNotifications = async () => {
+    try {
+        const response = await fetch(
+            "https://siwes-attendance-backend.onrender.com/api/notifications",
+            {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.error("Notification Error:", data);
+            return;
+        }
+
+        studentNotifications = data.notifications || [];
+
+        // Update unread badge
+        const unreadCount = data.unreadCount || 0;
+
+        if (unreadCount > 0) {
+            notificationBadge.textContent =
+                unreadCount > 99 ? "99+" : unreadCount;
+
+            notificationBadge.style.display = "flex";
+        } else {
+            notificationBadge.style.display = "none";
+        }
+
+        displayNotifications();
+
+    } catch (error) {
+        console.error("Unable to load notifications:", error);
+    }
+};
+
+
+// DISPLAY NOTIFICATIONS
+const displayNotifications = () => {
+    notificationList.innerHTML = "";
+
+    if (studentNotifications.length === 0) {
+        notificationList.innerHTML = `
+            <p class="notification-empty">
+                You're all caught up. No notifications yet.
+            </p>
+        `;
+        return;
+    }
+
+    studentNotifications.forEach(notification => {
+        const item = document.createElement("div");
+
+        item.className = notification.isRead
+            ? "notification-item"
+            : "notification-item unread";
+
+        const title = document.createElement("h4");
+        title.textContent = notification.title;
+
+        const message = document.createElement("p");
+        message.textContent = notification.message;
+
+        const date = document.createElement("small");
+        date.textContent = new Date(
+            notification.createdAt
+        ).toLocaleString("en-NG", {
+            dateStyle: "medium",
+            timeStyle: "short"
+        });
+
+        item.appendChild(title);
+        item.appendChild(message);
+        item.appendChild(date);
+
+        item.addEventListener("click", async () => {
+            if (!notification.isRead) {
+                await markNotificationAsRead(notification._id);
+            }
+
+            if (notification.link) {
+                window.location.href = notification.link;
+            }
+        });
+
+        notificationList.appendChild(item);
+    });
+};
+
+
+// MARK ONE NOTIFICATION AS READ
+const markNotificationAsRead = async (id) => {
+    try {
+        const response = await fetch(
+            `https://siwes-attendance-backend.onrender.com/api/notifications/${id}/read`,
+            {
+                method: "PATCH",
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.error("Mark as read error:", data);
+            return;
+        }
+
+        await loadNotifications();
+
+    } catch (error) {
+        console.error("Unable to mark notification as read:", error);
+    }
+};
+
+
+// MARK ALL NOTIFICATIONS AS READ
+markAllReadBtn.addEventListener("click", async () => {
+    try {
+        const response = await fetch(
+            "https://siwes-attendance-backend.onrender.com/api/notifications/read-all",
+            {
+                method: "PATCH",
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.error("Mark all as read error:", data);
+            return;
+        }
+
+        await loadNotifications();
+
+    } catch (error) {
+        console.error("Unable to mark all notifications as read:", error);
+    }
+});
+
+
+// OPEN AND CLOSE NOTIFICATION DROPDOWN
+notificationBell.addEventListener("click", (event) => {
+    event.stopPropagation();
+
+    notificationDropdown.classList.toggle("show");
+});
+
+
+// CLOSE DROPDOWN WHEN CLICKING OUTSIDE
+document.addEventListener("click", (event) => {
+    if (
+        !event.target.closest(".notification-wrapper")
+    ) {
+        notificationDropdown.classList.remove("show");
+    }
+});
+
+
+// LOAD NOTIFICATIONS WHEN DASHBOARD OPENS
+loadNotifications();
+
+
+// REFRESH NOTIFICATIONS EVERY 30 SECONDS
+setInterval(loadNotifications, 30000);

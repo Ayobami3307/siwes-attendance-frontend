@@ -650,6 +650,124 @@ body {
     font-size: 14px;
 }
 
+/* NOTIFICATION SYSTEM */
+.notification-wrapper {
+    position: relative;
+}
+
+.notification-icon {
+    position: relative;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 20px;
+    color: inherit;
+    padding: 8px;
+}
+
+.notification-icon .badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #ef4444;
+    color: #fff;
+    font-size: 10px;
+    min-width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.notification-dropdown {
+    display: none;
+    position: absolute;
+    top: 45px;
+    right: 0;
+    width: 340px;
+    max-height: 420px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.notification-dropdown.show {
+    display: block;
+}
+
+.notification-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    border-bottom: 1px solid #eee;
+}
+
+.notification-header h3 {
+    font-size: 16px;
+    margin: 0;
+}
+
+.notification-header button {
+    border: none;
+    background: none;
+    color: #2563eb;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.notification-list {
+    max-height: 350px;
+    overflow-y: auto;
+}
+
+.notification-item {
+    padding: 14px 16px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+.notification-item:hover {
+    background: #f8fafc;
+}
+
+.notification-item.unread {
+    background: #eff6ff;
+}
+
+.notification-item h4 {
+    font-size: 14px;
+    margin: 0 0 5px;
+}
+
+.notification-item p {
+    font-size: 12px;
+    color: #64748b;
+    margin: 0 0 6px;
+}
+
+.notification-item small {
+    font-size: 11px;
+    color: #94a3b8;
+}
+
+.notification-empty {
+    text-align: center;
+    padding: 25px 15px;
+    color: #94a3b8;
+    font-size: 13px;
+}
+
+@media (max-width: 480px) {
+    .notification-dropdown {
+        width: 290px;
+        right: -45px;
+    }
+}
+
 @media (max-width: 600px) {
     .top-header {
         gap: 10px;
