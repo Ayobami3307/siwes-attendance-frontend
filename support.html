@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NIIT Student Portal - Student Support</title>
     <link rel="stylesheet" href="css/support.css">
-    <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link rel="stylesheet" href="css/notifications.css">
+    <link rel="stylesheet" href="css/notifications.css">
 </head>
 <body>
+
     <aside class="sidebar">
         <div class="sidebar-brand">
             <h1 class="logo">NIIT</h1>
@@ -21,23 +21,27 @@
                 <i class="fa-solid fa-house"></i>
                 <span>Dashboard</span>
             </a>
+
             <a href="scan.html" class="nav-item">
                 <i class="fa-solid fa-qrcode"></i>
                 <span>Scan QR</span>
             </a>
+
             <a href="attendance.html" class="nav-item">
                 <i class="fa-solid fa-calendar-days"></i>
                 <span>Attendance</span>
             </a>
-            
+
             <a href="profile.html" class="nav-item">
                 <i class="fa-solid fa-user"></i>
                 <span>Profile</span>
             </a>
+
             <a href="logout.html" class="nav-item logout">
                 <i class="fa-solid fa-right-from-bracket"></i>
                 <span>Logout</span>
             </a>
+
             <a href="support.html" class="nav-item active">
                 <i class="fa-solid fa-headset"></i>
                 <span>Support</span>
@@ -54,41 +58,50 @@
     </aside>
 
     <div class="main-wrapper">
-        <button class="menu-toggle" id="menuToggle" type="button">
-            <i class="fa-solid fa-bars"></i>
-        </button>
+
         <header class="top-header">
-            
-            <div class="notification-wrapper">
-                <button class="notification-icon" id="notificationBell" type="button">
-                    <i class="fa-regular fa-bell"></i>
-                    <span class="badge" id="notificationBadge" style="display: none;">0</span>
-                </button>
 
-                <div class="notification-dropdown" id="notificationDropdown">
-                    <div class="notification-header">
-                        <h3>Notifications</h3>
-                        <button id="markAllReadBtn" type="button">
-                            Mark all as read
-                        </button>
-                    </div>
+            <div class="header-right">
 
-                    <div class="notification-list" id="notificationList">
-                        <p class="notification-empty">Loading notifications...</p>
+                <div class="notification-wrapper">
+                    <button class="notification-icon" id="notificationBell" type="button">
+                        <i class="fa-regular fa-bell"></i>
+                        <span class="badge" id="notificationBadge" style="display: none;">0</span>
+                    </button>
+
+                    <div class="notification-dropdown" id="notificationDropdown">
+                        <div class="notification-header">
+                            <h3>Notifications</h3>
+                            <button id="markAllReadBtn" type="button">
+                                Mark all as read
+                            </button>
+                        </div>
+
+                        <div class="notification-list" id="notificationList">
+                            <p class="notification-empty">Loading notifications...</p>
+                        </div>
                     </div>
                 </div>
+
+                <div class="user-profile">
+                    <div class="avatar">AE</div>
+
+                    <div class="user-info">
+                        <h5 class="student-name"></h5>
+                        <p class="student-id"></p>
+                    </div>
+                </div>
+
             </div>
 
-            <div class="user-profile">
-                <div class="avatar">AE</div>
-                <div class="user-info">
-                    <h5 class="student-name"></h5>
-                    <p class="student-id"></p>
-                </div>
-            </div>
+            <button class="menu-toggle" id="menuToggle" type="button" aria-label="Toggle navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
         </header>
 
         <main class="main-content">
+
             <div class="support-header">
                 <div>
                     <h2>Need Support?</h2>
@@ -97,13 +110,16 @@
             </div>
 
             <div class="support-layout">
+
                 <div class="support-form-card">
+
                     <div class="card-title">
                         <i class="fa-solid fa-circle-question"></i>
                         <h3>Submit a Ticket</h3>
                     </div>
 
                     <form id="support-form">
+
                         <div class="form-group">
                             <label for="support-course">Course</label>
                             <select id="support-course">
@@ -130,16 +146,19 @@
                             <i class="fa-solid fa-paper-plane"></i>
                             Submit Ticket
                         </button>
+
                     </form>
                 </div>
 
                 <div class="support-info-card">
+
                     <div class="card-title">
                         <i class="fa-solid fa-info-circle"></i>
                         <h3>Before You Submit</h3>
                     </div>
 
                     <div class="support-info">
+
                         <div class="info-item">
                             <i class="fa-solid fa-calendar-check"></i>
                             <div>
@@ -163,14 +182,18 @@
                                 <p>Describe any other technical problem you're experiencing.</p>
                             </div>
                         </div>
+
                     </div>
                 </div>
+
             </div>
 
             <div class="ticket-section">
+
                 <div class="section-title">
                     <h3>My Support Tickets</h3>
-                    <button id="refreshBtn" class="refresh-btn">
+
+                    <button id="refreshBtn" class="refresh-btn" type="button">
                         <i class="fa-solid fa-rotate"></i>
                         Refresh
                     </button>
@@ -179,12 +202,14 @@
                 <div id="myTickets">
                     <p>Loading your support tickets...</p>
                 </div>
+
             </div>
+
         </main>
     </div>
 
     <script src="js/notifications.js"></script>
-
     <script src="js/support.js"></script>
+
 </body>
 </html>

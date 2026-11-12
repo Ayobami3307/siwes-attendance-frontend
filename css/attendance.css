@@ -1,15 +1,29 @@
+/* ==============================
+   GLOBAL
+================================ */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+html {
+    min-height: 100%;
+}
+
 body {
+    min-height: 100vh;
     background-color: #f8fafc;
     color: #1e293b;
     display: flex;
-    min-height: 100vh;
+    overflow-x: clip;
 }
+
+
+/* ==============================
+   SIDEBAR
+================================ */
 
 .sidebar {
     width: 260px;
@@ -21,12 +35,15 @@ body {
     top: 0;
     bottom: 0;
     left: 0;
-    z-index: 100;
+    z-index: 1200;
     padding: 24px 16px;
+    overflow-y: auto;
+    transition: left 0.3s ease;
 }
 
 .sidebar-brand {
-    padding: 0 12px 28px 12px;
+    padding: 0 12px 28px;
+    flex-shrink: 0;
 }
 
 .sidebar-brand .logo {
@@ -91,12 +108,13 @@ body {
 
 .sidebar-footer {
     margin-top: 20px;
-    padding: 16px 12px 0 12px;
+    padding: 16px 12px 0;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
     display: flex;
     align-items: center;
     gap: 12px;
     color: #64748b;
+    flex-shrink: 0;
 }
 
 .sidebar-footer i {
@@ -114,50 +132,54 @@ body {
     color: #64748b;
 }
 
+
+/* ==============================
+   MAIN WRAPPER
+================================ */
+
 .main-wrapper {
     margin-left: 260px;
     flex: 1;
+    min-width: 0;
     display: flex;
     flex-direction: column;
-    min-width: 0;
 }
 
+
+/* ==============================
+   TOP HEADER
+================================ */
+
 .top-header {
-    height: 70px;
+    min-height: 70px;
     background-color: #ffffff;
     border-bottom: 1px solid #e2e8f0;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    padding: 0 36px;
-    gap: 15px;
+    padding: 10px 36px;
     position: sticky;
     top: 0;
-    z-index: 1000;
+    z-index: 1100;
+    flex-shrink: 0;
 }
 
-.notification-icon {
-    position: relative;
-    font-size: 1.25rem;
-    color: #1e293b;
-    cursor: pointer;
+.header-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 25px;
+    flex-shrink: 0;
 }
 
-.notification-icon .badge {
-    position: absolute;
-    top: -2px;
-    right: -2px;
-    width: 8px;
-    height: 8px;
-    background-color: #ef4444;
-    border-radius: 50%;
-}
+
+/* USER PROFILE */
 
 .user-profile {
     display: flex;
     align-items: center;
     gap: 12px;
-    cursor: pointer;
+    order: 2;
 }
 
 .avatar {
@@ -171,6 +193,7 @@ body {
     justify-content: center;
     font-weight: 700;
     font-size: 0.85rem;
+    flex-shrink: 0;
 }
 
 .avatar img {
@@ -182,7 +205,7 @@ body {
 }
 
 .user-info {
-    line-height: 1.2;
+    line-height: 1.3;
 }
 
 .student-name {
@@ -196,34 +219,84 @@ body {
     color: #64748b;
 }
 
-.menu-toggle {
-    display: none;
+
+/* NOTIFICATIONS */
+
+.notification-wrapper {
+    position: relative;
+    flex-shrink: 0;
+    order: 1;
 }
 
-.sidebar.open ~ .main-wrapper .menu-toggle {
-    left: auto;
-    right: 120px;
-    top: 15px;
-    color: red;
+.notification-icon {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: transparent;
+    font-size: 1.25rem;
+    color: #1e293b;
+    cursor: pointer;
+}
+
+.notification-icon .badge {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    width: 8px;
+    height: 8px;
+    background-color: #ef4444;
+    border-radius: 50%;
+}
+
+
+/* HAMBURGER */
+
+.menu-toggle {
+    display: none;
+    border: none;
+    background: transparent;
+    color: #1e293b;
+    font-size: 1.3rem;
+    cursor: pointer;
+    padding: 6px;
+}
+
+
+/* ==============================
+   MAIN CONTENT
+================================ */
+
+.maincontent {
+    width: 100%;
+    min-width: 0;
+    padding: 10px 0 30px;
 }
 
 .header {
     display: flex;
     justify-content: space-between;
-    margin: 20px;
+    align-items: center;
+    gap: 20px;
+    margin: 20px 30px;
+}
+
+.header .title {
+    text-align: left;
 }
 
 .header .history {
     font-size: 1.95rem;
+    color: #0f172a;
 }
 
 .header .track {
     color: #64748b;
     font-size: 0.95rem;
-}
-
-.header .title {
-    text-align: center;
+    margin-top: 5px;
 }
 
 .banner-cta {
@@ -236,27 +309,39 @@ body {
     font-weight: 600;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
     transition: background-color 0.2s ease;
     box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+    white-space: nowrap;
 }
+
+.banner-cta:hover {
+    background-color: #1d4ed8;
+}
+
+
+/* ==============================
+   ATTENDANCE CARDS
+================================ */
 
 .attendance-cards {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
     margin: 30px;
     margin-bottom: 5px;
 }
 
 .card {
+    min-width: 0;
     background-color: #ffffff;
     border: 1px solid #e2e8f0;
     border-radius: 12px;
-    padding: 24px;
+    padding: 22px;
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 16px;
 }
 
 .card-icon {
@@ -285,6 +370,11 @@ body {
     color: #9333ea;
 }
 
+.red-bg {
+    background-color: #fee2e2;
+    color: #dc2626;
+}
+
 .card-label {
     font-size: 0.82rem;
     color: #64748b;
@@ -297,10 +387,11 @@ body {
     font-weight: 800;
     color: #0f172a;
     margin: 2px 0;
+    overflow-wrap: anywhere;
 }
 
 .card-change {
-    font-size: 0.9rem;
+    font-size: 0.82rem;
     color: #16a34a;
     display: flex;
     align-items: center;
@@ -308,26 +399,46 @@ body {
     font-weight: 600;
 }
 
-.days {
+.card-change.days {
     color: #64748b;
 }
 
+.card-change.positive {
+    color: #16a34a;
+}
+
+
+/* ==============================
+   ATTENDANCE HISTORY
+================================ */
+
 .attendance-history {
     margin: 30px;
+    margin-top: 20px;
     padding: 24px;
     background-color: #ffffff;
     border: 1px solid #e2e8f0;
     border-radius: 12px;
-    margin-top: 20px;
+    min-width: 0;
 }
 
 .attendance-history .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 24px;
-    border-bottom: 1px solid #e2e8f0;
+    gap: 15px;
+    margin: 0 0 24px;
     padding-bottom: 20px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.header-title {
+    min-width: 0;
+}
+
+.header-title h3 {
+    font-size: 1.05rem;
+    color: #0f172a;
 }
 
 .attendance-history a {
@@ -335,12 +446,8 @@ body {
     color: #2563eb;
 }
 
-.attendance-history .select-month select {
-    padding: 5px 10px;
-    border-radius: 6px;
-    border: 1px solid #cbd1d8;
-    color: #64748b;
-}
+
+/* MONTH SELECTOR */
 
 .select-month {
     display: flex;
@@ -371,9 +478,48 @@ body {
     box-shadow: 0 0 0 3px rgba(31, 111, 235, 0.1);
 }
 
-#select-month option {
+
+/* EXPORT BUTTON */
+
+#export-pdf {
+    min-height: 42px;
+    padding: 0 18px;
+    border: none;
+    border-radius: 8px;
+    background: #1f6feb;
+    color: #ffffff;
     font-size: 14px;
-    color: #333;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+#export-pdf:hover {
+    background: #1558b0;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(31, 111, 235, 0.25);
+}
+
+#export-pdf:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+
+/* ==============================
+   ATTENDANCE TABLE
+================================ */
+
+.table-wrapper {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .history-table {
@@ -390,13 +536,16 @@ body {
     text-align: left;
     padding: 12px 20px;
     color: #64748b;
+    white-space: nowrap;
+    font-size: 0.85rem;
 }
 
 .history-table td {
-    padding: 14px;
+    padding: 14px 20px;
     font-size: 0.88rem;
     color: #334155;
     border-bottom: 1px solid #f1f5f9;
+    white-space: nowrap;
 }
 
 .history-table .font-bold {
@@ -410,6 +559,7 @@ body {
     border-radius: 20px;
     font-size: 0.76rem;
     font-weight: 600;
+    white-space: nowrap;
 }
 
 .history-table .verified {
@@ -422,376 +572,57 @@ body {
     color: #b91c1c;
 }
 
-.red-bg {
-    background-color: #fee2e2;
-    color: #dc2626;
-}
 
-#export-pdf {
-    height: 42px;
-    padding: 0 18px;
-    border: none;
-    border-radius: 8px;
-    background: #1f6feb;
-    color: #ffffff;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    transition: all 0.2s ease;
-}
+/* ==============================
+   TABLET
+================================ */
 
-#export-pdf:hover {
-    background: #1558b0;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 10px rgba(31, 111, 235, 0.25);
-}
-
-#export-pdf:active {
-    transform: translateY(0);
-    box-shadow: none;
-}
-
-#export-pdf i {
-    font-size: 14px;
-}
-
-#export-pdf:focus {
-    outline: none;
-}
-
-@media (max-width: 1024px) {
-    .sidebar {
-        width: 220px;
-    }
-
-    .main-wrapper {
-        margin-left: 220px;
-    }
+@media (max-width: 1100px) {
 
     .attendance-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 15px;
-        margin: 20px;
     }
 
     .card {
         padding: 18px;
-        gap: 14px;
     }
 
     .attendance-history {
-        margin: 20px;
+        padding: 20px;
     }
+
 }
 
+
+/* ==============================
+   MOBILE / TABLET SIDEBAR
+================================ */
+
 @media (max-width: 768px) {
+
     body {
         display: block;
     }
 
     .sidebar {
-        position: fixed;
-        top: 0;
-        left: -280px;
         width: 260px;
         height: 100vh;
-        padding: 24px 16px;
-        z-index: 1200;
+        height: 100dvh;
+        top: 0;
+        bottom: 0;
+        left: -280px;
+        padding: 16px 14px 12px;
+        overflow: hidden;
         transition: left 0.3s ease;
-        overflow-y: auto;
     }
 
     .sidebar.open {
         left: 0;
     }
 
-    .sidebar-menu {
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
-        flex: 1;
-    }
-
     .sidebar-brand {
-        padding: 0 12px 28px 12px;
-    }
-
-    .sidebar-brand .logo {
-        font-size: 1.8rem;
-    }
-
-    .sidebar-brand p {
-        font-size: 0.82rem;
-    }
-
-    .nav-item {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: flex-start;
-        gap: 14px;
-        padding: 12px 16px;
-        font-size: 0.92rem;
-        text-align: left;
-    }
-
-    .nav-item i {
-        font-size: 1.1rem;
-        width: 20px;
-    }
-
-    .nav-item.logout {
-        margin-top: auto;
-    }
-
-    .sidebar-footer {
-        display: flex;
-    }
-
-    .main-wrapper {
-        margin-left: 0;
-        width: 100%;
-    }
-
-    .top-header {
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        height: 65px;
-        padding: 0 18px;
-        justify-content: flex-end;
-        gap: 15px;
-    }
-
-    .menu-toggle {
-        display: block;
-        position: fixed;
-        top: 18px;
-        left: 18px;
-        transform: none;
-        border: none;
-        background: transparent;
-        color: #1e293b;
-        font-size: 1.3rem;
-        cursor: pointer;
-        padding: 6px;
-        z-index: 1300;
-        transition: all 0.3s ease;
-    }
-
-    .user-info {
-        display: none;
-    }
-
-    .header {
-        margin: 20px;
-        gap: 15px;
-    }
-
-    .header .history {
-        font-size: 1.5rem;
-    }
-
-    .header .track {
-        font-size: 0.82rem;
-    }
-
-    .banner-cta {
-        padding: 10px 14px;
-        font-size: 0.78rem;
-        white-space: nowrap;
-    }
-
-    .attendance-cards {
-        grid-template-columns: 1fr;
-        margin: 20px;
-        gap: 12px;
-    }
-
-    .card {
-        padding: 18px;
-    }
-
-    .attendance-history {
-        margin: 20px;
-        padding: 16px;
-        overflow: hidden;
-    }
-
-    .attendance-history > .header {
-        flex-wrap: wrap;
-        margin: 0 0 18px;
-        padding-bottom: 16px;
-    }
-
-    .header-title {
-        width: 100%;
-    }
-
-    .select-month {
-        flex: 1;
-    }
-
-    #select-month {
-        width: 100%;
-        min-width: 0;
-    }
-
-    #export-pdf {
-        flex: 1;
-    }
-
-    .table-wrapper {
-        width: 100%;
-        max-width: 100%;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-    }
-
-    .history-table {
-        width: 100%;
-        min-width: 650px;
-        border-collapse: collapse;
-    }
-
-    .verified,
-    .pending,
-    .absent {
-        width: fit-content;
-        flex: none;
-        white-space: nowrap;
-    }
-}
-
-@media (max-width: 480px) {
-    .sidebar {
-        width: 260px;
-        padding: 20px 14px;
-    }
-
-    .sidebar-brand {
-        padding: 0 10px 24px 10px;
-    }
-
-    .sidebar-brand .logo {
-        font-size: 1.5rem;
-    }
-
-    .sidebar-brand p {
-        font-size: 0.75rem;
-    }
-
-    .nav-item {
-        padding: 11px 14px;
-        font-size: 0.86rem;
-    }
-
-    .nav-item i {
-        font-size: 1rem;
-    }
-
-    .top-header {
-        padding: 0 14px;
-    }
-
-    .menu-toggle {
-        left: 14px;
-        font-size: 1.15rem;
-        color: #1e293b;
-    }
-
-    .notification-icon {
-        font-size: 1.05rem;
-    }
-
-    .avatar {
-        width: 34px;
-        height: 34px;
-        font-size: 0.75rem;
-    }
-
-    .user-profile {
-        gap: 8px;
-    }
-
-    .user-info {
-        display: none;
-    }
-
-    .header {
-        flex-direction: column;
-        align-items: flex-start;
-        margin: 14px;
-    }
-
-    .header .history {
-        font-size: 1.35rem;
-    }
-
-    .banner-cta {
-        width: 100%;
-        justify-content: center;
-    }
-
-    .attendance-cards {
-        margin: 14px;
-    }
-
-    .card {
-        padding: 16px;
-        gap: 14px;
-    }
-
-    .card-icon {
-        width: 48px;
-        height: 48px;
-        font-size: 1.2rem;
-    }
-
-    .card-label {
-        font-size: 0.75rem;
-    }
-
-    .card-value {
-        font-size: 1.45rem;
-    }
-
-    .card-change {
-        font-size: 0.78rem;
-    }
-
-    .attendance-history {
-        margin: 14px;
-        padding: 12px;
-    }
-
-    .attendance-history > .header {
-        gap: 10px;
-    }
-
-    .select-month,
-    #export-pdf {
-        width: 100%;
-        flex: none;
-    }
-}
-
-@media (max-width: 768px) {
-    .sidebar {
-        height: 100vh;
-        height: 100dvh;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        padding: 16px 14px 12px;
-        box-sizing: border-box;
-    }
-
-    .sidebar-brand {
-        padding-bottom: 14px;
+        padding: 0 10px 14px;
         flex-shrink: 0;
     }
 
@@ -808,36 +639,249 @@ body {
     }
 
     .sidebar-footer {
-        flex-shrink: 0;
         margin-top: 8px;
         padding: 12px 10px 4px;
+        flex-shrink: 0;
+    }
+
+    .main-wrapper {
+        width: 100%;
+        margin-left: 0;
+    }
+
+
+    /* RESPONSIVE HEADER */
+
+    .top-header {
+        min-height: 65px;
+        padding: 8px 18px;
+        gap: 12px;
+        justify-content: flex-end;
+    }
+
+    .header-right {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 12px;
+        flex-shrink: 0;
+    }
+
+    /* MOBILE ORDER: PROFILE → BELL → HAMBURGER */
+
+    .user-profile {
+        order: 1;
+    }
+
+    .notification-wrapper {
+        order: 2;
     }
 
     .menu-toggle {
-        position: fixed;
-        top: 12px;
-        left: 12px;
-        right: auto;
-        z-index: 1301;
+        order: 3;
+        display: flex;
+        position: static;
         width: 40px;
         height: 40px;
-        display: flex;
         align-items: center;
         justify-content: center;
-        background: red;
+        flex-shrink: 0;
+        background: transparent;
+        border: none;
         border-radius: 8px;
+        color: #1e293b;
+        font-size: 1.3rem;
+        cursor: pointer;
+        padding: 6px;
     }
 
-    .menu-toggle.sidebar-menu-open {
-        left: auto;
-        right: 82px;
-        top: 12px;
-        color: #1e293b;
-        background: #fff;
+    .user-info {
+        display: none;
     }
+
+    .avatar {
+        width: 36px;
+        height: 36px;
+    }
+
+
+    /* PAGE HEADING */
+
+    .header {
+        margin: 20px;
+        gap: 15px;
+    }
+
+    .header .history {
+        font-size: 1.6rem;
+    }
+
+    .header .track {
+        font-size: 0.85rem;
+    }
+
+    .banner-cta {
+        padding: 10px 14px;
+        font-size: 0.8rem;
+    }
+
+
+    /* CARDS */
+
+    .attendance-cards {
+        margin: 20px;
+        gap: 12px;
+    }
+
+
+    /* HISTORY */
+
+    .attendance-history {
+        margin: 20px;
+        padding: 16px;
+    }
+
+    .attendance-history .header {
+        flex-wrap: wrap;
+        margin: 0 0 18px;
+        padding-bottom: 16px;
+    }
+
+    .header-title {
+        width: 100%;
+    }
+
+    .select-month {
+        flex: 1;
+        min-width: 0;
+    }
+
+    #select-month {
+        width: 100%;
+        min-width: 0;
+    }
+
+    #export-pdf {
+        flex: 1;
+    }
+
+
+    /* TABLE */
+
+    .history-table {
+        min-width: 600px;
+    }
+
 }
 
+
+/* ==============================
+   SMALL MOBILE
+================================ */
+
+@media (max-width: 480px) {
+
+    .top-header {
+        padding: 8px 12px;
+        gap: 8px;
+    }
+
+    .header-right {
+        gap: 10px;
+    }
+
+    .notification-icon {
+        font-size: 1.1rem;
+    }
+
+    .menu-toggle {
+        width: 36px;
+        height: 36px;
+        font-size: 1.15rem;
+    }
+
+
+    /* PAGE HEADING */
+
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        margin: 16px 14px;
+    }
+
+    .header .history {
+        font-size: 1.4rem;
+    }
+
+    .banner-cta {
+        width: 100%;
+    }
+
+
+    /* CARDS */
+
+    .attendance-cards {
+        grid-template-columns: 1fr;
+        margin: 14px;
+    }
+
+    .card {
+        padding: 16px;
+        gap: 14px;
+    }
+
+    .card-icon {
+        width: 48px;
+        height: 48px;
+        font-size: 1.2rem;
+    }
+
+    .card-label {
+        font-size: 0.78rem;
+    }
+
+    .card-value {
+        font-size: 1.45rem;
+    }
+
+    .card-change {
+        font-size: 0.78rem;
+    }
+
+
+    /* HISTORY */
+
+    .attendance-history {
+        margin: 14px;
+        padding: 12px;
+    }
+
+    .attendance-history .header {
+        gap: 12px;
+    }
+
+    .select-month,
+    #export-pdf {
+        width: 100%;
+        flex: none;
+    }
+
+
+    /* TABLE */
+
+    .history-table {
+        min-width: 560px;
+    }
+
+}
+
+
+/* ==============================
+   SHORT MOBILE SCREENS
+================================ */
+
 @media (max-width: 768px) and (max-height: 650px) {
+
     .sidebar {
         padding-top: 8px;
         padding-bottom: 8px;
@@ -856,4 +900,5 @@ body {
         margin-top: 4px;
         padding-top: 8px;
     }
+
 }

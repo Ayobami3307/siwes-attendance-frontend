@@ -6,9 +6,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/lecturerSession.css">
     <link rel="stylesheet" href="css/lecturerProfile.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/notifications.css">
     <title>Lecturer Profile</title>
-<link rel="stylesheet" href="css/notifications.css">
 </head>
 <body>
 
@@ -23,6 +22,7 @@
                 <i class="fa-solid fa-house"></i>
                 <span>Dashboard</span>
             </a>
+
             <a href="lecturerSession.html" class="nav-item">
                 <i class="fa-solid fa-qrcode"></i>
                 <span>Create Session</span>
@@ -33,8 +33,6 @@
                 <span>Attendance Records</span>
             </a>
 
-            
-
             <a href="lecturerProfile.html" class="nav-item active">
                 <i class="fa-solid fa-user"></i>
                 <span>Profile</span>
@@ -44,7 +42,7 @@
                 <i class="fa-solid fa-right-from-bracket"></i>
                 <span>Logout</span>
             </a>
-            
+
             <a href="lecturerSupport.html" class="nav-item">
                 <i class="fa-solid fa-headset"></i>
                 <span>Support Tickets</span>
@@ -61,30 +59,29 @@
     </aside>
 
     <div class="main-wrapper">
-        <button class="menu-toggle" id="menuToggle" type="button">
-            <i class="fa-solid fa-bars"></i>
-        </button>
-        
+
         <header class="top-header">
+
             <div class="notification-wrapper">
-    <button class="notification-icon" id="notificationBell" type="button">
-        <i class="fa-regular fa-bell"></i>
-        <span class="badge" id="notificationBadge" style="display: none;">0</span>
-    </button>
+                <button class="notification-icon" id="notificationBell" type="button">
+                    <i class="fa-regular fa-bell"></i>
+                    <span class="badge" id="notificationBadge" style="display: none;">0</span>
+                </button>
 
-    <div class="notification-dropdown" id="notificationDropdown">
-        <div class="notification-header">
-            <h3>Notifications</h3>
-            <button id="markAllReadBtn" type="button">
-                Mark all as read
-            </button>
-        </div>
+                <div class="notification-dropdown" id="notificationDropdown">
+                    <div class="notification-header">
+                        <h3>Notifications</h3>
+                        <button id="markAllReadBtn" type="button">
+                            Mark all as read
+                        </button>
+                    </div>
 
-        <div class="notification-list" id="notificationList">
-            <p class="notification-empty">Loading notifications...</p>
-        </div>
-    </div>
-</div>
+                    <div class="notification-list" id="notificationList">
+                        <p class="notification-empty">Loading notifications...</p>
+                    </div>
+                </div>
+            </div>
+
             <div class="user-profile">
                 <div class="avatar">LA</div>
 
@@ -93,6 +90,11 @@
                     <p class="lecturer-id">Lecturer</p>
                 </div>
             </div>
+
+            <button class="menu-toggle" id="menuToggle" type="button">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
         </header>
 
         <main class="main-content">
@@ -116,6 +118,7 @@
 
                             <input type="file" id="profile-image-input" accept="image/*" style="display: none;">
                         </div>
+
                         <div>
                             <h2 id="profileName">Lecturer A</h2>
                             <p id="profileRole">Lecturer</p>
@@ -129,7 +132,7 @@
                         </button>
                     </div>
 
-                    <div class="profile-details">  
+                    <div class="profile-details">
 
                         <div class="profile-field">
                             <label>Lecturer ID</label>
@@ -170,6 +173,7 @@
                         <div class="form-group">
                             <label for="edit-email">Email Address</label>
                             <input type="email" id="edit-email" placeholder="Enter your email address" required>
+
                             <button type="button" id="send-email-otp-btn">
                                 Verify New Email
                             </button>
@@ -184,6 +188,7 @@
                                 maxlength="6"
                                 placeholder="Enter the 6-digit code"
                             >
+
                             <button type="button" id="verify-email-otp-btn">
                                 Confirm Email
                             </button>
@@ -218,7 +223,6 @@
     </div>
 
     <script src="js/notifications.js"></script>
-
     <script src="js/lecturerProfile.js"></script>
 
 </body>

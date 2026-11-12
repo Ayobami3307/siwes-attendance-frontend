@@ -506,13 +506,6 @@ body {
         left: 0;
     }
 
-    .sidebar.open ~ .main-wrapper .menu-toggle {
-        left: auto;
-        right: 125px;
-        top: 15px;
-        color: red;
-    }
-
     .sidebar-menu {
         display: flex;
         flex-direction: column;
@@ -622,12 +615,6 @@ body {
     .menu-toggle {
         left: 14px;
         font-size: 1.15rem;
-    }
-
-    .sidebar.open ~ .main-wrapper .menu-toggle {
-        right: 110px;
-        left: auto;
-        color: red;
     }
 
     .notification-icon {
@@ -756,5 +743,30 @@ body {
     .sidebar-footer {
         margin-top: 4px;
         padding-top: 8px;
+    }
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: flex;
+        position: static;
+        transform: none;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        padding: 6px;
+        border: none;
+        border-radius: 8px;
+        background: #fff;
+        color: #000;
+        font-size: 1.3rem;
+        cursor: pointer;
+        flex-shrink: 0;
+    }
+
+    #menuToggle,
+    #menuToggle i {
+        color: #000 !important;
     }
 }

@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NIIT Student Portal - Profile</title>
-    <link rel="stylesheet" href="css/responsive.css">
+
     <link rel="stylesheet" href="css/profile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link rel="stylesheet" href="css/notifications.css">
+    <link rel="stylesheet" href="css/notifications.css">
 </head>
+
 <body>
+
     <aside class="sidebar">
         <div class="sidebar-brand">
             <h1 class="logo">NIIT</h1>
@@ -21,22 +23,27 @@
                 <i class="fa-solid fa-house"></i>
                 <span>Dashboard</span>
             </a>
+
             <a href="scan.html" class="nav-item">
                 <i class="fa-solid fa-qrcode"></i>
                 <span>Scan QR</span>
             </a>
+
             <a href="attendance.html" class="nav-item">
                 <i class="fa-solid fa-calendar-days"></i>
                 <span>Attendance</span>
             </a>
+
             <a href="profile.html" class="nav-item active">
                 <i class="fa-solid fa-user"></i>
                 <span>Profile</span>
             </a>
+
             <a href="logout.html" class="nav-item logout">
                 <i class="fa-solid fa-right-from-bracket"></i>
                 <span>Logout</span>
             </a>
+
             <a href="support.html" class="nav-item">
                 <i class="fa-solid fa-headset"></i>
                 <span>Support</span>
@@ -45,6 +52,7 @@
 
         <div class="sidebar-footer">
             <i class="fa-solid fa-graduation-cap"></i>
+
             <div>
                 <p class="footer-title">Learn Today</p>
                 <p class="footer-subtitle">Build Tomorrow</p>
@@ -53,42 +61,54 @@
     </aside>
 
     <div class="main-wrapper">
-        <button class="menu-toggle" id="menuToggle" type="button">
-            <i class="fa-solid fa-bars"></i>
-        </button>
 
         <header class="top-header">
-            <div class="notification-wrapper">
-                <button class="notification-icon" id="notificationBell" type="button">
-                    <i class="fa-regular fa-bell"></i>
-                    <span class="badge" id="notificationBadge" style="display: none;">0</span>
-                </button>
 
-                <div class="notification-dropdown" id="notificationDropdown">
-                    <div class="notification-header">
-                        <h3>Notifications</h3>
-                        <button id="markAllReadBtn" type="button">
-                            Mark all as read
-                        </button>
-                    </div>
+            <button class="menu-toggle" id="menuToggle" type="button" aria-label="Toggle navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
 
-                    <div class="notification-list" id="notificationList">
-                        <p class="notification-empty">Loading notifications...</p>
+            <div class="header-right">
+
+                <div class="notification-wrapper">
+                    <button class="notification-icon" id="notificationBell" type="button">
+                        <i class="fa-regular fa-bell"></i>
+                        <span class="badge" id="notificationBadge" style="display: none;">0</span>
+                    </button>
+
+                    <div class="notification-dropdown" id="notificationDropdown">
+                        <div class="notification-header">
+                            <h3>Notifications</h3>
+
+                            <button id="markAllReadBtn" type="button">
+                                Mark all as read
+                            </button>
+                        </div>
+
+                        <div class="notification-list" id="notificationList">
+                            <p class="notification-empty">Loading notifications...</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="user-profile">
-                <div class="avatar"></div>
-                <div class="user-info">
-                    <h5 class="student-name"></h5>
-                    <p class="student-id"></p>
+
+                <div class="user-profile">
+                    <div class="avatar"></div>
+
+                    <div class="user-info">
+                        <h5 class="student-name"></h5>
+                        <p class="student-id"></p>
+                    </div>
                 </div>
+
             </div>
         </header>
 
         <main class="main-content">
+
             <div class="profile">
+
                 <div class="profile-card">
+
                     <div class="profile-avatar-wrapper">
                         <div class="profile-avatar"></div>
 
@@ -96,26 +116,39 @@
                             <i class="fa-solid fa-camera"></i>
                         </button>
 
-                        <input type="file" id="profile-image-input" accept="image/*"style="display: none;"/>
+                        <input
+                            type="file"
+                            id="profile-image-input"
+                            accept="image/*"
+                            style="display: none;"
+                        >
                     </div>
+
                     <h3 class="profile-name"></h3>
                     <p class="profile-role"></p>
-                    <span class="status-pill verified" style="margin-top: 10px;">Active Student</span>
+
+                    <span class="status-pill verified" style="margin-top: 10px;">
+                        Active Student
+                    </span>
 
                     <div class="profile-stats">
+
                         <div class="card">
                             <span class="stat-number" id="progress">Month 3</span>
                             <span class="stat-text">Progress</span>
                         </div>
+
                         <div class="card">
                             <span class="stat-number" id="profileAttendance">0%</span>
                             <span class="stat-text">Attendance</span>
                         </div>
+
                     </div>
 
                 </div>
 
                 <div class="student-detail">
+
                     <div class="title">
                         <h3>
                             <i class="fa-solid fa-id-card" style="color: #2563eb;"></i>
@@ -133,7 +166,9 @@
                     </div>
 
                     <!-- STUDENT DETAILS -->
+
                     <form class="form-input" id="profile-details-form">
+
                         <div class="form-group">
                             <label for="fullName">Full Name</label>
                             <input type="text" id="fullName" readonly>
@@ -163,15 +198,18 @@
                             <label for="programDuration">Programme Duration</label>
                             <input type="text" id="programDuration" readonly>
                         </div>
+
                     </form>
 
                     <!-- EDIT PROFILE FORM -->
+
                     <form class="edit-profile-form" id="edit-profile-form" style="display: none;">
 
                         <h3>Edit Profile</h3>
 
                         <div class="form-group">
                             <label for="edit-name">Full Name</label>
+
                             <input
                                 type="text"
                                 id="edit-name"
@@ -182,6 +220,7 @@
 
                         <div class="form-group">
                             <label for="edit-email">Email Address</label>
+
                             <input
                                 type="email"
                                 id="edit-email"
@@ -230,6 +269,7 @@
                         </div>
 
                         <div class="form-actions">
+
                             <button type="button" class="save-btn" id="save-profile-btn">
                                 Save Changes
                             </button>
@@ -237,16 +277,19 @@
                             <button type="button" class="cancel-btn" id="cancel-edit-btn">
                                 Cancel
                             </button>
+
                         </div>
 
                     </form>
+
                 </div>
             </div>
+
         </main>
     </div>
 
     <script src="js/notifications.js"></script>
-    
     <script src="js/profile.js"></script>
+
 </body>
 </html>

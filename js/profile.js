@@ -485,18 +485,20 @@ const getProfile = async () => {
 const menuToggle = document.querySelector("#menuToggle");
 const sidebar = document.querySelector(".sidebar");
 
-menuToggle.addEventListener("click", () => {
-    sidebar.classList.toggle("open");
+    menuToggle.addEventListener("click", () => {
+        sidebar.classList.toggle("open");
+        menuToggle.classList.toggle("sidebar-menu-open");
 
-    const icon = menuToggle.querySelector("i");
+        const icon = menuToggle.querySelector("i");
 
-    if (sidebar.classList.contains("open")) {
-        icon.classList.remove("fa-bars");
-        icon.classList.add("fa-xmark");
-    } else {
-        icon.classList.remove("fa-xmark");
-        icon.classList.add("fa-bars");
-    }
-});
+        if (sidebar.classList.contains("open")) {
+            icon.classList.remove("fa-bars");
+            icon.classList.add("fa-xmark");
+        } else {
+            icon.classList.remove("fa-xmark");
+            icon.classList.add("fa-bars");
+        }
+    });
+
 
 getProfile();

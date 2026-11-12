@@ -1,10 +1,16 @@
+/* ==============================
+   PROFILE CARD
+============================== */
+
 .profile-card {
     background-color: #ffffff;
     border: 1px solid #e1e7ef;
     border-radius: 15px;
     padding: 30px;
+    width: 100%;
     max-width: 900px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
 }
 
 .profile-header {
@@ -41,7 +47,7 @@
 
 .profile-details {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 20px;
 }
 
@@ -63,17 +69,18 @@
 .profile-field p {
     color: #12366b;
     font-weight: 600;
-    word-break: break-word;
+    overflow-wrap: anywhere;
 }
 
-.menu-toggle {
-    display: none;
-}
+/* ==============================
+   PROFILE IMAGE
+============================== */
 
 .profile-avatar-wrapper {
     position: relative;
     width: 120px;
     height: 120px;
+    flex-shrink: 0;
 }
 
 .profile-avatar-wrapper .profile-avatar {
@@ -98,35 +105,25 @@
     height: 36px;
     border: none;
     border-radius: 50%;
+    background: #0b3d91;
+    color: #ffffff;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
+/* ==============================
+   PROFILE ACTIONS
+============================== */
+
 .profile-actions {
     display: flex;
     margin: 20px 0;
 }
 
-.profile-actions button{
-    padding: 5px 15vw;
-    border: none;
-    border-radius: 6px;
-    background: #0b3d91;
-    color: white;
-    font-size: 14px;
-    width: 40vw;
-    height: 8vh;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.2s ease;
-}
-
-.form-actions button,
-#send-email-otp-btn,
-#verify-email-otp-btn {
-    padding: 10px 16px;
+.profile-actions button {
+    padding: 12px 24px;
     border: none;
     border-radius: 6px;
     background: #0b3d91;
@@ -134,15 +131,12 @@
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    transition: background 0.2s ease;
+    transition: background-color 0.2s ease;
 }
 
-.profile-actions button:hover,
-.form-actions button:hover,
-#send-email-otp-btn:hover,
-#verify-email-otp-btn:hover {
-    background: #082f70;
-}
+/* ==============================
+   EDIT PROFILE FORM
+============================== */
 
 .edit-profile-form {
     margin-top: 24px;
@@ -197,6 +191,27 @@
     margin-top: 24px;
 }
 
+.form-actions button,
+#send-email-otp-btn,
+#verify-email-otp-btn {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    background: #0b3d91;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.profile-actions button:hover,
+.form-actions button:hover,
+#send-email-otp-btn:hover,
+#verify-email-otp-btn:hover {
+    background: #082f70;
+}
+
 #cancel-edit-btn {
     background: #64748b;
 }
@@ -209,46 +224,38 @@
     margin-top: 16px;
 }
 
-@media (max-width: 600px) {
-    .edit-profile-form {
-        padding: 16px;
-    }
+/* ==============================
+   DESKTOP / TABLET
+============================== */
 
-    .profile-actions button,
-    .form-actions button,
-    #send-email-otp-btn,
-    #verify-email-otp-btn {
-        width: 100%;
-    }
+.menu-toggle {
+    display: none;
+}
 
-    .form-actions {
-        flex-direction: column;
-    }
+#menuToggle {
+    color: #000 !important;
+}
+
+#menuToggle i {
+    color: #000 !important;
 }
 
 @media (max-width: 1024px) {
-    .sidebar {
-        width: 220px;
-    }
-
-    .main-wrapper {
-        margin-left: 220px;
-    }
-
-    .top-header {
-        padding: 0 24px;
+    .profile-card {
+        max-width: 100%;
     }
 
     .main-content {
         padding: 24px;
     }
-
-    .profile-card {
-        max-width: 100%;
-    }
 }
 
+/* ==============================
+   MOBILE RESPONSIVENESS
+============================== */
+
 @media (max-width: 768px) {
+
     body {
         display: block;
         overflow-x: hidden;
@@ -260,13 +267,43 @@
         left: -280px;
         width: 260px;
         height: 100vh;
+        height: 100dvh;
         z-index: 1200;
         transition: left 0.3s ease;
-        overflow-y: auto;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        padding: 16px 14px 12px;
+        box-sizing: border-box;
     }
 
     .sidebar.open {
         left: 0;
+    }
+
+    .sidebar-brand {
+        padding-bottom: 14px;
+        flex-shrink: 0;
+    }
+
+    .sidebar-menu {
+        flex: 1;
+        min-height: 0;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .nav-item {
+        padding: 10px 12px;
+        flex-shrink: 0;
+    }
+
+    .sidebar-footer {
+        flex-shrink: 0;
+        margin-top: 8px;
+        padding: 12px 10px 4px;
     }
 
     .main-wrapper {
@@ -281,30 +318,29 @@
         z-index: 1000;
         height: 65px;
         padding: 0 18px;
+        display: flex;
+        align-items: center;
         justify-content: flex-end;
+        gap: 15px;
     }
+
+    /* Hamburger appears after notification and avatar */
 
     .menu-toggle {
-        display: block;
-        position: fixed;
-        top: 18px;
-        left: 18px;
-        transform: none;
+        display: flex;
+        position: static;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        flex-shrink: 0;
         border: none;
-        background: transparent;
+        border-radius: 8px;
+        background: #ffffff;
         color: #1e293b;
-        font-size: 1.3rem;
+        font-size: 1.2rem;
         cursor: pointer;
-        padding: 6px;
-        z-index: 1300;
-        transition: all 0.3s ease;
-    }
-
-    .sidebar.open ~ .main-wrapper .menu-toggle {
-        left: auto;
-        right: 120px;
-        top: 15px;
-        color: red;
+        z-index: 1301;
     }
 
     .user-info,
@@ -317,6 +353,7 @@
         max-width: 100%;
         min-width: 0;
         padding: 20px 16px;
+        box-sizing: border-box;
         overflow-x: hidden;
     }
 
@@ -339,24 +376,29 @@
     }
 }
 
+/* ==============================
+   SMALL PHONES
+============================== */
+
 @media (max-width: 480px) {
+
     .top-header {
         padding: 0 14px;
+        gap: 12px;
     }
 
     .menu-toggle {
-        left: 14px;
+        width: 36px;
+        height: 36px;
         font-size: 1.15rem;
     }
 
     .sidebar.open ~ .main-wrapper .menu-toggle {
-        right: 110px;
-        left: auto;
-        color: red;
+        right: 82px;
     }
 
     .main-content {
-        padding: 20px 14px;
+        padding: 18px 14px;
     }
 
     .profile-card {
@@ -387,67 +429,32 @@
     .profile-field {
         padding: 14px;
     }
-}
 
-@media (max-width: 768px) {
-    .sidebar {
-        height: 100vh;
-        height: 100dvh;
-        overflow: hidden;
-        display: flex;
+    .profile-actions button {
+        width: 100%;
+    }
+
+    .edit-profile-form {
+        padding: 16px;
+    }
+
+    .form-actions {
         flex-direction: column;
-        padding: 16px 14px 12px;
-        box-sizing: border-box;
     }
 
-    .sidebar-brand {
-        padding-bottom: 14px;
-        flex-shrink: 0;
-    }
-
-    .sidebar-menu {
-        flex: 1;
-        min-height: 0;
-        overflow-y: auto;
-        gap: 4px;
-    }
-
-    .nav-item {
-        padding: 10px 12px;
-        flex-shrink: 0;
-    }
-
-    .sidebar-footer {
-        flex-shrink: 0;
-        margin-top: 8px;
-        padding: 12px 10px 4px;
-    }
-
-    .menu-toggle {
-        position: fixed;
-        top: 12px;
-        left: 12px;
-        right: auto;
-        z-index: 1301;
-        width: 40px;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: #fff;
-        border-radius: 8px;
-    }
-
-    .menu-toggle.sidebar-menu-open {
-        left: auto;
-        right: 82px;
-        top: 12px;
-        color: #1e293b;
-        background: #fff;
+    .form-actions button,
+    #send-email-otp-btn,
+    #verify-email-otp-btn {
+        width: 100%;
     }
 }
+
+/* ==============================
+   SHORT MOBILE SCREENS
+============================== */
 
 @media (max-width: 768px) and (max-height: 650px) {
+
     .sidebar {
         padding-top: 8px;
         padding-bottom: 8px;

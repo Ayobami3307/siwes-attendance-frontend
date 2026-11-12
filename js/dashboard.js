@@ -2,6 +2,7 @@ const token = localStorage.getItem("token") || sessionStorage.getItem("token");
 
 let studentAttendanceData = [];
 let studentSessionsData = [];
+
 if (!token) {
     window.location.href = "login.html?role=student";
 } else {
@@ -41,7 +42,6 @@ const formatDate = (value) => {
     if (!value) return "-";
 
     const date = new Date(value);
-
     const day = String(date.getDate()).padStart(2, "0");
 
     const months = [
@@ -67,12 +67,15 @@ const formatTime = (value) => {
 
 const getProfile = async () => {
     try {
-        const response = await fetch("https://siwes-attendance-backend.onrender.com/api/profile", {
-            method: "GET",
-            headers: {
-                "Authorization": `Bearer ${token}`
+        const response = await fetch(
+            "https://siwes-attendance-backend.onrender.com/api/profile",
+            {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
             }
-        });
+        );
 
         const data = await response.json();
 
@@ -91,11 +94,13 @@ const getProfile = async () => {
 
         studentName.textContent = data.name;
         studentId.textContent = `Student ID: ${data.studentId}`;
+
         if (data.courseId) {
             courseName.textContent = data.courseId.name || "Not assigned";
         } else {
             courseName.textContent = "Not assigned";
         }
+
         if (data.profileImage) {
             headerAvatar.innerHTML = `
                 <img src="${data.profileImage}" alt="Profile Picture">
@@ -110,6 +115,7 @@ const getProfile = async () => {
 
             headerAvatar.textContent = initials;
         }
+
         const firstName = data.name.split(" ")[1] || data.name;
 
         welcomeMessage.innerHTML =
@@ -123,13 +129,17 @@ const getProfile = async () => {
 
 const loadAttendance = async () => {
     console.log("loadAttendance function started");
+
     try {
-        const response = await fetch("https://siwes-attendance-backend.onrender.com/api/attendance", {
-            method: "GET",
-            headers: {
-                "Authorization": `Bearer ${token}`
+        const response = await fetch(
+            "https://siwes-attendance-backend.onrender.com/api/attendance",
+            {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
             }
-        });
+        );
 
         const data = await response.json();
 
@@ -147,6 +157,7 @@ const loadAttendance = async () => {
             alert(data.message || "Unable to load attendance.");
             return;
         }
+
         const totalClasses = document.querySelector("#totalClasses");
         const classesAttended = document.querySelector("#classesAttended");
         const overallRate = document.querySelector("#overallRate");
@@ -174,29 +185,43 @@ const loadAttendance = async () => {
             return;
         }
 
-        const total = sessions.length;
+        // Only count sessions that have ended
+        const now = new Date();
 
-        totalClasses.textContent = total;
-        totalClassesText.textContent = `${total} sessions recorded`;
+        const completedSessions = sessions.filter(session => {
+            return session.sessionEndsAt &&
+                new Date(session.sessionEndsAt) <= now;
+        });
 
-        const attended = data.filter(
+        const completedSessionIds = new Set(
+            completedSessions.map(session => session.sessionId)
+        );
+
+        // Only count attendance records belonging to completed sessions
+        const completedAttendance = data.filter(record =>
+            completedSessionIds.has(record.sessionId)
+        );
+
+        const total = completedSessions.length;
+
+        const attended = completedAttendance.filter(
             record => record.status === "Present"
         ).length;
 
-        const absent = data.filter(
+        const absent = completedAttendance.filter(
             record => record.status === "Absent"
         ).length;
 
         classesAbsent.textContent = absent;
-
         classesAttended.textContent = attended;
         classesAttendedText.textContent = `${attended} sessions attended`;
 
-        classesAbsent.textContent = absent;
+        totalClasses.textContent = total;
+        totalClassesText.textContent = `${total} completed sessions recorded`;
 
         const rate = total > 0
             ? ((attended / total) * 100).toFixed(1)
-            : 0;
+            : "0.0";
 
         overallRate.textContent = `${rate}%`;
         overallRateText.textContent = "Based on your attendance";
@@ -227,39 +252,39 @@ const loadAttendance = async () => {
                 !record.timeOut;
         });
 
-       if (todayRecord) {
-        todayStatus.textContent = todayRecord.status;
-        todayStatus.classList.remove("pending");
-        todayStatus.classList.add("verified");
-
-        todayLoginTime.textContent = formatTime(todayRecord.date);
-        todayTimeOut.textContent = "-";
-
-        timeOutBtn.style.display = "block";
-    } else {
-        const completedToday = data.find(record => {
-            const recordDate = new Date(record.date);
-
-            return recordDate.getDate() === today.getDate() &&
-                recordDate.getMonth() === today.getMonth() &&
-                recordDate.getFullYear() === today.getFullYear();
-        });
-
-        if (completedToday) {
-            todayStatus.textContent = completedToday.status;
+        if (todayRecord) {
+            todayStatus.textContent = todayRecord.status;
             todayStatus.classList.remove("pending");
             todayStatus.classList.add("verified");
 
-            todayLoginTime.textContent = formatTime(completedToday.date);
-            todayTimeOut.textContent = formatTime(completedToday.timeOut);
-        } else {
-            todayStatus.textContent = "No Attendance";
-            todayLoginTime.textContent = "-";
+            todayLoginTime.textContent = formatTime(todayRecord.date);
             todayTimeOut.textContent = "-";
-        }
 
-        timeOutBtn.style.display = "none";
-    }
+            timeOutBtn.style.display = "block";
+        } else {
+            const completedToday = data.find(record => {
+                const recordDate = new Date(record.date);
+
+                return recordDate.getDate() === today.getDate() &&
+                    recordDate.getMonth() === today.getMonth() &&
+                    recordDate.getFullYear() === today.getFullYear();
+            });
+
+            if (completedToday) {
+                todayStatus.textContent = completedToday.status;
+                todayStatus.classList.remove("pending");
+                todayStatus.classList.add("verified");
+
+                todayLoginTime.textContent = formatTime(completedToday.date);
+                todayTimeOut.textContent = formatTime(completedToday.timeOut);
+            } else {
+                todayStatus.textContent = "No Attendance";
+                todayLoginTime.textContent = "-";
+                todayTimeOut.textContent = "-";
+            }
+
+            timeOutBtn.style.display = "none";
+        }
 
     } catch (error) {
         console.log("Error:", error);
@@ -277,12 +302,15 @@ timeOutBtn.addEventListener("click", async (e) => {
     }
 
     try {
-        const response = await fetch("https://siwes-attendance-backend.onrender.com/api/attendance/timeout", {
-            method: "PATCH",
-            headers: {
-                "Authorization": `Bearer ${token}`
+        const response = await fetch(
+            "https://siwes-attendance-backend.onrender.com/api/attendance/timeout",
+            {
+                method: "PATCH",
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
             }
-        });
+        );
 
         const data = await response.json();
 
@@ -308,6 +336,7 @@ const sidebar = document.querySelector(".sidebar");
 
 menuToggle.addEventListener("click", () => {
     sidebar.classList.toggle("open");
+
     menuToggle.classList.toggle(
         "sidebar-menu-open",
         sidebar.classList.contains("open")
@@ -523,7 +552,6 @@ const loadNotifications = async () => {
     }
 };
 
-
 // DISPLAY NOTIFICATIONS
 const displayNotifications = () => {
     notificationList.innerHTML = "";
@@ -551,6 +579,7 @@ const displayNotifications = () => {
         message.textContent = notification.message;
 
         const date = document.createElement("small");
+
         date.textContent = new Date(
             notification.createdAt
         ).toLocaleString("en-NG", {
@@ -575,7 +604,6 @@ const displayNotifications = () => {
         notificationList.appendChild(item);
     });
 };
-
 
 // MARK ONE NOTIFICATION AS READ
 const markNotificationAsRead = async (id) => {
@@ -604,7 +632,6 @@ const markNotificationAsRead = async (id) => {
     }
 };
 
-
 // MARK ALL NOTIFICATIONS AS READ
 markAllReadBtn.addEventListener("click", async () => {
     try {
@@ -632,7 +659,6 @@ markAllReadBtn.addEventListener("click", async () => {
     }
 });
 
-
 // OPEN AND CLOSE NOTIFICATION DROPDOWN
 notificationBell.addEventListener("click", (event) => {
     event.stopPropagation();
@@ -640,20 +666,15 @@ notificationBell.addEventListener("click", (event) => {
     notificationDropdown.classList.toggle("show");
 });
 
-
 // CLOSE DROPDOWN WHEN CLICKING OUTSIDE
 document.addEventListener("click", (event) => {
-    if (
-        !event.target.closest(".notification-wrapper")
-    ) {
+    if (!event.target.closest(".notification-wrapper")) {
         notificationDropdown.classList.remove("show");
     }
 });
 
-
 // LOAD NOTIFICATIONS WHEN DASHBOARD OPENS
 loadNotifications();
-
 
 // REFRESH NOTIFICATIONS EVERY 30 SECONDS
 setInterval(loadNotifications, 30000);

@@ -433,7 +433,20 @@ footer p {
     cursor: pointer;
 }
 
+/* =========================================
+   DESKTOP NAVIGATION
+========================================= */
+
+.menu-toggle {
+    display: none;
+}
+
+/* =========================================
+   TABLET RESPONSIVENESS
+========================================= */
+
 @media (max-width: 1024px) {
+
     .container {
         padding: 40px 30px;
         gap: 25px;
@@ -466,29 +479,137 @@ footer p {
     }
 }
 
+/* =========================================
+   MODERN MOBILE NAVIGATION
+========================================= */
+
 @media (max-width: 768px) {
+
     .navlinks {
-        padding: 14px 18px;
+        position: relative;
+        display: flex;
+        align-items: center;
         justify-content: space-between;
+        padding: 14px 22px;
+        background: rgba(255, 255, 255, 0.97);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
     }
 
     .navlinks .logo {
-        font-size: 1.6rem;
+        font-size: 1.8rem;
+        letter-spacing: -1px;
+    }
+
+    .menu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        background: #f8fafc;
+        color: #0c4a92;
+        font-size: 1.25rem;
+        cursor: pointer;
+        flex-shrink: 0;
+        transition: all 0.3s ease;
+    }
+
+    .menu-toggle:hover {
+        background: #eaf2fc;
+        transform: scale(1.04);
     }
 
     .navlinks ul {
-        gap: 12px;
-        font-size: 0.85rem;
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 12px;
+        right: 12px;
+        width: auto;
+
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 5px;
+
+        padding: 12px;
+        margin: 0;
+
+        background: #ffffff;
+        border: 1px solid #e8edf4;
+        border-radius: 16px;
+
+        box-shadow: 0 15px 40px rgba(15, 23, 42, 0.12);
+
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateY(-10px);
+
+        transition:
+            opacity 0.25s ease,
+            transform 0.25s ease,
+            visibility 0.25s ease;
+
+        z-index: 1001;
+    }
+
+    .navlinks ul.show-menu {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(0);
+    }
+
+    .navlinks ul li {
+        width: 100%;
+        list-style: none;
     }
 
     .navlinks ul li a {
-        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        padding: 13px 15px;
+        border-radius: 10px;
+
+        color: #334155;
+        font-size: 0.95rem;
+        font-weight: 500;
+        text-decoration: none;
+        white-space: normal;
+
+        transition: all 0.2s ease;
     }
 
-    .portal-login-btn {
-        padding: 7px 9px !important;
-        font-size: 0.75rem;
+    .navlinks ul li a:hover {
+        background: #eff6ff;
+        color: #0c4a92;
+        padding-left: 20px;
     }
+
+    .navlinks ul > .portal-login-btn {
+        width: 100%;
+        margin-top: 8px;
+        padding: 13px 12px !important;
+
+        background: #0c4a92 !important;
+        border-radius: 10px !important;
+
+        font-size: 0.85rem;
+        font-weight: 600;
+
+        transition: all 0.25s ease;
+    }
+
+    .navlinks ul > .portal-login-btn:hover {
+        background: #08366b !important;
+        transform: translateY(-2px);
+    }
+
+    /* Hero section */
 
     .container {
         flex-direction: column;
@@ -505,7 +626,6 @@ footer p {
 
     .main-content h1 {
         order: 1;
-        
     }
 
     .main-content p {
@@ -531,6 +651,8 @@ footer p {
         margin-top: 5px;
     }
 
+    /* Cards */
+
     .cards {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -555,6 +677,8 @@ footer p {
         font-size: 0.7rem;
     }
 
+    /* How it works */
+
     .how {
         padding: 45px 15px;
     }
@@ -575,6 +699,8 @@ footer p {
         max-width: 100%;
     }
 
+    /* FAQ */
+
     .faq {
         margin-top: 40px;
         margin-bottom: 40px;
@@ -593,6 +719,8 @@ footer p {
         padding: 18px 15px;
     }
 
+    /* Support section */
+
     .Need-Support {
         padding: 40px 15px 60px;
     }
@@ -607,6 +735,8 @@ footer p {
         padding: 30px 20px;
     }
 
+    /* Portal modal */
+
     .portal-box {
         padding: 30px 20px;
     }
@@ -616,27 +746,28 @@ footer p {
     }
 }
 
+/* =========================================
+   SMALL MOBILE SCREENS
+========================================= */
+
 @media (max-width: 480px) {
+
     .navlinks {
-        padding: 12px 14px;
+        padding: 12px 16px;
     }
 
     .navlinks .logo {
-        font-size: 1.45rem;
+        font-size: 1.6rem;
     }
 
-    .navlinks ul {
-        gap: 8px;
-        font-size: 0.72rem;
+    .menu-toggle {
+        width: 42px;
+        height: 42px;
     }
 
+    /* Keep navigation links visible inside dropdown */
     .navlinks ul li a {
-        display: none;
-    }
-
-    .portal-login-btn {
-        padding: 7px 8px !important;
-        font-size: 0.68rem;
+        display: flex;
     }
 
     .container {
@@ -661,6 +792,8 @@ footer p {
         padding: 11px 20px !important;
     }
 
+    /* Cards */
+
     .cards {
         grid-template-columns: 1fr;
         gap: 10px;
@@ -678,6 +811,8 @@ footer p {
         padding-left: 10px;
         font-size: 0.75rem;
     }
+
+    /* How it works */
 
     .how {
         padding: 40px 15px;
@@ -700,6 +835,8 @@ footer p {
         line-height: 1.5;
     }
 
+    /* FAQ */
+
     .faq h2 {
         font-size: 1.2rem;
     }
@@ -715,6 +852,8 @@ footer p {
     .fAQS .faq-card summary {
         font-size: 0.9rem;
     }
+
+    /* Support */
 
     .Need-Support h2 {
         font-size: 24px;
@@ -737,6 +876,8 @@ footer p {
         height: 55px;
         font-size: 15px;
     }
+
+    /* Portal modal */
 
     .portal-box h2 {
         font-size: 1.4rem;
