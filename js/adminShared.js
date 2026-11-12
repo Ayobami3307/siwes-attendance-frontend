@@ -45,3 +45,51 @@ const loadSharedAdminAvatar = async () => {
 };
 
 loadSharedAdminAvatar();
+
+// ADMIN SIDEBAR TOGGLE
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const sidebarToggle = document.getElementById("sidebarToggle");
+    const sidebar = document.querySelector(".sidebar");
+    const sidebarOverlay = document.getElementById("sidebarOverlay");
+
+    if (!sidebarToggle || !sidebar || !sidebarOverlay) return;
+
+    function openSidebar() {
+        sidebar.classList.add("sidebar-open");
+        sidebarOverlay.classList.add("overlay-active");
+
+        sidebarToggle.innerHTML = "✕";
+        sidebarToggle.setAttribute("aria-expanded", "true");
+    }
+
+    function closeSidebar() {
+        sidebar.classList.remove("sidebar-open");
+        sidebarOverlay.classList.remove("overlay-active");
+
+        sidebarToggle.innerHTML = "☰";
+        sidebarToggle.setAttribute("aria-expanded", "false");
+    }
+
+    sidebarToggle.addEventListener("click", () => {
+        if (sidebar.classList.contains("sidebar-open")) {
+            closeSidebar();
+        } else {
+            openSidebar();
+        }
+    });
+
+    sidebarOverlay.addEventListener("click", closeSidebar);
+
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+            closeSidebar();
+        }
+    });
+
+    sidebar.querySelectorAll(".nav-item").forEach(item => {
+        item.addEventListener("click", closeSidebar);
+    });
+
+});

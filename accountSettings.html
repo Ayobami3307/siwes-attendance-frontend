@@ -3,207 +3,265 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Account Settings | NIIT Smart Attendance</title>
-<link rel="stylesheet" href="css/adminDashboard.css">
-<link rel="stylesheet" href="css/accountSettings.css">
+
+    <link rel="stylesheet" href="css/adminDashboard.css">
+    <link rel="stylesheet" href="css/accountSettings.css">
 </head>
 <body>
 
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
 
-<!-- SIDEBAR -->
-<aside class="sidebar">
+        <div class="admin-profile">
+            <div class="admin-avatar" id="adminAvatar">A</div>
+            <h2>NIIT Smart Attendance</h2>
+            <p>Administrator</p>
+        </div>
 
-    <div class="admin-profile">
-        <div class="admin-avatar" id="adminAvatar">A</div>
-        <h2>NIIT Smart Attendance</h2>
-        <p>Administrator</p>
-    </div>
+        <nav class="sidebar-navigation">
 
-    <nav class="sidebar-navigation">
-        <a href="adminDashboard.html" class="nav-item"><span>▦</span> Dashboard</a>
-        <a href="lecturersList.html" class="nav-item"><span>♙</span> Lecturers</a>
-        <a href="studentsList.html" class="nav-item"><span>♧</span> Students</a>
-        <a href="createId.html" class="nav-item"><span>＋</span> Create Account</a>
-        <a href="courseManagement.html" class="nav-item"><span>▤</span> Course Management</a>
-        <a href="pendingActivations.html" class="nav-item"><span>◷</span> Pending Activations</a>
-    </nav>
+            <a href="adminDashboard.html" class="nav-item">
+                <span>▦</span> Dashboard
+            </a>
 
-    <div class="sidebar-footer">
-        <p>NIIT Smart Attendance</p>
-        <small>Powered by NIIT</small>
-    </div>
+            <a href="lecturersList.html" class="nav-item">
+                <span>♙</span> Lecturers
+            </a>
 
-</aside>
+            <a href="studentsList.html" class="nav-item">
+                <span>♧</span> Students
+            </a>
 
-<!-- MAIN CONTENT -->
-<main class="main-content">
+            <a href="createId.html" class="nav-item">
+                <span>＋</span> Create Account
+            </a>
 
-    <header class="topbar">
+            <a href="courseManagement.html" class="nav-item">
+                <span>▤</span> Course Management
+            </a>
+
+            <a href="pendingActivations.html" class="nav-item">
+                <span>◷</span> Pending Activations
+            </a>
+
+        </nav>
+
+        <div class="sidebar-footer">
+            <p>NIIT Smart Attendance</p>
+            <small>Powered by NIIT</small>
+        </div>
+
+    </aside>
+
+    <!-- SIDEBAR OVERLAY -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <!-- TOPBAR -->
+        <header class="topbar">
+
+            <div class="topbar-actions">
+
+                <button type="button" id="logoutButton">
+                    Logout
+                </button>
+
+                <button
+                    type="button"
+                    class="sidebar-toggle"
+                    id="sidebarToggle"
+                    aria-label="Open navigation menu"
+                    aria-expanded="false">
+                    ☰
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- PAGE WELCOME -->
         <div class="welcome-text">
             <h1>Account Settings</h1>
             <p>Manage your administrator account and preferences.</p>
         </div>
 
-        <div class="topbar-actions">
-            <button type="button" id="logoutButton">Logout</button>
-        </div>
-    </header>
 
-    <!-- PROFILE IMAGE SETTINGS -->
-    <section class="settings-section">
+        <!-- PROFILE IMAGE SETTINGS -->
+        <section class="settings-section">
 
-        <div class="section-heading">
-            <h2>Profile Picture</h2>
-            <p>Update your administrator profile picture.</p>
-        </div>
+            <div class="section-heading">
+                <h2>Profile Picture</h2>
+                <p>Update your administrator profile picture.</p>
+            </div>
 
-        <div class="settings-card">
+            <div class="settings-card">
 
-            <div class="image-upload-area">
+                <div class="image-upload-area">
 
-                <img
-                    src=""
-                    alt="Admin Profile Picture"
-                    id="profileImagePreview"
-                    class="profile-image-preview"
-                    style="display: none;"
-                >
-
-                <div class="profile-image-placeholder" id="imagePlaceholder">
-                    A
-                </div>
-
-                <div class="image-upload-controls">
-                    <label for="profileImageInput" class="upload-button">
-                        Choose Image
-                    </label>
-
-                    <input
-                        type="file"
-                        id="profileImageInput"
-                        accept="image/*"
-                        hidden
+                    <img
+                        src=""
+                        alt="Admin Profile Picture"
+                        id="profileImagePreview"
+                        class="profile-image-preview"
+                        style="display: none;"
                     >
 
-                    <button type="button" id="saveImageButton">
-                        Save Picture
-                    </button>
+                    <div
+                        class="profile-image-placeholder"
+                        id="imagePlaceholder">
+                        A
+                    </div>
 
-                    <p>JPG, PNG or WEBP. Maximum size: 5MB.</p>
+                    <div class="image-upload-controls">
+
+                        <label for="profileImageInput" class="upload-button">
+                            Choose Image
+                        </label>
+
+                        <input
+                            type="file"
+                            id="profileImageInput"
+                            accept="image/*"
+                            hidden
+                        >
+
+                        <button type="button" id="saveImageButton">
+                            Save Picture
+                        </button>
+
+                        <p>JPG, PNG or WEBP. Maximum size: 5MB.</p>
+
+                    </div>
+
                 </div>
+
+                <p id="imageMessage" class="settings-message"></p>
 
             </div>
 
-            <p id="imageMessage" class="settings-message"></p>
+        </section>
 
-        </div>
 
-    </section>
+        <!-- USERNAME SETTINGS -->
+        <section class="settings-section">
 
-    <!-- USERNAME SETTINGS -->
-    <section class="settings-section">
+            <div class="section-heading">
+                <h2>Change Username</h2>
+                <p>Update the username used to access your administrator account.</p>
+            </div>
 
-        <div class="section-heading">
-            <h2>Change Username</h2>
-            <p>Update the username used to access your administrator account.</p>
-        </div>
+            <div class="settings-card">
 
-        <div class="settings-card">
+                <form id="usernameForm">
 
-            <form id="usernameForm">
+                    <div class="form-group">
+                        <label for="newUsername">New Username</label>
 
-                <div class="form-group">
-                    <label for="newUsername">New Username</label>
-                    <input
-                        type="text"
-                        id="newUsername"
-                        placeholder="Enter new username"
-                        required
-                    >
-                </div>
+                        <input
+                            type="text"
+                            id="newUsername"
+                            placeholder="Enter new username"
+                            required
+                        >
+                    </div>
 
-                <div class="form-group">
-                    <label for="usernameCurrentPassword">Current Password</label>
-                    <input
-                        type="password"
-                        id="usernameCurrentPassword"
-                        placeholder="Enter your current password"
-                        required
-                    >
-                </div>
+                    <div class="form-group">
+                        <label for="usernameCurrentPassword">
+                            Current Password
+                        </label>
 
-                <button type="submit" class="save-button">
-                    Update Username
-                </button>
+                        <input
+                            type="password"
+                            id="usernameCurrentPassword"
+                            placeholder="Enter your current password"
+                            required
+                        >
+                    </div>
 
-            </form>
+                    <button type="submit" class="save-button">
+                        Update Username
+                    </button>
 
-            <p id="usernameMessage" class="settings-message"></p>
+                </form>
 
-        </div>
+                <p id="usernameMessage" class="settings-message"></p>
 
-    </section>
+            </div>
 
-    <!-- PASSWORD SETTINGS -->
-    <section class="settings-section">
+        </section>
 
-        <div class="section-heading">
-            <h2>Change Password</h2>
-            <p>Keep your administrator account secure by using a strong password.</p>
-        </div>
 
-        <div class="settings-card">
+        <!-- PASSWORD SETTINGS -->
+        <section class="settings-section">
 
-            <form id="passwordForm">
+            <div class="section-heading">
+                <h2>Change Password</h2>
+                <p>Keep your administrator account secure by using a strong password.</p>
+            </div>
 
-                <div class="form-group">
-                    <label for="currentPassword">Current Password</label>
-                    <input
-                        type="password"
-                        id="currentPassword"
-                        placeholder="Enter current password"
-                        required
-                    >
-                </div>
+            <div class="settings-card">
 
-                <div class="form-group">
-                    <label for="newPassword">New Password</label>
-                    <input
-                        type="password"
-                        id="newPassword"
-                        placeholder="Enter new password"
-                        minlength="8"
-                        required
-                    >
-                </div>
+                <form id="passwordForm">
 
-                <div class="form-group">
-                    <label for="confirmPassword">Confirm New Password</label>
-                    <input
-                        type="password"
-                        id="confirmPassword"
-                        placeholder="Confirm new password"
-                        minlength="8"
-                        required
-                    >
-                </div>
+                    <div class="form-group">
+                        <label for="currentPassword">Current Password</label>
 
-                <button type="submit" class="save-button">
-                    Change Password
-                </button>
+                        <input
+                            type="password"
+                            id="currentPassword"
+                            placeholder="Enter current password"
+                            required
+                        >
+                    </div>
 
-            </form>
+                    <div class="form-group">
+                        <label for="newPassword">New Password</label>
 
-            <p id="passwordMessage" class="settings-message"></p>
+                        <input
+                            type="password"
+                            id="newPassword"
+                            placeholder="Enter new password"
+                            minlength="8"
+                            required
+                        >
+                    </div>
 
-        </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm New Password</label>
 
-    </section>
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            placeholder="Confirm new password"
+                            minlength="8"
+                            required
+                        >
+                    </div>
 
-</main>
+                    <button type="submit" class="save-button">
+                        Change Password
+                    </button>
 
-<script src="js/adminShared.js"></script>
+                </form>
 
-<script src="js/accountSettings.js"></script>
+                <p id="passwordMessage" class="settings-message"></p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- SCRIPTS -->
+    <script src="js/adminShared.js"></script>
+    <script src="js/accountSettings.js"></script>
+
 </body>
 </html>

@@ -54,6 +54,7 @@
         </small>
     </div>
 </aside>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
 
 
 <!-- MAIN CONTENT -->
@@ -62,10 +63,11 @@
     <!-- TOP NAVIGATION -->
     <header class="topbar">
 
-        <div class="welcome-text">
-            <h1>Hi, Admin</h1>
-            <p>Welcome to your administration dashboard.</p>
-        </div>
+        <button type="button" class="sidebar-toggle" id="sidebarToggle"
+            aria-label="Open navigation menu"
+            aria-expanded="false">
+            ☰
+        </button>
 
         <div class="topbar-actions">
 
@@ -82,6 +84,11 @@
         </div>
 
     </header>
+
+    <div class="welcome-text">
+        <h1>Hi, Admin</h1>
+        <p>Welcome to your administration dashboard.</p>
+    </div>
 
 
     <!-- STATISTICS -->

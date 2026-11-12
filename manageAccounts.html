@@ -29,27 +29,33 @@
         <nav class="sidebar-navigation">
 
             <a href="adminDashboard.html" class="nav-item">
-                <span>▦</span> Dashboard
+                <span>▦</span>
+                Dashboard
             </a>
 
             <a href="lecturersList.html" class="nav-item">
-                <span>♙</span> Lecturers
+                <span>♙</span>
+                Lecturers
             </a>
 
             <a href="studentsList.html" class="nav-item">
-                <span>♧</span> Students
+                <span>♧</span>
+                Students
             </a>
 
             <a href="createid.html" class="nav-item">
-                <span>＋</span> Create Account
+                <span>＋</span>
+                Create Account
             </a>
 
             <a href="courseManagement.html" class="nav-item">
-                <span>▤</span> Course Management
+                <span>▤</span>
+                Course Management
             </a>
 
             <a href="pendingActivations.html" class="nav-item">
-                <span>◷</span> Pending Activations
+                <span>◷</span>
+                Pending Activations
             </a>
 
         </nav>
@@ -59,7 +65,8 @@
             <p>NIIT Smart Attendance</p>
 
             <small>
-                <i data-lucide="zap"></i> Powered by NIIT
+                <i data-lucide="zap"></i>
+                Powered by NIIT
             </small>
 
         </div>
@@ -67,8 +74,32 @@
     </aside>
 
 
+    <!-- SIDEBAR OVERLAY -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+
     <!-- MAIN CONTENT -->
     <main class="main-content">
+
+        <!-- MOBILE TOPBAR -->
+        <div class="mobile-topbar">
+
+            <a href="adminDashboard.html" class="mobile-dashboard-btn">
+                ← Dashboard
+            </a>
+
+            <button
+                type="button"
+                class="sidebar-toggle"
+                id="sidebarToggle"
+                aria-label="Open navigation menu"
+                aria-expanded="false"
+            >
+                ☰
+            </button>
+
+        </div>
+
 
         <div class="accounts-container">
 
@@ -91,23 +122,31 @@
             <section class="accounts-summary">
 
                 <div class="summary-card">
+
                     <h3>Total Accounts</h3>
                     <p id="totalAccounts">0</p>
+
                 </div>
 
                 <div class="summary-card">
+
                     <h3>Active Accounts</h3>
                     <p id="activeAccounts">0</p>
+
                 </div>
 
                 <div class="summary-card">
+
                     <h3>Pending Accounts</h3>
                     <p id="pendingAccounts">0</p>
+
                 </div>
 
                 <div class="summary-card">
+
                     <h3>Disabled Accounts</h3>
                     <p id="disabledAccounts">0</p>
+
                 </div>
 
             </section>
@@ -120,28 +159,38 @@
 
                     <div>
                         <h3>All Accounts</h3>
-                        <p>Students and lecturers registered on the system.</p>
+
+                        <p>
+                            Students and lecturers registered on the system.
+                        </p>
                     </div>
 
+
+                    <!-- ACCOUNT FILTERS -->
                     <div class="account-filters">
 
                         <input
                             type="search"
                             id="accountSearch"
                             placeholder="Search by name, ID or email..."
+                            aria-label="Search accounts"
                         >
 
-                        <select id="roleFilter">
+                        <select id="roleFilter" aria-label="Filter by role">
+
                             <option value="all">All Roles</option>
                             <option value="student">Students</option>
                             <option value="lecturer">Lecturers</option>
+
                         </select>
 
-                        <select id="statusFilter">
+                        <select id="statusFilter" aria-label="Filter by status">
+
                             <option value="all">All Statuses</option>
                             <option value="active">Active</option>
                             <option value="pending">Pending</option>
                             <option value="disabled">Disabled</option>
+
                         </select>
 
                     </div>
@@ -149,11 +198,13 @@
                 </div>
 
 
+                <!-- ACCOUNTS TABLE -->
                 <div class="table-container">
 
                     <table>
 
                         <thead>
+
                             <tr>
                                 <th>Account ID</th>
                                 <th>Full Name</th>
@@ -163,12 +214,16 @@
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
+
                         </thead>
+
 
                         <tbody id="accountsTableBody">
 
                             <tr>
-                                <td colspan="7">Loading accounts...</td>
+                                <td colspan="7">
+                                    Loading accounts...
+                                </td>
                             </tr>
 
                         </tbody>
@@ -189,6 +244,7 @@
 
         <div class="account-modal">
 
+            <!-- MODAL HEADER -->
             <div class="modal-header">
 
                 <div>
@@ -200,6 +256,7 @@
                     type="button"
                     id="closeAccountModal"
                     class="modal-close"
+                    aria-label="Close account details"
                 >
                     &times;
                 </button>
@@ -207,6 +264,7 @@
             </div>
 
 
+            <!-- MODAL BODY -->
             <div class="account-modal-body">
 
                 <div class="account-modal-avatar" id="modalAvatar">
@@ -218,46 +276,70 @@
                 <p id="modalAccountId">Account ID</p>
 
 
+                <!-- ACCOUNT INFORMATION -->
                 <div class="account-details-grid">
 
                     <div class="detail-item">
+
                         <span>Email Address</span>
                         <strong id="modalEmail">-</strong>
+
                     </div>
 
+
                     <div class="detail-item">
+
                         <span>Phone Number</span>
                         <strong id="modalPhone">-</strong>
+
                     </div>
 
+
                     <div class="detail-item">
+
                         <span>Account Role</span>
                         <strong id="modalRole">-</strong>
+
                     </div>
 
+
                     <div class="detail-item">
+
                         <span>Course</span>
                         <strong id="modalCourse">-</strong>
+
                     </div>
 
+
                     <div class="detail-item">
+
                         <span>Course Code</span>
                         <strong id="modalCourseCode">-</strong>
+
                     </div>
 
+
                     <div class="detail-item">
+
                         <span>Programme Duration</span>
                         <strong id="modalDuration">-</strong>
+
                     </div>
 
+
                     <div class="detail-item">
+
                         <span>Account Status</span>
                         <strong id="modalStatus">-</strong>
+
                     </div>
 
+
                     <div class="detail-item">
+
                         <span>Date Created</span>
                         <strong id="modalCreatedAt">-</strong>
+
                     </div>
 
                 </div>
@@ -276,15 +358,24 @@
         }
     </script>
 
+
+    <!-- LUCIDE ICONS -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <script>
-        lucide.createIcons();
+        if (window.lucide) {
+            lucide.createIcons();
+        }
     </script>
 
+
+    <!-- SHARED ADMIN FUNCTIONALITY -->
     <script src="js/adminShared.js"></script>
 
+
+    <!-- MANAGE ACCOUNTS FUNCTIONALITY -->
     <script src="js/manageAccounts.js"></script>
 
 </body>
+
 </html>

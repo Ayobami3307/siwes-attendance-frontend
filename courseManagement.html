@@ -64,22 +64,44 @@
 
     </aside>
 
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
 
     <!-- MAIN CONTENT -->
     <main class="main-content">
 
-        <header class="page-header">
-            <div>
-                <h1>Course Management</h1>
-                <p>Create, update and manage available courses.</p>
-            </div>
+        <header class="topbar">
+
+        
+
+        <div class="topbar-actions">
 
             <a href="adminDashboard.html" class="back-button">
                 <i data-lucide="arrow-left"></i>
                 Dashboard
             </a>
-        </header>
 
+            <button type="button" id="logoutButton">
+                Logout
+            </button>
+
+            <button
+                type="button"
+                class="sidebar-toggle"
+                id="sidebarToggle"
+                aria-label="Open navigation menu"
+                aria-expanded="false">
+                ☰
+            </button>
+
+        </div>
+
+    </header>
+
+        <div class="page-title">
+            <h1>Course Management</h1>
+            <p>Create, update and manage available courses.</p>
+        </div>
 
         <!-- SUMMARY CARDS -->
         <section class="summary-cards">

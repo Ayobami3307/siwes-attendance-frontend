@@ -743,6 +743,9 @@ if (helpButton) {
 
     document.body.appendChild(helpModal);
 
+    // HIDE HELP CENTRE WHEN PAGE LOADS
+    helpModal.style.display = "none";
+
 
     // HELP CENTRE STYLING
     const helpStyle = document.createElement("style");

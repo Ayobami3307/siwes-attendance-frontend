@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Pending Activations | NIIT Smart Attendance</title>
+
     <link rel="stylesheet" href="css/pendingActivations.css">
 </head>
+
 <body>
+
+    <!-- SIDEBAR -->
     <aside class="sidebar">
 
         <div class="admin-profile">
@@ -45,16 +51,47 @@
 
         <div class="sidebar-footer">
             <p>NIIT Smart Attendance</p>
-            <small> <i data-lucide="zap"></i> Powered by NIIT</small>
+            <small>
+                <i data-lucide="zap"></i> Powered by NIIT
+            </small>
         </div>
 
     </aside>
 
 
+    <!-- MOBILE SIDEBAR OVERLAY -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+
+    <!-- MAIN CONTENT -->
     <main class="main-content">
 
         <div class="activations-container">
 
+            <!-- MOBILE STICKY HEADER -->
+            <header class="mobile-topbar">
+
+                <div class="mobile-topbar-actions">
+
+                    <a href="adminDashboard.html" class="mobile-dashboard-btn">
+                        ← Dashboard
+                    </a>
+
+                    <button
+                        type="button"
+                        class="sidebar-toggle"
+                        id="sidebarToggle"
+                        aria-label="Open navigation menu"
+                        aria-expanded="false">
+                        ☰
+                    </button>
+
+                </div>
+
+            </header>
+
+
+            <!-- PAGE HEADER -->
             <header class="page-header">
 
                 <div>
@@ -69,6 +106,7 @@
             </header>
 
 
+            <!-- ACTIVATION SUMMARY -->
             <section class="activation-summary">
 
                 <div class="summary-card">
@@ -89,6 +127,7 @@
             </section>
 
 
+            <!-- ACTIVATIONS TABLE -->
             <section class="activations-list-section">
 
                 <div class="list-header">
@@ -119,11 +158,9 @@
                         </thead>
 
                         <tbody id="activationsTableBody">
-
                             <tr>
                                 <td colspan="6">Loading pending accounts...</td>
                             </tr>
-
                         </tbody>
 
                     </table>
@@ -137,17 +174,27 @@
     </main>
 
 
+    <!-- ADMIN AUTHENTICATION -->
     <script>
         if (!localStorage.getItem("adminToken")) {
             window.location.replace("staffLogin.html");
         }
     </script>
 
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script>lucide.createIcons();</script>
 
+    <!-- ICONS -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        lucide.createIcons();
+    </script>
+
+
+    <!-- SHARED ADMIN FUNCTIONALITY -->
     <script src="js/adminShared.js"></script>
 
+    <!-- PAGE FUNCTIONALITY -->
     <script src="js/pendingActivations.js"></script>
+
 </body>
-</html>
+</html>>

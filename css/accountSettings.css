@@ -1,175 +1,687 @@
-/* SETTINGS SECTIONS */
+/* =================================
+   GENERAL RESET
+================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f8f8fb;
+    color: #171747;
+    overflow-x: hidden;
+}
+
+.main-content {
+    overflow: visible !important;
+    min-width: 0;
+}
+
+/* =================================
+   SIDEBAR
+================================= */
+
+.sidebar {
+    width: 260px;
+    background: linear-gradient(135deg, #011231 0%, #154288 100%);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    padding: 24px 16px;
+    transition: transform 0.3s ease;
+}
+
+.admin-profile {
+    height: 200px;
+    padding: 10px 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.admin-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #011231 0%, #154288 100%);
+    border: 4px solid rgba(255, 255, 255, 0.207);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 42px;
+    font-weight: bold;
+    margin-bottom: 18px;
+}
+
+.admin-profile h2 {
+    font-size: 17px;
+    margin-bottom: 7px;
+}
+
+.admin-profile p {
+    font-size: 13px;
+}
+
+.sidebar-navigation {
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-item {
+    color: white;
+    text-decoration: none;
+    padding: 15px 25px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.nav-item span {
+    font-size: 19px;
+}
+
+.nav-item:hover {
+    background: #154288;
+    border-radius: 15px;
+}
+
+.nav-item.active {
+    background: #3133a0;
+    color: white;
+    border-radius: 15px;
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    padding: 25px;
+    font-size: 15px;
+    text-align: center;
+}
+
+.sidebar-footer p {
+    font-weight: bold;
+}
+
+.sidebar-footer small {
+    opacity: 0.8;
+}
+
+.sidebar-footer small svg {
+    width: 13px;
+    height: 13px;
+    stroke-width: 1.5;
+    vertical-align: middle;
+}
+
+/* =================================
+   TOPBAR
+================================= */
+
+.topbar {
+    position: fixed !important;
+    top: 0 !important;
+    left: 260px !important;
+    right: 0 !important;
+
+    width: auto !important;
+    height: 70px !important;
+    min-height: 70px !important;
+
+    margin: 0 !important;
+    padding: 0 30px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+
+    background: #f8f8fb !important;
+    border: none !important;
+    border-bottom: 1px solid #eee !important;
+    border-radius: 0 !important;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05) !important;
+
+    box-sizing: border-box !important;
+    z-index: 1000 !important;
+}
+
+.topbar-actions {
+    width: 100% !important;
+    height: 100% !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 12px !important;
+
+    background: transparent !important;
+}
+
+.topbar-actions #logoutButton {
+    border: none;
+    background: #ef4444;
+    color: #fff;
+    padding: 11px 20px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    transition: 0.3s ease;
+}
+
+.topbar-actions #logoutButton:hover {
+    background: #dc2626;
+}
+
+/* =================================
+   HAMBURGER
+================================= */
+
+.sidebar-toggle {
+    display: none;
+    width: 40px;
+    height: 40px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #154288;
+    color: #fff;
+
+    font-size: 23px;
+    cursor: pointer;
+
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+/* =================================
+   WELCOME TEXT
+================================= */
+
+.welcome-text {
+    margin-top: 85px;
+    margin-bottom: 30px;
+}
+
+.welcome-text h1 {
+    font-size: 25px;
+    font-weight: 500;
+    color: #171747;
+    margin-bottom: 7px;
+}
+
+.welcome-text p {
+    font-size: 13px;
+    color: #777;
+    line-height: 1.6;
+}
+
+/* =================================
+   SETTINGS SECTIONS
+================================= */
+
 .settings-section {
-max-width: 850px;
-margin-bottom: 35px;
+    width: 100%;
+    max-width: 850px;
+    margin-bottom: 35px;
 }
 
 .section-heading {
-margin-bottom: 18px;
+    margin-bottom: 18px;
 }
 
 .section-heading h2 {
-font-size: 18px;
-color: #171747;
-margin-bottom: 7px;
+    font-size: 18px;
+    color: #171747;
+    margin-bottom: 7px;
 }
 
 .section-heading p {
-font-size: 13px;
-color: #777;
+    font-size: 13px;
+    color: #777;
+    line-height: 1.6;
 }
 
-/* SETTINGS CARD */
+/* =================================
+   SETTINGS CARDS
+================================= */
+
 .settings-card {
-background: #fff;
-border: 1px solid #eee;
-border-radius: 12px;
-padding: 28px;
-box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    width: 100%;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 28px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
 }
 
-/* PROFILE IMAGE */
+/* =================================
+   PROFILE IMAGE SETTINGS
+================================= */
+
 .image-upload-area {
-display: flex;
-align-items: center;
-gap: 25px;
-flex-wrap: wrap;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    flex-wrap: wrap;
 }
 
 .profile-image-preview,
 .profile-image-placeholder {
-width: 105px;
-height: 105px;
-border-radius: 50%;
-object-fit: cover;
-flex-shrink: 0;
+    width: 105px;
+    height: 105px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
 }
 
 .profile-image-placeholder {
-display: flex;
-justify-content: center;
-align-items: center;
-background: linear-gradient(135deg, #011231, #154288);
-color: white;
-font-size: 42px;
-font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #011231, #154288);
+    color: #fff;
+    font-size: 42px;
+    font-weight: bold;
 }
 
 .image-upload-controls {
-display: flex;
-flex-wrap: wrap;
-align-items: center;
-gap: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
 }
 
 .image-upload-controls p {
-width: 100%;
-font-size: 12px;
-color: #888;
+    width: 100%;
+    font-size: 12px;
+    color: #888;
+    line-height: 1.5;
+    margin: 0;
 }
+
+/* CHOOSE IMAGE AND SAVE PICTURE */
 
 .upload-button,
 .image-upload-controls button {
-padding: 11px 17px;
-border-radius: 7px;
-border: none;
-cursor: pointer;
-font-size: 13px;
+    display: inline-block;
+    padding: 11px 17px;
+    border-radius: 7px;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    transition: 0.3s ease;
 }
 
 .upload-button {
-background: #e8edff;
-color: #154288;
-}
-
-.image-upload-controls button,
-.save-button {
-background: #154288;
-color: white;
+    background: #e8edff;
+    color: #154288;
 }
 
 .upload-button:hover {
-background: #dce5ff;
+    background: #dce5ff;
 }
 
-.image-upload-controls button:hover,
-.save-button:hover {
-background: #011231;
+.image-upload-controls button {
+    background: #154288;
+    color: #fff;
 }
 
-/* FORMS */
+.image-upload-controls button:hover {
+    background: #011231;
+}
+
+/* =================================
+   FORM SETTINGS
+================================= */
+
 .form-group {
-margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .form-group label {
-display: block;
-margin-bottom: 9px;
-font-size: 13px;
-font-weight: 600;
-color: #333;
+    display: block;
+    margin-bottom: 9px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #333;
 }
 
 .form-group input {
-width: 100%;
-padding: 13px 14px;
-border: 1px solid #ddd;
-border-radius: 7px;
-outline: none;
-font-size: 14px;
-background: #fff;
+    width: 100%;
+    padding: 13px 14px;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+    outline: none;
+    font-size: 14px;
+    background: #fff;
+    color: #171747;
+    transition: 0.3s ease;
 }
 
 .form-group input:focus {
-border-color: #154288;
-box-shadow: 0 0 0 3px rgba(21, 66, 136, 0.08);
+    border-color: #154288;
+    box-shadow: 0 0 0 3px rgba(21, 66, 136, 0.08);
 }
+
+.form-group input::placeholder {
+    color: #aaa;
+}
+
+/* =================================
+   SAVE BUTTON
+================================= */
 
 .save-button {
-padding: 12px 20px;
-border: none;
-border-radius: 7px;
-cursor: pointer;
-font-size: 13px;
-font-weight: 600;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    background: #154288;
+    color: #fff;
+    transition: 0.3s ease;
 }
 
-/* FEEDBACK MESSAGES */
+.save-button:hover {
+    background: #011231;
+}
+
+/* =================================
+   FEEDBACK MESSAGES
+================================= */
+
 .settings-message {
-margin-top: 15px;
-font-size: 13px;
+    margin-top: 15px;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.settings-message:empty {
+    display: none;
 }
 
 .settings-message.success {
-color: #16a34a;
+    color: #16a34a;
 }
 
 .settings-message.error {
-color: #dc2626;
+    color: #dc2626;
 }
 
-/* RESPONSIVENESS */
+/* =================================
+   SIDEBAR OVERLAY
+================================= */
+
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 1050;
+}
+
+.sidebar-overlay.overlay-active {
+    display: block;
+}
+
+/* =================================
+   TABLET RESPONSIVENESS
+================================= */
+
+@media (max-width: 1100px) {
+    .settings-section {
+        max-width: 100%;
+    }
+}
+
+/* =================================
+   MOBILE RESPONSIVENESS
+================================= */
+
 @media (max-width: 700px) {
-.settings-card {
-padding: 20px 15px;
+
+    body {
+        display: block;
+    }
+
+    /* MOBILE SIDEBAR */
+
+    .sidebar {
+        width: 280px;
+        max-width: 85%;
+        transform: translateX(-100%);
+        padding: 20px 16px;
+        box-shadow: 5px 0 25px rgba(0, 0, 0, 0.15);
+        z-index: 1100;
+    }
+
+    .sidebar.sidebar-open {
+        transform: translateX(0);
+    }
+
+    .admin-profile {
+        height: 170px;
+    }
+
+    .admin-avatar {
+        width: 65px;
+        height: 65px;
+        font-size: 30px;
+        margin-bottom: 12px;
+    }
+
+    .admin-profile h2 {
+        font-size: 16px;
+    }
+
+    .admin-profile h2,
+    .admin-profile p {
+        display: block;
+    }
+
+    .sidebar-footer {
+        display: block;
+    }
+
+    .nav-item {
+        justify-content: flex-start;
+        padding: 15px 20px;
+    }
+
+    .nav-item span {
+        font-size: 21px;
+    }
+
+    /* MOBILE OVERLAY */
+
+    .sidebar-overlay {
+        display: block;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: 0.3s ease;
+    }
+
+    .sidebar-overlay.overlay-active {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
+
+    /* MAIN CONTENT */
+
+    .main-content {
+        width: 100%;
+        margin-left: 0;
+        padding: 20px 15px;
+    }
+
+    /* FULL-WIDTH MOBILE HEADER */
+
+    .topbar {
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+
+        height: 65px !important;
+        min-height: 65px !important;
+
+        padding: 0 15px !important;
+    }
+
+    .topbar-actions {
+        width: 100% !important;
+        height: 100% !important;
+        justify-content: flex-end !important;
+        gap: 10px !important;
+    }
+
+    .topbar-actions #logoutButton {
+        padding: 10px 16px;
+        font-size: 12px;
+    }
+
+    /* HAMBURGER */
+
+    .sidebar-toggle {
+        display: flex !important;
+        width: 38px;
+        height: 38px;
+    }
+
+    /* PAGE HEADING */
+
+    .welcome-text {
+        margin-top: 80px;
+        margin-bottom: 25px;
+    }
+
+    .welcome-text h1 {
+        font-size: 22px;
+    }
+
+    .welcome-text p {
+        font-size: 12px;
+        line-height: 1.5;
+    }
+
+    /* SETTINGS SECTIONS */
+
+    .settings-section {
+        max-width: 100%;
+        margin-bottom: 28px;
+    }
+
+    .section-heading h2 {
+        font-size: 17px;
+    }
+
+    .settings-card {
+        padding: 22px 18px;
+    }
+
+    /* PROFILE PICTURE */
+
+    .image-upload-area {
+        gap: 18px;
+    }
+
+    .profile-image-preview,
+    .profile-image-placeholder {
+        width: 80px;
+        height: 80px;
+    }
+
+    .profile-image-placeholder {
+        font-size: 32px;
+    }
+
+    .image-upload-controls {
+        gap: 9px;
+    }
+
+    .image-upload-controls p {
+        font-size: 11px;
+    }
+
+    /* FORMS */
+
+    .form-group input {
+        padding: 12px;
+        font-size: 13px;
+    }
+
+    .save-button {
+        width: 100%;
+    }
 }
 
-.image-upload-area {
-    gap: 18px;
-}
+/* =================================
+   SMALL PHONES
+================================= */
 
-.profile-image-preview,
-.profile-image-placeholder {
-    width: 80px;
-    height: 80px;
-}
+@media (max-width: 380px) {
 
-.image-upload-controls {
-    gap: 8px;
-}
+    .main-content {
+        padding: 15px 10px;
+    }
 
-.save-button {
-    width: 100%;
-}
+    .welcome-text h1 {
+        font-size: 18px;
+    }
 
+    .welcome-text p {
+        font-size: 11px;
+    }
+
+    .settings-card {
+        padding: 19px 14px;
+    }
+
+    .image-upload-area {
+        gap: 14px;
+    }
+
+    .upload-button,
+    .image-upload-controls button {
+        padding: 10px 13px;
+        font-size: 12px;
+    }
+
+    .topbar {
+        padding: 0 10px !important;
+    }
+
+    .topbar-actions {
+        gap: 8px !important;
+    }
+
+    .topbar-actions #logoutButton {
+        padding: 9px 13px;
+        font-size: 11px;
+    }
+
+    .sidebar-toggle {
+        width: 35px;
+        height: 35px;
+        font-size: 19px;
+    }
 }
