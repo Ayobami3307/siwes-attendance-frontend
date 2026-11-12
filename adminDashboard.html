@@ -11,9 +11,7 @@
 <!-- ADMIN SIDEBAR -->
 <aside class="sidebar">
     <div class="admin-profile">
-        <div class="admin-avatar" id="adminAvatar">
-            A
-        </div>
+        <div class="admin-avatar" id="adminAvatar">A</div>
 
         <h2>NIIT Smart Attendance</h2>
         <p>Administrator</p>
@@ -49,11 +47,12 @@
 
     <div class="sidebar-footer">
         <p>NIIT Smart Attendance</p>
-       <small>
+        <small>
             <i data-lucide="zap"></i> Powered by NIIT
         </small>
     </div>
 </aside>
+
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
 
@@ -63,7 +62,10 @@
     <!-- TOP NAVIGATION -->
     <header class="topbar">
 
-        <button type="button" class="sidebar-toggle" id="sidebarToggle"
+        <button
+            type="button"
+            class="sidebar-toggle"
+            id="sidebarToggle"
             aria-label="Open navigation menu"
             aria-expanded="false">
             ☰
@@ -85,6 +87,8 @@
 
     </header>
 
+
+    <!-- WELCOME -->
     <div class="welcome-text">
         <h1>Hi, Admin</h1>
         <p>Welcome to your administration dashboard.</p>
@@ -116,6 +120,165 @@
             <div class="stat-icon">◷</div>
             <h2 id="pendingAccounts">0</h2>
             <p>Pending Activations</p>
+        </div>
+
+    </section>
+
+
+    <!-- ADMIN NOTIFICATION CENTRE -->
+    <section class="admin-notification-panel">
+
+        <div class="notification-heading">
+            <div>
+                <h2>Notification Centre</h2>
+                <p>Send announcements and messages to students and lecturers.</p>
+            </div>
+        </div>
+
+
+        <form id="adminNotificationForm">
+
+            <!-- TITLE -->
+            <label for="notificationTitle">
+                Notification Title
+            </label>
+
+            <input
+                type="text"
+                id="notificationTitle"
+                maxlength="150"
+                placeholder="Enter notification title"
+                required
+            >
+
+
+            <!-- MESSAGE -->
+            <label for="notificationMessage">
+                Message
+            </label>
+
+            <textarea
+                id="notificationMessage"
+                maxlength="3000"
+                rows="4"
+                placeholder="Write your announcement..."
+                required
+            ></textarea>
+
+
+            <!-- RECIPIENT AUDIENCE -->
+            <label for="notificationAudience">
+                Send To
+            </label>
+
+            <select id="notificationAudience" required>
+
+                <option value="all">
+                    All Active Students
+                </option>
+
+                <option value="all-lecturers">
+                    All Active Lecturers
+                </option>
+
+                <option value="course">
+                    Students in a Course
+                </option>
+
+                <option value="course-lecturers">
+                    Lecturers in a Course
+                </option>
+
+                <option value="student">
+                    Individual Student
+                </option>
+
+                <option value="lecturer">
+                    Individual Lecturer
+                </option>
+
+            </select>
+
+
+            <!-- COURSE SELECTION -->
+            <div id="notificationCourseGroup" hidden>
+
+                <label for="notificationCourse">
+                    Select Course
+                </label>
+
+                <select id="notificationCourse">
+
+                    <option value="">
+                        Select a course
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- STUDENT SELECTION -->
+            <div id="notificationStudentGroup" hidden>
+
+                <label for="notificationStudent">
+                    Select Student
+                </label>
+
+                <select id="notificationStudent">
+
+                    <option value="">
+                        Select a student
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- LECTURER SELECTION -->
+            <div id="notificationLecturerGroup" hidden>
+
+                <label for="notificationLecturer">
+                    Select Lecturer
+                </label>
+
+                <select id="notificationLecturer">
+
+                    <option value="">
+                        Select a lecturer
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- SEND BUTTON -->
+            <button
+                type="submit"
+                id="sendNotificationButton">
+
+                Send Notification
+
+            </button>
+
+
+            <!-- FEEDBACK -->
+            <p id="notificationFeedback"></p>
+
+        </form>
+
+
+        <!-- SENT NOTIFICATION HISTORY -->
+        <div class="sent-notifications">
+
+            <h3>Recently Sent Notifications</h3>
+
+            <div id="sentNotificationsList">
+                Loading notifications...
+            </div>
+
         </div>
 
     </section>
@@ -157,7 +320,9 @@
             </div>
 
 
-            <h3 class="lecturer-heading">Quick Access: Lecturers</h3>
+            <h3 class="lecturer-heading">
+                Quick Access: Lecturers
+            </h3>
 
             <div class="quick-access-grid">
 
@@ -204,15 +369,18 @@
             </div>
 
 
+            <!-- CALENDAR -->
             <div class="calendar-panel">
 
                 <div class="calendar-header">
+
                     <h4 id="calendarMonth">Calendar</h4>
 
                     <div>
                         <button id="previousMonth">&lsaquo;</button>
                         <button id="nextMonth">&rsaquo;</button>
                     </div>
+
                 </div>
 
                 <div id="calendar"></div>
@@ -235,13 +403,20 @@
     }
 </script>
 
-<script src="https://unpkg.com/lucide@latest"></script>
 
-<script>lucide.createIcons();</script>
+<!-- LIBRARIES -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+    lucide.createIcons();
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+
+<!-- ADMIN SCRIPTS -->
 <script src="js/adminShared.js"></script>
 <script src="js/adminDashboard.js"></script>
+<script src="js/adminNotifications.js"></script>
+
 </body>
 </html>
