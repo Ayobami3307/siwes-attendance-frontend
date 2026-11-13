@@ -216,8 +216,109 @@
 
             </div>
 
+            <!-- LECTURER NOTIFICATION CENTRE -->
+            <section class="lecturer-notification-centre">
+
+                <div class="lecturer-notification-heading">
+                    <div>
+                        <h2><i class="fa-solid fa-paper-plane"></i> Notification Centre</h2>
+                        <p>Send announcements to students in your assigned course.</p>
+                    </div>
+                </div>
+
+                <div class="lecturer-notification-grid">
+
+                    <div class="lecturer-notification-card">
+
+                        <h3>Compose Message</h3>
+
+                        <form id="lecturerSendNotificationForm">
+
+                            <label for="lecturerNotificationAudience">
+                                Send To
+                            </label>
+
+                            <select id="lecturerNotificationAudience" required>
+                                <option value="course-students">
+                                    All Students in My Course
+                                </option>
+                                <option value="student">
+                                    Individual Student
+                                </option>
+                            </select>
+
+                            <div id="lecturerStudentIdGroup" hidden>
+                                <label for="lecturerNotificationStudentId">
+                                    Student ID
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="lecturerNotificationStudentId"
+                                    placeholder="Enter student's ID"
+                                >
+                            </div>
+
+                            <label for="lecturerNotificationTitle">
+                                Subject
+                            </label>
+
+                            <input
+                                type="text"
+                                id="lecturerNotificationTitle"
+                                placeholder="Enter message subject"
+                                required
+                            >
+
+                            <label for="lecturerNotificationMessage">
+                                Message
+                            </label>
+
+                            <textarea
+                                id="lecturerNotificationMessage"
+                                rows="5"
+                                placeholder="Write your message..."
+                                required
+                            ></textarea>
+
+                            <p id="lecturerNotificationFeedback"></p>
+
+                            <button type="submit" id="lecturerSendNotificationButton">
+                                <i class="fa-solid fa-paper-plane"></i>
+                                Send Notification
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                    <div class="lecturer-notification-card">
+
+                        <div class="lecturer-sent-heading">
+                            <h3>Sent Messages</h3>
+
+                            <button
+                                type="button"
+                                id="refreshLecturerNotifications"
+                                title="Refresh sent messages"
+                            >
+                                <i class="fa-solid fa-rotate"></i>
+                            </button>
+                        </div>
+
+                        <div id="lecturerSentNotificationsList">
+                            <p>Loading sent messages...</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
         </main>
     </div>
     <script src="js/lecturerDashboard.js"></script>
+    <script src="js/lecturerNotifications.js"></script>
 </body>
 </html>

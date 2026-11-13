@@ -523,6 +523,321 @@ body {
 }
 
 /* ==========================================
+   ADMIN NOTIFICATION CENTRE
+========================================== */
+
+.admin-notification-panel {
+    background: #ffffff;
+    padding: 28px;
+    margin: 30px 0;
+    border-radius: 16px;
+    border: 1px solid #e8edf5;
+    box-shadow: 0 5px 20px rgba(15, 35, 75, 0.05);
+    min-width: 0;
+}
+
+.notification-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid #edf0f5;
+}
+
+.notification-heading h2 {
+    font-size: 21px;
+    color: #102b55;
+    margin-bottom: 7px;
+}
+
+.notification-heading p {
+    color: #718096;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* FORM */
+
+#adminNotificationForm {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 18px;
+    max-width: 100%;
+}
+
+#adminNotificationForm > label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #263b59;
+    align-self: end;
+}
+
+#notificationTitle,
+#notificationMessage,
+#notificationAudience,
+#notificationCourse,
+#notificationStudent,
+#notificationLecturer {
+    width: 100%;
+    padding: 13px 14px;
+    border: 1px solid #dce3ed;
+    border-radius: 9px;
+    background: #fbfcfe;
+    color: #25364f;
+    font-family: inherit;
+    font-size: 13px;
+    outline: none;
+    transition: 0.2s ease;
+    min-width: 0;
+}
+
+#notificationTitle,
+#notificationMessage,
+#notificationAudience {
+    grid-column: 1 / -1;
+}
+
+#notificationMessage {
+    resize: vertical;
+    min-height: 120px;
+    line-height: 1.6;
+}
+
+#notificationTitle:focus,
+#notificationMessage:focus,
+#notificationAudience:focus,
+#notificationCourse:focus,
+#notificationStudent:focus,
+#notificationLecturer:focus {
+    border-color: #2563eb;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.09);
+}
+
+/* CONDITIONAL RECIPIENT FIELDS */
+
+#notificationCourseGroup,
+#notificationStudentGroup,
+#notificationLecturerGroup {
+    grid-column: 1 / -1;
+    min-width: 0;
+    padding: 15px;
+    background: #f5f8ff;
+    border: 1px solid #e2eaff;
+    border-radius: 10px;
+}
+
+#notificationCourseGroup[hidden],
+#notificationStudentGroup[hidden],
+#notificationLecturerGroup[hidden] {
+    display: none !important;
+}
+
+#notificationCourseGroup label,
+#notificationStudentGroup label,
+#notificationLecturerGroup label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: #263b59;
+    margin-bottom: 9px;
+}
+
+/* SEND BUTTON */
+
+#sendNotificationButton {
+    grid-column: 1 / -1;
+    width: 100%;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 9px;
+    background: linear-gradient(135deg, #123b78, #2563eb);
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+#sendNotificationButton:hover {
+    background: linear-gradient(135deg, #0c2c5c, #174fc2);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(37, 99, 235, 0.2);
+}
+
+#sendNotificationButton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+#notificationFeedback {
+    grid-column: 1 / -1;
+    min-height: 18px;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+/* SENT NOTIFICATIONS */
+
+.sent-notifications {
+    margin-top: 35px;
+    padding-top: 25px;
+    border-top: 1px solid #edf0f5;
+}
+
+.sent-notifications h3 {
+    color: #102b55;
+    font-size: 17px;
+    margin-bottom: 18px;
+}
+
+#sentNotificationsList {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.sent-notification-card {
+    min-width: 0;
+    padding: 17px;
+    border: 1px solid #e6ebf3;
+    border-radius: 11px;
+    background: #fbfcff;
+    transition: 0.2s ease;
+}
+
+.sent-notification-card:hover {
+    border-color: #b8cdf5;
+    box-shadow: 0 4px 13px rgba(15, 35, 75, 0.06);
+}
+
+.sent-notification-card h4 {
+    font-size: 14px;
+    color: #173a70;
+    margin-bottom: 9px;
+    overflow-wrap: anywhere;
+}
+
+.sent-notification-card p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #536176;
+    margin-bottom: 13px;
+    overflow-wrap: anywhere;
+}
+
+.sent-notification-card small {
+    display: block;
+    font-size: 11px;
+    color: #8490a2;
+    margin-top: 7px;
+    overflow-wrap: anywhere;
+}
+
+/* ==========================================
+   NOTIFICATION TABLET RESPONSIVENESS
+========================================== */
+
+@media (max-width: 900px) {
+    .admin-notification-panel {
+        padding: 22px;
+    }
+
+    #sentNotificationsList {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==========================================
+   NOTIFICATION MOBILE RESPONSIVENESS
+========================================== */
+
+@media (max-width: 700px) {
+    .admin-notification-panel {
+        padding: 18px 14px;
+        margin: 22px 0;
+        border-radius: 12px;
+    }
+
+    .notification-heading {
+        margin-bottom: 20px;
+    }
+
+    .notification-heading h2 {
+        font-size: 18px;
+    }
+
+    .notification-heading p {
+        font-size: 12px;
+    }
+
+    #adminNotificationForm {
+        grid-template-columns: 1fr;
+        gap: 11px;
+    }
+
+    #adminNotificationForm > label,
+    #notificationTitle,
+    #notificationMessage,
+    #notificationAudience,
+    #notificationCourseGroup,
+    #notificationStudentGroup,
+    #notificationLecturerGroup,
+    #sendNotificationButton,
+    #notificationFeedback {
+        grid-column: 1;
+    }
+
+    #notificationTitle,
+    #notificationMessage,
+    #notificationAudience,
+    #notificationCourse,
+    #notificationStudent,
+    #notificationLecturer {
+        font-size: 13px;
+        padding: 12px;
+    }
+
+    #notificationMessage {
+        min-height: 110px;
+    }
+
+    #sendNotificationButton {
+        padding: 14px;
+    }
+
+    .sent-notifications {
+        margin-top: 28px;
+        padding-top: 20px;
+    }
+
+    .sent-notifications h3 {
+        font-size: 16px;
+    }
+
+    .sent-notification-card {
+        padding: 14px;
+    }
+}
+
+@media (max-width: 380px) {
+    .admin-notification-panel {
+        padding: 15px 11px;
+    }
+
+    .notification-heading h2 {
+        font-size: 16px;
+    }
+
+    .sent-notification-card h4 {
+        font-size: 13px;
+    }
+}
+
+/* ==========================================
    TABLET RESPONSIVENESS
 ========================================== */
 
